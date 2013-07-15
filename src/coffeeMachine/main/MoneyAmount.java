@@ -131,7 +131,10 @@ public class MoneyAmount {
 		return new Withdraw(RequestResultStatus.SUCCESSFUL, requestedCoins);
 	}
 	
+<<<<<<< HEAD
 	@Override
+=======
+>>>>>>> 9550f8bcba9e846f54a93883bc605fa9ecdd9316
 	public String toString()
 	{
 		String output = System.lineSeparator();
