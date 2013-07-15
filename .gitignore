@@ -1,0 +1,6 @@
+*.[oa]
+*.
+*~
+.settings/
+bin/
+.classpath
