@@ -40,6 +40,12 @@ public class MoneyAmount {
 		}
 	}
 	
+	public void add(Coin coin)
+	{
+		int count = coins.get(coin).intValue();
+		coins.put(coin, Integer.valueOf(++count));
+	}
+	
 	public int getSumOfCoinsValue() {
 		int amount = 0;
 		for(Coin c : coins.keySet()) {
