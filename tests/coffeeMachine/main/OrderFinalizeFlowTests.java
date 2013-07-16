@@ -40,16 +40,16 @@ public class OrderFinalizeFlowTests {
 		coins.put(Coin.TWENTY, 0);
 		coins.put(Coin.FIFTY, 0);
 		coins.put(Coin.LEV, 0);
-		
+
 		MoneyAmount change = new MoneyAmount(coins);
 		Withdraw withdraw = change.withdraw(30);
 		Drink drink = new Drink("Coffee", 30);
-		
+
 		orderFinalizeFlow = new OrderFinalizeFlow(drink, withdraw);
 		orderFinalizeFlow.finalizeDrinkOrder(coffeeMachine);
 		int expected = 49;
 		int actual = coffeeMachine.getDrinks().getDrinks().get(drink);
-		
+
 		assertTrue(expected == actual);
 	}
 }

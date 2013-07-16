@@ -32,7 +32,7 @@ public class OrderFinalizeFlow implements Flow {
 		finalizeDrinkOrder(machine);
 		removeChangeFromMachine(machine);
 
-		return new DrinksListFlow();
+		return new DrinkListFlow();
 	}
 
 	void removeChangeFromMachine(CoffeeMachineState machine) {
