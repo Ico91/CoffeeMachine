@@ -1,5 +1,9 @@
 package coffeeMachine.main;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Holds the current state of the coffee machine. Includes the lists of drinks
  * and coins which are currently available in the machine.
@@ -30,6 +34,17 @@ public class CoffeeMachineState {
 
 	public void setDrinks(DrinksContainer drinks) {
 		this.drinks = drinks;
-	}	
+	}
+	
+	public List<Drink> getFiltratedDrinks(){  // by Andrey
+		List<Drink> drinksList=new ArrayList<Drink>();
+		for(Map.Entry<Drink, Integer> entry: drinks.getDrinks().entrySet()){
+			if(entry.getValue()!=0){
+				drinksList.add(entry.getKey());
+			}
+		
+		}
+		return drinksList;
+	}
 	
 }

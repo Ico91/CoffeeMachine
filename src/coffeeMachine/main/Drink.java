@@ -3,7 +3,14 @@ package coffeeMachine.main;
 public class Drink implements Comparable<Drink> {
 	private String name;
 	private int price;
+<<<<<<< HEAD
 
+=======
+	public Drink(){
+		name="";
+		price=0;
+	}
+>>>>>>> e99c501e5950475643f99ff27e68e18ad390f143
 	public Drink(String name, int price) {
 		this.name = name;
 		this.price = price;
