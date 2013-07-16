@@ -23,14 +23,13 @@ public class PaymentFlow implements Flow {
 	public Flow execute(CoffeeMachineState machine) {
 		MenuController menuController = new MenuController(buildMenu());
 
-		do{
+		do {
+			System.out.println("Drink: " + drink.getName() + System.lineSeparator()
+					+ "Price: " + drink.getPrice());
 			menuController.start();
-			if(isOrderCancelled)
-				break;
-		}while(userCoins.getSumOfCoinsValue() < drink.getPrice());
-
-		if (isOrderCancelled)
-			return new DrinkListFlow();
+			if (isOrderCancelled)
+				return new DrinkListFlow();
+		} while (userCoins.getSumOfCoinsValue() < drink.getPrice());
 
 		return new OrderFlow(drink, userCoins);
 	}
