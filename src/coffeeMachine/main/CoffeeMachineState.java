@@ -1,11 +1,21 @@
 package coffeeMachine.main;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+=======
+/**
+ * Holds the current state of the coffee machine. Includes the lists of drinks
+ * and coins which are currently available in the machine.
+ * 
+ * @author Hristo
+ *
+ */
+>>>>>>> be9cab466479a64cd970f4c69cdb0f75f76c5635
 public class CoffeeMachineState {
 	private MoneyAmount coins;
 	private DrinksContainer drinks;
