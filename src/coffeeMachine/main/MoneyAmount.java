@@ -40,6 +40,14 @@ public class MoneyAmount {
 		}
 	}
 	
+	public int getSumOfCoinsValue() {
+		int amount = 0;
+		for(Coin c : coins.keySet()) {
+			amount += coins.get(c) * c.getValue();
+		}
+		return amount;
+	}
+	
 	/***
 	 * 
 	 * @param amount - The requested amount to withdraw from the specified money amount object
