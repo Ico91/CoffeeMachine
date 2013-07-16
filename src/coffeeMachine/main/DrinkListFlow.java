@@ -46,7 +46,7 @@ public class DrinkListFlow implements Flow{
 		menuControler.start();
 		
 		
-		flow=new PaymentFlow(drink); 
+		flow = new PaymentFlow(drink); 
 		return flow;
 	}
 	
