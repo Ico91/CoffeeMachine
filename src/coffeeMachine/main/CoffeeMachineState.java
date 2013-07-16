@@ -1,5 +1,12 @@
 package coffeeMachine.main;
 
+/**
+ * Holds the current state of the coffee machine. Includes the lists of drinks
+ * and coins which are currently available in the machine.
+ * 
+ * @author Hristo
+ *
+ */
 public class CoffeeMachineState {
 	private MoneyAmount coins;
 	private DrinksContainer drinks;

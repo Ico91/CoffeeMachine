@@ -35,6 +35,11 @@ public class InsufficientAmountFlow implements Flow {
 
 	/**
 	 * 
+	 * Prints the available options to the user. Based on the user's choice
+	 * this method either continues making the drink and returning only the
+	 * available coins or cancels the order, returning the coins inserted by
+	 * the user.
+	 * 
 	 * @param CoffeeMachineState - current state of the coffee machine
 	 * @return Flow object
 	 * 
