@@ -53,7 +53,8 @@ public class InsufficientAmountFlow implements Flow {
 							@Override
 							public ResultStatus execute(List<String> params) {
 								return new ResultStatus(
-										InitOrderFinalizeFlow(), true);
+										setNextFlow(new OrderFinalizeFlow(
+												drink, withdraw)), true);
 							}
 
 							@Override
@@ -69,8 +70,8 @@ public class InsufficientAmountFlow implements Flow {
 							@Override
 							public ResultStatus execute(List<String> params) {
 								// TODO Auto-generated method stub
-								return new ResultStatus(InitDrinkListFlow(),
-										true);
+								return new ResultStatus(
+										setNextFlow(new DrinkListFlow()), true);
 							}
 
 							@Override
@@ -89,15 +90,10 @@ public class InsufficientAmountFlow implements Flow {
 		return flow;
 	}
 
-	private String InitOrderFinalizeFlow() {
-		flow = new OrderFinalizeFlow(drink, withdraw);
-	}
-
-	private String InitDrinkListFlow() {
-		System.out
-				.println("Order canceled. The money you've inserted are returned to You!"
-						+ userCoins.toString());
-		flow = new DrinkListFlow();
+	String setNextFlow(Flow flow)
+	{
+		this.flow = flow;
+		return null;
 	}
 
 }
