@@ -1,7 +1,5 @@
 package coffeeMachine.main;
 
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Calculates the necessary change to return and the total number of coins.

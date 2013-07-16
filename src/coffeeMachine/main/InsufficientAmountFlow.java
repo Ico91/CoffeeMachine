@@ -11,9 +11,9 @@ import modules.menuModule.ResultStatus;
 
 /**
  * 
- * Gives the option of choosing whether to continue the order flow by
- * making the drink and returning only the available coins in the machine 
- * as a change, or cancel the order which returns the user inserted coins.  
+ * Gives the option of choosing whether to continue the order flow by making the
+ * drink and returning only the available coins in the machine as a change, or
+ * cancel the order which returns the user inserted coins.
  * 
  * @author Hristo
  * 
@@ -35,12 +35,12 @@ public class InsufficientAmountFlow implements Flow {
 
 	/**
 	 * 
-	 * Prints the available options to the user. Based on the user's choice
-	 * this method either continues making the drink and returning only the
-	 * available coins or cancels the order, returning the coins inserted by
-	 * the user.
+	 * Prints the available options to the user. Based on the user's choice this
+	 * method either continues making the drink and returning only the available
+	 * coins or cancels the order, returning the coins inserted by the user.
 	 * 
-	 * @param CoffeeMachineState - current state of the coffee machine
+	 * @param CoffeeMachineState
+	 *            - current state of the coffee machine
 	 * @return Flow object
 	 * 
 	 */
@@ -59,7 +59,7 @@ public class InsufficientAmountFlow implements Flow {
 							public ResultStatus execute(List<String> params) {
 								return new ResultStatus(
 										setNextFlow(new OrderFinalizeFlow(
-												drink, withdraw)), true);
+												drink, withdraw), ""), true);
 							}
 
 							@Override
@@ -75,8 +75,12 @@ public class InsufficientAmountFlow implements Flow {
 							@Override
 							public ResultStatus execute(List<String> params) {
 								// TODO Auto-generated method stub
-								return new ResultStatus(
-										setNextFlow(new DrinkListFlow()), true);
+								return new ResultStatus(setNextFlow(
+										new DrinkListFlow(),
+										"Your money has been returned to you"
+												+ userCoins
+														.getSumOfCoinsValue()),
+										true);
 							}
 
 							@Override
@@ -95,10 +99,9 @@ public class InsufficientAmountFlow implements Flow {
 		return flow;
 	}
 
-	String setNextFlow(Flow flow)
-	{
+	String setNextFlow(Flow flow, String message) {
 		this.flow = flow;
-		return null;
+		return message;
 	}
 
 }
