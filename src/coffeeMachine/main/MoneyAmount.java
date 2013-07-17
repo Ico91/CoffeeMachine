@@ -76,6 +76,21 @@ public class MoneyAmount {
 	}
 
 	/***
+	 *  Add coins to current available coins
+	 * @param coin Type of coin
+	 * @param count Count of coins to add
+	 */
+		public MoneyAmount add(Coin coin, int count) {
+			if (count < 0)
+				throw new InvalidParameterException(
+						"Count of coins cannot be negative number!");
+			int totalCount = this.coins.get(coin) + count;
+			this.coins.put(coin, totalCount);
+			
+			return this;
+		}
+	
+	/***
 	 * Merge the current MoneyAmount with specified MoneyAmount object and
 	 * returns new money amount object
 	 * 
@@ -93,67 +108,6 @@ public class MoneyAmount {
 		}
 
 		return moneyAmountToReturn;
-	}
-
-	/***
-	 * Add the passed count of coins of type five to currently available amount
-	 * 
-	 * @param amount
-	 *            Amount of coins to add
-	 * @return MoneyAmount object after addition
-	 */
-	public MoneyAmount addCointsOfFive(int amount) {
-		add(Coin.FIVE, amount);
-		return this;
-	}
-
-	/***
-	 * Add the passed count of coins of type ten to currently available amount
-	 * 
-	 * @param amount
-	 *            Amount of coins to add
-	 * @return MoneyAmount object after addition
-	 */
-	public MoneyAmount addCointsOfTen(int count) {
-		add(Coin.TEN, count);
-		return this;
-	}
-
-	/***
-	 * Add the passed count of coins of type twenty to currently available
-	 * amount
-	 * 
-	 * @param amount
-	 *            Amount of coins to add
-	 * @return MoneyAmount object after addition
-	 */
-	public MoneyAmount addCointsOfTwenty(int count) {
-		add(Coin.TWENTY, count);
-		return this;
-	}
-
-	/***
-	 * Add the passed count of coins of type fifty to currently available amount
-	 * 
-	 * @param amount
-	 *            Amount of coins to add
-	 * @return MoneyAmount object after addition
-	 */
-	public MoneyAmount addCointsOfFifty(int count) {
-		add(Coin.FIFTY, count);
-		return this;
-	}
-
-	/***
-	 * Add the passed count of coins of type lev to currently available amount
-	 * 
-	 * @param amount
-	 *            Amount of coins to add
-	 * @return MoneyAmount object after addition
-	 */
-	public MoneyAmount addCointsOfLev(int count) {
-		add(Coin.LEV, count);
-		return this;
 	}
 
 	/***
@@ -233,15 +187,6 @@ public class MoneyAmount {
 		}
 
 		return output;
-	}
-
-	// Add coins to current available coins
-	private void add(Coin coin, int count) {
-		if (count < 0)
-			throw new InvalidParameterException(
-					"Count of coins cannot be negative number!");
-		int totalCount = this.coins.get(coin) + count;
-		this.coins.put(coin, totalCount);
 	}
 
 	// Get coins from current available coins

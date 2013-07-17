@@ -22,8 +22,8 @@ public class MoneyAmountTests {
 	@Before
 	public void testMoneyAmount_SetUpObject() {
 		availableCoins = new MoneyAmount();
-		availableCoins.addCointsOfFive(5).addCointsOfTen(4)
-				.addCointsOfTwenty(3).addCointsOfFifty(2).addCointsOfLev(1);
+		availableCoins.add(Coin.FIVE, 5).add(Coin.TEN, 4).add(Coin.TWENTY, 3)
+				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
 	}
 
 	@Test(expected = InvalidParameterException.class)
@@ -103,8 +103,9 @@ public class MoneyAmountTests {
 	@Test
 	public void testAdd_addSomeCoins_ExpectCorrectSumOfCoins() {
 		MoneyAmount moneyAmount = new MoneyAmount();
-		moneyAmount.addCointsOfFive(10).addCointsOfTen(9).addCointsOfTwenty(8)
-				.addCointsOfFifty(7).addCointsOfLev(6);
+		availableCoins = new MoneyAmount();
+		availableCoins.add(Coin.FIVE, 10).add(Coin.TEN, 9).add(Coin.TWENTY, 8)
+				.add(Coin.FIFTY, 7).add(Coin.LEV, 6);
 
 		int expected = availableCoins.getSumOfCoinsValue()
 				+ moneyAmount.getSumOfCoinsValue();
