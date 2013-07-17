@@ -6,8 +6,6 @@ public class Drink implements Comparable<Drink> {
 	private String name;
 	private int price;
 
-<<<<<<< HEAD
-=======
 	public Drink() {
 		name = "";
 		price = 0;
@@ -16,7 +14,7 @@ public class Drink implements Comparable<Drink> {
 	public String toString(){
 		return name+" "+Integer.toString(price);
 	}
->>>>>>> 4fcaac2d4021108990bc42fb20539849ff060766
+	
 	public Drink(String name, int price) {
 		if ( name == null || name.isEmpty() ) {
 			throw new IllegalArgumentException( "No name specified" );
