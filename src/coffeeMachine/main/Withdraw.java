@@ -17,11 +17,4 @@ public class Withdraw {
 		return change;
 	}
 
-	public void setStatus(RequestResultStatus status) {
-		this.status = status;
-	}
-
-	public void setChange(MoneyAmount change) {
-		this.change = change;
-	}
 }

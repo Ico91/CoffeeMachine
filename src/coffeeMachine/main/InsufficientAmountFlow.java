@@ -24,7 +24,7 @@ public class InsufficientAmountFlow implements Flow {
 	private Withdraw withdraw;
 	private Drink drink;
 
-	private Flow flow;
+	private Flow nextFlow;
 
 	public InsufficientAmountFlow(Drink drink, MoneyAmount userCoins,
 			Withdraw withdraw) {
@@ -45,11 +45,21 @@ public class InsufficientAmountFlow implements Flow {
 	 * 
 	 */
 	@Override
-	public Flow execute(CoffeeMachineState machine) {
+	public Flow execute(CoffeeMachineState coffeeMachine) {
 		System.out
 				.println("The machine does not have the neccessary coins to return your change."
 						+ "\n What would you like to do: ");
 
+		
+		MenuController menuController = new MenuController(buildMenu());
+
+		menuController.start();
+
+		return nextFlow;
+	}
+	
+	private MenuModel buildMenu()
+	{
 		MenuBuilder menuBuilder = new MenuBuilder();
 		menuBuilder
 				.command("1", "Make drink and don't return change",
@@ -57,9 +67,8 @@ public class InsufficientAmountFlow implements Flow {
 
 							@Override
 							public ResultStatus execute(List<String> params) {
-								return new ResultStatus(
-										setNextFlow(new OrderFinalizeFlow(
-												drink, withdraw), ""), true);
+								nextFlow = new OrderFinalizeFlow(drink, withdraw);
+								return new ResultStatus("", true);
 							}
 
 							@Override
@@ -74,12 +83,11 @@ public class InsufficientAmountFlow implements Flow {
 
 							@Override
 							public ResultStatus execute(List<String> params) {
-								// TODO Auto-generated method stub
-								return new ResultStatus(setNextFlow(
-										new DrinkListFlow(),
-										"Your money has been returned to you"
+								nextFlow = new DrinkListFlow();
+								return new ResultStatus(
+										"Your money has been returned to you: "
 												+ userCoins
-														.getSumOfCoinsValue()),
+														.getSumOfCoinsValue(),
 										true);
 							}
 
@@ -91,17 +99,22 @@ public class InsufficientAmountFlow implements Flow {
 
 						}).build();
 
-		MenuModel menuModel = new MenuModel(menuBuilder);
-		MenuController menuController = new MenuController(menuModel);
-
-		menuController.start();
-
-		return flow;
+		return new MenuModel(menuBuilder);
 	}
 
-	String setNextFlow(Flow flow, String message) {
-		this.flow = flow;
-		return message;
+	public MoneyAmount getUserCoins() {
+		return userCoins;
 	}
 
+	public Withdraw getWithdraw() {
+		return withdraw;
+	}
+
+	public Drink getDrink() {
+		return drink;
+	}
+
+	public Flow getNextFlow() {
+		return nextFlow;
+	}
 }

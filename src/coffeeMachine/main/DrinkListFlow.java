@@ -8,62 +8,60 @@ import modules.menuModule.MenuController;
 import modules.menuModule.MenuModel;
 import modules.menuModule.ParamRequirements;
 import modules.menuModule.ResultStatus;
+
 /**
  * 
- * Gives the option of choosing drink from menu
- * returns PaymentFlow with selected drink
+ * Gives the option of choosing drink from menu returns PaymentFlow with
+ * selected drink
  * 
  * @author Andrey
  * 
  */
 
-
-public class DrinkListFlow implements Flow{
+public class DrinkListFlow implements Flow {
 	private Flow flow;
 	private Drink drink;
-	
-	public DrinkListFlow(){
-		drink=new Drink();
+
+	public DrinkListFlow() {
+		drink = new Drink("drink", 0);
 	}
-	
-	
-	public Flow execute(CoffeeMachineState cm){
-		
-		MenuBuilder menuBuilder=new MenuBuilder();
-		final int index=1;
-		for(Drink d:cm.getFiltratedDrinks()){
+
+	public Flow execute(CoffeeMachineState cm) {
+
+		MenuBuilder menuBuilder = new MenuBuilder();
+		final int index = 1;
+		for ( Drink d : cm.getFiltratedDrinks() ) {
 			menuBuilder.command(
 					Integer.toString(index),
 					cm.getFiltratedDrinks().get(index).getName()
 							+ Integer.toString(cm.getFiltratedDrinks()
-									.get(index).getPrice()), new DrinkSelection(drink, d.getName(),d.getPrice()));
-			
+									.get(index).getPrice()),
+					new DrinkSelection(drink, d.getName(), d.getPrice()));
+
 		}
-		
+
 		menuBuilder.build();
-		MenuModel menuModel= new MenuModel(menuBuilder);
-		MenuController menuControler=new MenuController(menuModel);	
+		MenuModel menuModel = new MenuModel(menuBuilder);
+		MenuController menuControler = new MenuController(menuModel);
 		menuControler.start();
-		
-		
-		flow = new PaymentFlow(drink); 
+
+		flow = new PaymentFlow(drink);
 		return flow;
 	}
-	
 
-	
-	/*private String neshto(Drink drink){
-		flow=new PaymentFlow(drink);
-		return null;
-	}*/
-	
-	private class DrinkSelection implements Executable{
+	/*
+	 * private String neshto(Drink drink){ flow=new PaymentFlow(drink); return
+	 * null; }
+	 */
+
+	private class DrinkSelection implements Executable {
 		private Drink drink;
 		private String name;
 		private int price;
+
 		public DrinkSelection(Drink drink, String name, int price) {
-			this.name=name;
-			this.price=price;
+			this.name = name;
+			this.price = price;
 		}
 
 		@Override
@@ -78,8 +76,6 @@ public class DrinkListFlow implements Flow{
 			// TODO Auto-generated method stub
 			return new ParamRequirements();
 		}
-		
+
 	}
 }
-
-

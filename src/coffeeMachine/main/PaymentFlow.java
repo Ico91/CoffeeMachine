@@ -41,8 +41,9 @@ public class PaymentFlow implements Flow {
 
 			@Override
 			public ResultStatus execute(List<String> params) {
-				// TODO Auto-generated method stub
-				return new ResultStatus(addCoin(Coin.FIVE), true);
+				userCoins.add(Coin.FIVE);
+				return new ResultStatus("Accumulated sum: "
+						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
 			}
 
 			@Override

@@ -1,33 +1,26 @@
 package coffeeMachine.main;
 
+
 public class Drink implements Comparable<Drink> {
+	
 	private String name;
 	private int price;
 
-	public Drink() {
-		name = "";
-		price = 0;
-	}
-
 	public Drink(String name, int price) {
+		if ( name == null || name.isEmpty() ) {
+			throw new IllegalArgumentException( "No name specified" );
+		}
 		this.name = name;
 		this.price = price;
 	}
+
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getPrice() {
 		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
 	}
 
 	@Override
@@ -43,4 +36,22 @@ public class Drink implements Comparable<Drink> {
 		}
 		return result;
 	}
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Drink))
+			return false;
+		Drink other = (Drink) obj;
+		return name.equals(other.name);
+	}
+
 }
