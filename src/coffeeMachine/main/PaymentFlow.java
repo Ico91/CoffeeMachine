@@ -42,7 +42,7 @@ public class PaymentFlow implements Flow {
 
 			@Override
 			public ResultStatus execute(List<String> params) {
-				userCoins.add(Coin.FIVE);
+				userCoins.add(Coin.FIVE, 1);
 				return new ResultStatus("Accumulated sum: "
 						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
 			}
@@ -57,8 +57,9 @@ public class PaymentFlow implements Flow {
 
 			@Override
 			public ResultStatus execute(List<String> params) {
-				// TODO Auto-generated method stub
-				return new ResultStatus(addCoin(Coin.TEN), true);
+				userCoins.add(Coin.TEN, 1);
+				return new ResultStatus("Accumulated sum: "
+						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
 			}
 
 			@Override
@@ -71,8 +72,9 @@ public class PaymentFlow implements Flow {
 
 			@Override
 			public ResultStatus execute(List<String> params) {
-				// TODO Auto-generated method stub
-				return new ResultStatus(addCoin(Coin.TWENTY), true);
+				userCoins.add(Coin.TWENTY, 1);
+				return new ResultStatus("Accumulated sum: "
+						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
 			}
 
 			@Override
@@ -85,8 +87,9 @@ public class PaymentFlow implements Flow {
 
 			@Override
 			public ResultStatus execute(List<String> params) {
-				// TODO Auto-generated method stub
-				return new ResultStatus(addCoin(Coin.FIFTY), true);
+				userCoins.add(Coin.FIFTY, 1);
+				return new ResultStatus("Accumulated sum: "
+						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
 			}
 
 			@Override
@@ -99,8 +102,9 @@ public class PaymentFlow implements Flow {
 
 			@Override
 			public ResultStatus execute(List<String> params) {
-				// TODO Auto-generated method stub
-				return new ResultStatus(addCoin(Coin.LEV), true);
+				userCoins.add(Coin.LEV, 1);
+				return new ResultStatus("Accumulated sum: "
+						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
 			}
 
 			@Override
@@ -126,12 +130,6 @@ public class PaymentFlow implements Flow {
 		}).build();
 
 		return new MenuModel(menuBuilder);
-	}
-
-	private String addCoin(Coin coin) {
-		userCoins.add(coin);
-		return "Accumulated sum: "
-				+ String.valueOf(userCoins.getSumOfCoinsValue());
 	}
 
 	private String cancelOrder() {

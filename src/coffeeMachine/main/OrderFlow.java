@@ -36,8 +36,8 @@ public class OrderFlow implements Flow {
 	public Flow execute(CoffeeMachineState coffeeMachine)
 	{	
 		MoneyAmount allCoins = new MoneyAmount();
-		allCoins.add(userCoins.getCoins());
-		allCoins.add(coffeeMachine.getCoins());
+
+		allCoins = coffeeMachine.getCoins().mergeWith(userCoins);
 		
 		int change = userCoins.getSumOfCoinsValue() - drink.getPrice();
 		
