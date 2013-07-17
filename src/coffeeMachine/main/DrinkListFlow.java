@@ -19,25 +19,23 @@ import modules.menuModule.ResultStatus;
  */
 
 public class DrinkListFlow implements Flow{
-	private Flow flow;
 	private Drink drink;
 
 	public DrinkListFlow() {
-		drink = new Drink("drink", 0);
+		
 	}
 	
 	public Flow execute(CoffeeMachineState cm){
 		
 		MenuBuilder menuBuilder=new MenuBuilder();
-		int index=0;
+		int index=1;
 		for(Drink d:cm.getFiltratedDrinks()){
 			menuBuilder.command(
 					Integer.toString(index),
-					cm.getFiltratedDrinks().get(index).getName()
+					cm.getFiltratedDrinks().get(index - 1).getName()
 							+ Integer.toString(cm.getFiltratedDrinks()
-									.get(index).getPrice()),
-					new DrinkSelection(drink, d.getName(), d.getPrice()));
-									.get(index).getPrice()), new DrinkSelection(drink, d.getName(),d.getPrice()));
+									.get(index - 1).getPrice()),
+					new DrinkSelection(d));
 			index++;
 		}
 
@@ -46,36 +44,18 @@ public class DrinkListFlow implements Flow{
 		MenuController menuControler = new MenuController(menuModel);
 		menuControler.start();
 
-		flow = new PaymentFlow(drink);
-		return flow;
-		
-		
-		return new PaymentFlow(drink); 
-		
+		return new PaymentFlow(drink);
 	}
 
-	/*
-	 * private String neshto(Drink drink){ flow=new PaymentFlow(drink); return
-	 * null; }
-	 */
-
 	private class DrinkSelection implements Executable {
-		private Drink drink;
-		private String name;
-		private int price;
-
-		public DrinkSelection(Drink drink, String name, int price) {
-			this.name = name;
-			this.price = price;
-			this.drink = drink;
-			this.name=name;
-			this.price=price;
+		private Drink selectedDrink;
+		public DrinkSelection(Drink drink) {
+			this.selectedDrink = drink;
 		}
 
 		@Override
 		public ResultStatus execute(List<String> params) {
-			drink.setName(name);
-			drink.setPrice(price);
+			drink = new Drink(selectedDrink.getName(), selectedDrink.getPrice());
 			return new ResultStatus("", true);
 		}
 
@@ -85,5 +65,9 @@ public class DrinkListFlow implements Flow{
 			return new ParamRequirements();
 		}
 
+	}
+	
+	public Drink getDrink() {
+		return this.drink;
 	}
 }
