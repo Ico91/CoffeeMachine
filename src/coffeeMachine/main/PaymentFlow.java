@@ -1,5 +1,6 @@
 package coffeeMachine.main;
 
+
 import java.util.List;
 
 import modules.menuModule.Executable;
@@ -151,4 +152,5 @@ public class PaymentFlow implements Flow {
 	public boolean isOrderCancelled() {
 		return isOrderCancelled;
 	}
+
 }
