@@ -1,7 +1,6 @@
 package coffeeMachine.main;
 
 
-
 import java.util.List;
 
 import modules.menuModule.Executable;
