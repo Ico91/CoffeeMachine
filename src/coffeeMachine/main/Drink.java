@@ -8,7 +8,10 @@ public class Drink implements Comparable<Drink> {
 		name = "";
 		price = 0;
 	}
-
+	
+	public String toString(){
+		return name+" "+Integer.toString(price);
+	}
 	public Drink(String name, int price) {
 		this.name = name;
 		this.price = price;

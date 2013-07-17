@@ -18,6 +18,7 @@ import modules.menuModule.ResultStatus;
  */
 
 
+
 public class DrinkListFlow implements Flow{
 	private Flow flow;
 	private Drink drink;
@@ -26,18 +27,21 @@ public class DrinkListFlow implements Flow{
 		drink=new Drink();
 	}
 	
+	public Drink getDrink(){ // for testing
+		return drink;
+	}
 	
 	public Flow execute(CoffeeMachineState cm){
 		
 		MenuBuilder menuBuilder=new MenuBuilder();
-		final int index=1;
+		int index=0;
 		for(Drink d:cm.getFiltratedDrinks()){
 			menuBuilder.command(
 					Integer.toString(index),
 					cm.getFiltratedDrinks().get(index).getName()
 							+ Integer.toString(cm.getFiltratedDrinks()
 									.get(index).getPrice()), new DrinkSelection(drink, d.getName(),d.getPrice()));
-			
+			index++;
 		}
 		
 		menuBuilder.build();
@@ -46,8 +50,8 @@ public class DrinkListFlow implements Flow{
 		menuControler.start();
 		
 		
-		flow = new PaymentFlow(drink); 
-		return flow;
+		return new PaymentFlow(drink); 
+		
 	}
 	
 
@@ -62,6 +66,7 @@ public class DrinkListFlow implements Flow{
 		private String name;
 		private int price;
 		public DrinkSelection(Drink drink, String name, int price) {
+			this.drink = drink;
 			this.name=name;
 			this.price=price;
 		}
