@@ -33,6 +33,28 @@ public class OrderFinalizeFlowTests {
 	}
 
 	@Test
+	public void testRemoveChangeFromMachine() {
+		MoneyAmount money = new MoneyAmount();
+		Map<Coin, Integer> coins = new TreeMap<Coin, Integer>();
+		coins.put(Coin.FIVE, 2);
+		coins.put(Coin.TEN, 5);
+		coins.put(Coin.TWENTY, 0);
+		coins.put(Coin.FIFTY, 0);
+		coins.put(Coin.LEV, 0);
+		
+		money.add(coins);
+		
+		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30), money.withdraw(30));
+		int expected = coffeeMachine.getCoins().getSumOfCoinsValue() - 30;
+		
+		orderFinalizeFlow.removeChangeFromMachine(coffeeMachine);
+		
+		int actual = coffeeMachine.getCoins().getSumOfCoinsValue();
+		
+		assertTrue(expected == actual);
+	}
+	
+	@Test
 	public void testFinalizeDrinkOrderMustReturnCorrectAmountOfDrinks() {
 		Map<Coin, Integer> coins = new TreeMap<Coin, Integer>();
 		coins.put(Coin.FIVE, 2);

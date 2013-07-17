@@ -1,5 +1,7 @@
 package coffeeMachine.main;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -32,6 +34,15 @@ public class MoneyAmountTests {
 	}
 
 	@Test
+	public void testGetSumOfCoinsValueAfterWithdraw_MustBeSuccess() {
+		int before = availableCoins.getSumOfCoinsValue();
+		availableCoins.withdraw(175);
+		int actual = availableCoins.getSumOfCoinsValue();
+		int expected = before - 175;
+		assertTrue(expected == actual);
+	}
+
+	@Test
 	public void testWithdraw_requestedAmountLessThanAvailable_ExpectSuccess() {
 		requestedAmount = 175;
 		try {
@@ -55,18 +66,11 @@ public class MoneyAmountTests {
 		coinsToReturn.put(Coin.TWENTY, 1);
 		coinsToReturn.put(Coin.TEN, 1);
 		coinsToReturn.put(Coin.FIVE, 1);
-		try {
-			Withdraw amount = availableCoins.withdraw(requestedAmount);
-			assertEquals("The the coins should be the same",
-					coinsToReturn.toString(), amount.getChange().getCoins()
-							.toString());
-			System.out.println("Coins to return: " + coinsToReturn.toString()
-					+ System.lineSeparator() + "Returned coins: "
-					+ amount.getChange().getCoins().toString());
-		} catch (InvalidWithdrawAmountException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		Withdraw amount = availableCoins.withdraw(requestedAmount);
+		assertEquals("The the coins should be the same",
+				coinsToReturn.toString(), amount.getChange().getCoins()
+						.toString());
 	}
 
 	@Test

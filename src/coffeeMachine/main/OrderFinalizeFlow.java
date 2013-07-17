@@ -29,6 +29,7 @@ public class OrderFinalizeFlow implements Flow {
 	@Override
 	public Flow execute(CoffeeMachineState machine) {
 		printOrderInformation();
+
 		finalizeDrinkOrder(machine);
 		removeChangeFromMachine(machine);
 
@@ -38,6 +39,7 @@ public class OrderFinalizeFlow implements Flow {
 	void removeChangeFromMachine(CoffeeMachineState machine) {
 		MoneyAmount moneyInMachine = machine.getCoins();
 		moneyInMachine.withdraw(this.change.getChange().getSumOfCoinsValue());
+		machine.setCoins(moneyInMachine);
 	}
 
 	private void printOrderInformation() {
