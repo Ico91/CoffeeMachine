@@ -1,10 +1,6 @@
 package coffeeMachine.main;
 
 import static org.junit.Assert.*;
-
-import java.util.Map;
-import java.util.TreeMap;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,62 +10,42 @@ public class OrderFinalizeFlowTests {
 
 	@Before
 	public void testMoneyAmount_SetUpObject() {
-		Drink drink = new Drink("Coffee", 30);
-		Map<Coin, Integer> coins = new TreeMap<Coin, Integer>();
-		coins.put(Coin.FIVE, 5);
-		coins.put(Coin.TEN, 4);
-		coins.put(Coin.TWENTY, 3);
-		coins.put(Coin.FIFTY, 2);
-		coins.put(Coin.LEV, 1);
+		DrinksContainer drinksContainer = new DrinksContainer();
+		drinksContainer.add(new Drink("Coffee", 30), 10)
+				.add(new Drink("Tea", 40), 10)
+				.add(new Drink("Hot chocolate", 50), 5).commit();
 
-		Map<Drink, Integer> availableDrinks = new TreeMap<Drink, Integer>();
-		availableDrinks.put(drink, 50);
-		availableDrinks.put(new Drink("Tea", 40), 10);
-		availableDrinks.put(new Drink("Hot chocolate", 50), 5);
-
-		MoneyAmount availableCoins = new MoneyAmount(coins);
+		MoneyAmount availableCoins = new MoneyAmount(5, 4, 3, 2, 1);
 		this.coffeeMachine = new CoffeeMachineState(availableCoins,
-				new DrinksContainer(availableDrinks));
+				drinksContainer);
 	}
 
 	@Test
 	public void testRemoveChangeFromMachine() {
-		MoneyAmount money = new MoneyAmount();
-		Map<Coin, Integer> coins = new TreeMap<Coin, Integer>();
-		coins.put(Coin.FIVE, 2);
-		coins.put(Coin.TEN, 5);
-		coins.put(Coin.TWENTY, 0);
-		coins.put(Coin.FIFTY, 0);
-		coins.put(Coin.LEV, 0);
-		
-		money.add(coins);
-		
-		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30), money.withdraw(30));
+		MoneyAmount money = new MoneyAmount(2, 5, 0, 0, 0);
+
+		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30),
+				money.withdraw(30));
 		int expected = coffeeMachine.getCoins().getSumOfCoinsValue() - 30;
-		
+
 		orderFinalizeFlow.removeChangeFromMachine(coffeeMachine);
-		
+
 		int actual = coffeeMachine.getCoins().getSumOfCoinsValue();
-		
+
 		assertTrue(expected == actual);
 	}
-	
+
 	@Test
 	public void testFinalizeDrinkOrderMustReturnCorrectAmountOfDrinks() {
-		Map<Coin, Integer> coins = new TreeMap<Coin, Integer>();
-		coins.put(Coin.FIVE, 2);
-		coins.put(Coin.TEN, 2);
-		coins.put(Coin.TWENTY, 0);
-		coins.put(Coin.FIFTY, 0);
-		coins.put(Coin.LEV, 0);
 
-		MoneyAmount change = new MoneyAmount(coins);
+		MoneyAmount change = new MoneyAmount(2, 2, 0, 0, 0);
 		Withdraw withdraw = change.withdraw(30);
 		Drink drink = new Drink("Coffee", 30);
+		int expected = coffeeMachine.getDrinks().getDrinks().get(drink) - 1;
 
 		orderFinalizeFlow = new OrderFinalizeFlow(drink, withdraw);
 		orderFinalizeFlow.finalizeDrinkOrder(coffeeMachine);
-		int expected = 49;
+
 		int actual = coffeeMachine.getDrinks().getDrinks().get(drink);
 
 		assertTrue(expected == actual);

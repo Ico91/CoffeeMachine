@@ -1,10 +1,7 @@
 package coffeeMachine.main;
 
-import java.util.Map;
-
 /***
- * Finalizing order and show information about ordered drink and change to the
- * user
+ * Finalizing order and print information about ordered drink and change
  * 
  * @author Krasimir Nikolov Atanasov
  * 
@@ -15,7 +12,7 @@ public class OrderFinalizeFlow implements Flow {
 	private Withdraw change;
 
 	/***
-	 * 
+	 * Constructs new OrderFinalizeFlow object
 	 * @param drink
 	 *            - Ordered drink
 	 * @param change
@@ -25,7 +22,7 @@ public class OrderFinalizeFlow implements Flow {
 		this.drink = drink;
 		this.change = change;
 	}
-
+	
 	@Override
 	public Flow execute(CoffeeMachineState machine) {
 		printOrderInformation();
@@ -37,9 +34,7 @@ public class OrderFinalizeFlow implements Flow {
 	}
 
 	void removeChangeFromMachine(CoffeeMachineState machine) {
-		MoneyAmount moneyInMachine = machine.getCoins();
-		moneyInMachine.withdraw(this.change.getChange().getSumOfCoinsValue());
-		machine.setCoins(moneyInMachine);
+		machine.getCoins().withdraw(this.change.getChange().getSumOfCoinsValue());
 	}
 
 	private void printOrderInformation() {
@@ -52,30 +47,24 @@ public class OrderFinalizeFlow implements Flow {
 					+ this.change.getChange().toString() + " as change.");
 		}
 	}
-
+	
+	
+	// TODO: Refactoring
 	void finalizeDrinkOrder(CoffeeMachineState machine) {
-		DrinksContainer drinksContainer = machine.getDrinks();
-		Map<Drink, Integer> drinks = drinksContainer.getDrinks();
-		int countOfSelectedDrink = drinks.get(drink);
-
-		countOfSelectedDrink--;
-		drinks.put(this.drink, countOfSelectedDrink);
-
-		drinksContainer.setDrinks(drinks);
-		machine.setDrinks(drinksContainer);
+		machine.getDrinks().decreaseDrinkAmount(drink);
 	}
 
 	/***
 	 * Getter for ordered drink
 	 * 
-	 * @return ordered drink
+	 * @return Ordered drink
 	 */
 	public Drink getDrink() {
 		return drink;
 	}
 
 	/***
-	 * Setter for ordered drink
+	 * Setter for Ordered drink
 	 * 
 	 * @param drink
 	 *            - ordered drink
