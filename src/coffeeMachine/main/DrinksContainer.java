@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 public class DrinksContainer {
 	private Map<Drink, Integer> drinks;
+	
 	private boolean additionClosed = false;
 	
 	public DrinksContainer()
@@ -48,15 +49,31 @@ public class DrinksContainer {
 		}
 	}
 
-	
-
 	public Map<Drink, Integer> getDrinks() {
 		return drinks;
 	}
-	
-	public void setDrinks(Map<Drink, Integer> drinks)
-	{
-		this.drinks = drinks;
+
+	@Override
+	public int hashCode() {
+		return drinks.hashCode();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof DrinksContainer))
+			return false;
+		DrinksContainer other = (DrinksContainer) obj;
+		if (drinks == null) {
+			if (other.drinks != null)
+				return false;
+		} else if (!drinks.equals(other.drinks))
+			return false;
+		return true;
+	}
+
 	
 }
