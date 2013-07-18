@@ -2,6 +2,8 @@ package coffeeMachine;
 
 import java.util.Objects;
 
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
+
 /***
  * Finalizing order and print information about ordered drink and change
  * 
@@ -44,7 +46,7 @@ public class OrderFinalizeFlow implements Flow {
 
 	private void printOrderInformation() {
 		System.out.println("Your " + this.drink.getName() + " is ready.");
-		if (this.change.getStatus() == RequestResultStatus.SUCCESSFUL) {
+		if (this.change.getStatus() == WithdrawRequestResultStatus.SUCCESSFUL) {
 			System.out.println("Your change is: "
 					+ this.change.getChange().toString());
 		} else {

@@ -22,14 +22,18 @@ public class OrderFinalizeFlowTests {
 				.add(new Drink("Tea", 40), 10)
 				.add(new Drink("Hot chocolate", 50), 5).commit();
 
-		MoneyAmount availableCoins = new MoneyAmount(5, 4, 3, 2, 1);
+		MoneyAmount availableCoins = new MoneyAmount();
+		availableCoins.add(Coin.FIVE, 5).add(Coin.TEN, 4).add(Coin.TWENTY, 3)
+				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
 		this.coffeeMachine = new CoffeeMachineState(availableCoins,
 				drinksContainer);
 	}
 
 	@Test
 	public void testRemoveChangeFromMachine() {
-		MoneyAmount money = new MoneyAmount(2, 5, 0, 0, 0);
+		MoneyAmount money = new MoneyAmount();
+		money.add(Coin.FIVE, 2).add(Coin.TEN, 5).add(Coin.TWENTY, 0)
+				.add(Coin.FIFTY, 0).add(Coin.LEV, 0);
 
 		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30),
 				money.withdraw(30));
@@ -45,7 +49,10 @@ public class OrderFinalizeFlowTests {
 	@Test
 	public void testFinalizeDrinkOrderMustReturnCorrectAmountOfDrinks() {
 
-		MoneyAmount change = new MoneyAmount(2, 2, 0, 0, 0);
+		MoneyAmount change = new MoneyAmount();
+		change.add(Coin.FIVE, 2).add(Coin.TEN, 2).add(Coin.TWENTY, 0)
+				.add(Coin.FIFTY, 0).add(Coin.LEV, 0);
+		
 		Withdraw withdraw = change.withdraw(30);
 		Drink drink = new Drink("Coffee", 30);
 		int expected = coffeeMachine.getDrinks().getDrinks().get(drink) - 1;

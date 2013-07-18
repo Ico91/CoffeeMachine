@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import coffeeMachine.Coin;
 import coffeeMachine.MoneyAmount;
-import coffeeMachine.RequestResultStatus;
 import coffeeMachine.Withdraw;
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 import coffeeMachine.exceptions.InvalidWithdrawAmountException;
 
 //TODO test method names are too long
@@ -48,7 +48,7 @@ public class MoneyAmountTests {
 		int before = availableCoins.sumOfCoins();
 
 		Withdraw withdraw = availableCoins.withdraw(175);
-		assertEquals(RequestResultStatus.SUCCESSFUL, withdraw.getStatus());
+		assertEquals(WithdrawRequestResultStatus.SUCCESSFUL, withdraw.getStatus());
 
 		int actual = availableCoins.sumOfCoins();
 		int expected = before - 175;
@@ -61,7 +61,7 @@ public class MoneyAmountTests {
 		requestedAmount = 175;
 		Withdraw amount = availableCoins.withdraw(requestedAmount);
 		assertEquals("Operation status should be successful",
-				amount.getStatus(), RequestResultStatus.SUCCESSFUL);
+				amount.getStatus(), WithdrawRequestResultStatus.SUCCESSFUL);
 	}
 
 	@Test
@@ -91,7 +91,8 @@ public class MoneyAmountTests {
 		moneyAmount1.add(moneyAmount2);
 
 		Integer expectedFifties = 3;
-		assertEquals("Expected must be equal to actual value", expectedFifties, moneyAmount1.getCoins().get(Coin.FIFTY));
+		assertEquals("Expected must be equal to actual value", expectedFifties,
+				moneyAmount1.getCoins().get(Coin.FIFTY));
 	}
 
 	@Test
@@ -116,9 +117,10 @@ public class MoneyAmountTests {
 	@Test
 	public void testWithdraw_requestedAmountMoreThanAvailable_ExpectInsufficientAmount() {
 		requestedAmount = 375;
-			Withdraw amount = availableCoins.withdraw(requestedAmount);
-			assertEquals("Operation status should not be successful",
-					amount.getStatus(), RequestResultStatus.INSUFFICIENT_AMOUNT);
+		Withdraw amount = availableCoins.withdraw(requestedAmount);
+		assertEquals("Operation status should not be successful",
+				amount.getStatus(), WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT);
+
 	}
 
 	@Test(expected = InvalidWithdrawAmountException.class)

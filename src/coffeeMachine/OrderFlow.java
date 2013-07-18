@@ -1,5 +1,7 @@
 package coffeeMachine;
 
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
+
 
 /**
  * Calculates the necessary change to return and the total number of coins.
@@ -38,13 +40,13 @@ public class OrderFlow implements Flow {
 	{	
 		MoneyAmount allCoins = new MoneyAmount();
 
-		allCoins = coffeeMachine.getCoins().mergeWith(userCoins);
+		allCoins = coffeeMachine.getCoins().add(userCoins);
 		
 		int change = userCoins.sumOfCoins() - drink.getPrice();
 		
 		this.withdraw = allCoins.withdraw(change);
 		
-		if(withdraw.getStatus() == RequestResultStatus.SUCCESSFUL)
+		if(withdraw.getStatus() == WithdrawRequestResultStatus.SUCCESSFUL)
 			return new OrderFinalizeFlow(drink, withdraw);
 		
 		return new InsufficientAmountFlow(drink, userCoins, withdraw);

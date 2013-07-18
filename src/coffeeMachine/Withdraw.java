@@ -1,15 +1,15 @@
 package coffeeMachine;
 
 public class Withdraw {
-	private RequestResultStatus status;
+	private WithdrawRequestResultStatus status;
 	private MoneyAmount change;
 
-	public Withdraw(RequestResultStatus status, MoneyAmount change) {
+	public Withdraw(WithdrawRequestResultStatus status, MoneyAmount change) {
 		this.status = status;
 		this.change = change;
 	}
 
-	public RequestResultStatus getStatus() {
+	public WithdrawRequestResultStatus getStatus() {
 		return status;
 	}
 
@@ -53,4 +53,9 @@ public class Withdraw {
 				+ this.change.getCoins().toString();
 	}
 
+	public static enum WithdrawRequestResultStatus {
+			SUCCESSFUL, INSUFFICIENT_AMOUNT;
+		}
+
+	
 }
