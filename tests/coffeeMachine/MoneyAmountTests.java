@@ -23,7 +23,22 @@ public class MoneyAmountTests {
 		availableCoins = new MoneyAmount().add(Coin.FIVE, 5).add(Coin.TEN, 4)
 				.add(Coin.TWENTY, 3).add(Coin.FIFTY, 2).add(Coin.LEV, 1);
 	}
-
+	
+	@Test
+	public void getCoinsForSuccess() {
+		int expected = 5;
+		int actual = availableCoins.getCoin(Coin.FIVE);
+		assertTrue("Actual coins must be 5", expected == actual);
+	}
+	
+	@Test
+	public void getCoinsForFail() {
+		int expected = 5;
+		int actual = availableCoins.getCoin(Coin.FIFTY);
+		
+		assertFalse("Expected value must be different than actual", expected == actual);
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidConstructorParameter() {
 		availableCoins = new MoneyAmount();
