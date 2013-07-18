@@ -55,12 +55,12 @@ public class OrderFinalizeFlowTests {
 		
 		Withdraw withdraw = change.withdraw(30);
 		Drink drink = new Drink("Coffee", 30);
-		int expected = coffeeMachine.getDrinks().getDrinks().get(drink) - 1;
+		int expected = coffeeMachine.getCurrentDrinks().getDrinks().get(drink) - 1;
 
 		orderFinalizeFlow = new OrderFinalizeFlow(drink, withdraw);
 		orderFinalizeFlow.finalizeDrinkOrder(coffeeMachine);
 
-		int actual = coffeeMachine.getDrinks().getDrinks().get(drink);
+		int actual = coffeeMachine.getCurrentDrinks().getDrinks().get(drink);
 
 		assertTrue(expected == actual);
 	}

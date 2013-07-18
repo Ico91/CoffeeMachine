@@ -56,7 +56,7 @@ public class OrderFinalizeFlow implements Flow {
 	}
 	
 	void finalizeDrinkOrder(CoffeeMachineState machine) {
-		machine.getDrinks().decreaseDrinkAmount(drink);
+		machine.getCurrentDrinks().decreaseDrinkAmount(drink);
 	}
 
 	/***

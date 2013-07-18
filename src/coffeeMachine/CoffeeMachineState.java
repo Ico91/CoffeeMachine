@@ -13,11 +13,13 @@ import java.util.Map;
  */
 public class CoffeeMachineState {
 	private MoneyAmount coins;
-	private DrinksContainer drinks;
+	private DrinksContainer currentDrinksAmount;
+	private final DrinksContainer initialDrinksAmount;
 	
 	public CoffeeMachineState(MoneyAmount coins, DrinksContainer drinks) {
 		this.coins = coins;
-		this.drinks = drinks;
+		this.currentDrinksAmount = drinks;
+		this.initialDrinksAmount = drinks;
 	}
 
 	public MoneyAmount getCoins() {
@@ -28,17 +30,17 @@ public class CoffeeMachineState {
 		this.coins = coins;
 	}
 
-	public DrinksContainer getDrinks() {
-		return drinks;
+	public DrinksContainer getCurrentDrinks() {
+		return this.currentDrinksAmount;
 	}
-
-	public void setDrinks(DrinksContainer drinks) {
-		this.drinks = drinks;
+	
+	public DrinksContainer getInitialDrinks() {
+		return this.initialDrinksAmount;
 	}
 	
 	public List<Drink> getFiltratedDrinks(){  // by Andrey
 		List<Drink> drinksList=new ArrayList<Drink>();
-		for(Map.Entry<Drink, Integer> entry: drinks.getDrinks().entrySet()){
+		for(Map.Entry<Drink, Integer> entry: this.currentDrinksAmount.getDrinks().entrySet()){
 			if(entry.getValue()!=0){
 				drinksList.add(entry.getKey());
 			}
