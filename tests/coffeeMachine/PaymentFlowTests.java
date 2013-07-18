@@ -17,12 +17,12 @@ public class PaymentFlowTests {
 	private PaymentFlow payment;
 
 	@Before
-	public void testExecute_SetUpObject() {
+	public void setUpObject() {
 		payment = new PaymentFlow(new Drink("Coffee", 45));
 	}
 
 	@Test
-	public void testExecute_InsertEnoughMoney_CheckCorrectResult() {
+	public void insertEnoughMoney() {
 		System.out.println("******************** TEST 2 *********************");
 		System.out.println("Insert enough money to buy the drink: 30 stotinki");
 		payment.execute(coffeeMachine);
@@ -38,7 +38,7 @@ public class PaymentFlowTests {
 	}
 
 	@Test
-	public void testExecute_CancelOrder() {
+	public void cancelOrder() {
 		System.out.println("******************** TEST 1 *********************");
 		System.out
 				.println("Cancel the order before inserting enough money to" +
@@ -49,7 +49,7 @@ public class PaymentFlowTests {
 	}
 
 	@After
-	public void testExecute_TearDownObject() {
+	public void tearDownObject() {
 		payment = null;
 	}
 

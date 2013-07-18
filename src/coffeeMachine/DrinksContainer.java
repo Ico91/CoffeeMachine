@@ -1,5 +1,6 @@
 package coffeeMachine;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -11,7 +12,7 @@ public class DrinksContainer {
 	
 	public DrinksContainer()
 	{
-		drinks = new TreeMap<Drink, Integer>();
+		drinks = new HashMap<Drink, Integer>();
 	}
 	
 	public DrinksContainer add(Drink drink, int quantity)
@@ -37,8 +38,20 @@ public class DrinksContainer {
 		return this;
 	}
 	
+	public int getDrinkQuantity(Drink drink)
+	{
+		Objects.requireNonNull(drink, "Specified drink is null");
+		Integer drinkQuantity = drinks.get(drink);
+		
+		if(drinkQuantity == null)
+			throw new IllegalArgumentException("Drink not found!");
+
+		return drinkQuantity.intValue();
+	}
+	
 	public void decreaseDrinkAmount(Drink drink)
 	{
+		Objects.requireNonNull(drink, "Specified drink is null");
 		Integer drinkQuantity = drinks.get(drink);
 		
 		if(drinkQuantity == null)
@@ -51,6 +64,11 @@ public class DrinksContainer {
 
 	public Map<Drink, Integer> getDrinks() {
 		return new TreeMap<Drink, Integer>(drinks);
+	}
+	
+	public boolean isAdditionClosed()
+	{
+		return this.additionClosed;
 	}
 
 	@Override

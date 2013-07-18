@@ -13,14 +13,13 @@ import coffeeMachine.Withdraw;
 import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 import coffeeMachine.exceptions.InvalidWithdrawAmountException;
 
-//TODO test method names are too long
 public class MoneyAmountTests {
 
 	private MoneyAmount availableCoins;
 	private int requestedAmount;
 
 	@Before
-	public void testMoneyAmount_SetUpObject() {
+	public void setUpObject() {
 		availableCoins = new MoneyAmount().add(Coin.FIVE, 5).add(Coin.TEN, 4)
 				.add(Coin.TWENTY, 3).add(Coin.FIFTY, 2).add(Coin.LEV, 1);
 	}
@@ -39,12 +38,12 @@ public class MoneyAmountTests {
 	}
 
 	@Test
-	public void testGetSumOfCoinsValue_MustReturnCorrectSum() {
+	public void testGetSumOfCoinsValue() {
 		assertEquals(325, availableCoins.sumOfCoins());
 	}
 
 	@Test
-	public void testGetSumOfCoinsValueAfterWithdraw_MustBeSuccess() {
+	public void testGetSumOfCoinsValueAfterWithdraw() {
 		int before = availableCoins.sumOfCoins();
 
 		Withdraw withdraw = availableCoins.withdraw(175);
@@ -57,7 +56,7 @@ public class MoneyAmountTests {
 	}
 
 	@Test
-	public void testWithdraw_requestedAmountLessThanAvailable_ExpectSuccess() {
+	public void testWithdrawLessMoneyThanAvailable() {
 		requestedAmount = 175;
 		Withdraw amount = availableCoins.withdraw(requestedAmount);
 		assertEquals("Operation status should be successful",
@@ -96,7 +95,7 @@ public class MoneyAmountTests {
 	}
 
 	@Test
-	public void testEqual_MustReturnFalse() {
+	public void testEqualMustReturnFalse() {
 		MoneyAmount moneyAmount = new MoneyAmount();
 		moneyAmount.add(Coin.FIVE, 5).add(Coin.TEN, 4).add(Coin.TWENTY, 3)
 				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
@@ -104,7 +103,7 @@ public class MoneyAmountTests {
 	}
 
 	@Test
-	public void testWithdraw_requestedAmountLessThanAvailable_ExpectCorrectChangeResult() {
+	public void testCorrectChangeResult() {
 		requestedAmount = 235;
 		MoneyAmount expected = new MoneyAmount();
 		expected.add(Coin.FIVE, 1).add(Coin.TEN, 1).add(Coin.TWENTY, 1)
@@ -115,7 +114,7 @@ public class MoneyAmountTests {
 	}
 
 	@Test
-	public void testWithdraw_requestedAmountMoreThanAvailable_ExpectInsufficientAmount() {
+	public void testWithdrawMoreMoneyThanAvailable() {
 		requestedAmount = 375;
 		Withdraw amount = availableCoins.withdraw(requestedAmount);
 		assertEquals("Operation status should not be successful",
@@ -124,14 +123,14 @@ public class MoneyAmountTests {
 	}
 
 	@Test(expected = InvalidWithdrawAmountException.class)
-	public void testWithDraw_requestedAmountLessThanZero_ExpectException()
+	public void testWithdrawAmountLessThanZero()
 			throws InvalidWithdrawAmountException {
 		requestedAmount = -50;
 		availableCoins.withdraw(requestedAmount);
 	}
 
 	@Test
-	public void testAdd_addSomeCoins_ExpectCorrectSumOfCoins() {
+	public void testAddCoins() {
 		MoneyAmount moneyAmount = new MoneyAmount();
 		availableCoins = new MoneyAmount();
 		availableCoins.add(Coin.FIVE, 10).add(Coin.TEN, 9).add(Coin.TWENTY, 8)
@@ -144,7 +143,7 @@ public class MoneyAmountTests {
 	}
 
 	@After
-	public void testMoneyAmount_TearDownObject() {
+	public void tearDownObject() {
 		availableCoins = null;
 	}
 }

@@ -1,13 +1,11 @@
 package coffeeMachine;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import coffeeMachine.Drink;
-import coffeeMachine.DrinksContainer;
 
 public class DrinksContainerTests {
 
@@ -16,8 +14,7 @@ public class DrinksContainerTests {
 	@Before
 	public void setUpObject() {
 		drinks = new DrinksContainer();
-		drinks.add(new Drink("Coffee", 45), 3)
-				.add(new Drink("Tea", 60), 2)
+		drinks.add(new Drink("Coffee", 45), 3).add(new Drink("Tea", 60), 2)
 				.add(new Drink("Hot Chocolate", 75), 1);
 	}
 
@@ -49,6 +46,21 @@ public class DrinksContainerTests {
 		drinks.add(drink, 5);
 	}
 
+	@Test(expected = NullPointerException.class)
+	public void addNullDrink() {
+		Drink drink = new Drink("Nescafe", 10);
+		drink = null;
+		drinks.add(drink, 1);
+	}
+
+	@Test
+	public void testCommit() {
+		Drink drink = new Drink("Nescafe", 30);
+		drinks.add(drink, 10).commit();
+
+		assertTrue(drinks.isAdditionClosed());
+	}
+
 	@Test
 	public void pickAvailableDrink() {
 		Drink drink = new Drink("Coffee", 45);
@@ -59,6 +71,29 @@ public class DrinksContainerTests {
 		assertEquals("Expected and current drink amount should be equal",
 				expectedDrinkAmount, drinks.getDrinks().get(drink).intValue());
 
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void decreaseNullDrinkAmount() {
+		Drink drink = new Drink("Nescafe", 30);
+		drink = null;
+		drinks.decreaseDrinkAmount(drink);
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void getNullDrinkAmount() {
+		Drink drink = new Drink("Nescafe", 30);
+		drink = null;
+		drinks.getDrinkQuantity(drink);
+	}
+
+	@Test
+	public void getAvailableDrinkAmount() {
+		Drink drink = new Drink("Coffee", 45);
+		int expectedDrinkAmount = 3;
+
+		assertEquals("Expected and actual drink amount should be equal",
+				expectedDrinkAmount, drinks.getDrinkQuantity(drink));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
