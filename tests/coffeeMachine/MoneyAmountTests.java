@@ -1,4 +1,4 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.*;
@@ -9,10 +9,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import coffeeMachine.main.InvalidWithdrawAmountException;
-import coffeeMachine.main.MoneyAmount;
-import coffeeMachine.main.RequestResultStatus;
-import coffeeMachine.main.Withdraw;
+import coffeeMachine.Coin;
+import coffeeMachine.MoneyAmount;
+import coffeeMachine.RequestResultStatus;
+import coffeeMachine.Withdraw;
+import coffeeMachine.exceptions.InvalidWithdrawAmountException;
 
 //TODO test method names are too long
 public class MoneyAmountTests {

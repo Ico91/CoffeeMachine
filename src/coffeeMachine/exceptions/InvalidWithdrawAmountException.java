@@ -1,4 +1,4 @@
-package coffeeMachine.main;
+package coffeeMachine.exceptions;
 
 @SuppressWarnings("serial")
 public class InvalidWithdrawAmountException extends RuntimeException {

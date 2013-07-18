@@ -1,4 +1,4 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 import java.util.Map;
 import java.util.Objects;

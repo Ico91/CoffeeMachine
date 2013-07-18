@@ -1,4 +1,4 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 public class Withdraw {
 	private RequestResultStatus status;

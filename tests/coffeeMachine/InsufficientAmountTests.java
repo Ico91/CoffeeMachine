@@ -1,10 +1,19 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Drink;
+import coffeeMachine.DrinkListFlow;
+import coffeeMachine.InsufficientAmountFlow;
+import coffeeMachine.MoneyAmount;
+import coffeeMachine.OrderFinalizeFlow;
+import coffeeMachine.RequestResultStatus;
+import coffeeMachine.Withdraw;
 
 public class InsufficientAmountTests {
 

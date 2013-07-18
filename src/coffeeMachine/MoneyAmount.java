@@ -1,4 +1,4 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Collections;
+
+import coffeeMachine.exceptions.InvalidWithdrawAmountException;
+import coffeeMachine.exceptions.MoneyAmountException;
 
 /***
  * Class which contains a collection of coins and provides options to add and
