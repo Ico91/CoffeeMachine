@@ -16,16 +16,15 @@ public class DrinksContainerTests {
 	@Before
 	public void testDrinksContainer_SetUpObject() {
 		drinks = new DrinksContainer();
-		drinks.getDrinks().put(new Drink("Coffee", 45), 3);
-		drinks.getDrinks().put(new Drink("Tea", 60), 2);
-		drinks.getDrinks().put(new Drink("Hot Chocolate", 75), 1);
+		drinks.add(new Drink("Coffee", 45), 3)
+				.add(new Drink("Tea", 60), 2)
+				.add(new Drink("Hot Chocolate", 75), 1);
 	}
 
 	@Test
 	public void testAddDrink_addToExistingDrink_expectCorrectQuantity() {
 		Drink drink = new Drink("Coffee", 45);
 		drinks.add(drink, 3);
-
 		int expectedDrinkQuantity = 6;
 
 		assertEquals("The quantity of the drink should be correct",
@@ -61,10 +60,9 @@ public class DrinksContainerTests {
 				expectedDrinkAmount, drinks.getDrinks().get(drink).intValue());
 
 	}
-	
-	@Test (expected = IllegalArgumentException.class)
-	public void testDecreaseDrinkAmount_chooseNotAvailableDrink_expectException()
-	{
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testDecreaseDrinkAmount_chooseNotAvailableDrink_expectException() {
 		Drink drink = new Drink("Nescafe", 30);
 		drinks.decreaseDrinkAmount(drink);
 	}
