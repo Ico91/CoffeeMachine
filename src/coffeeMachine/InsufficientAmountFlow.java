@@ -62,7 +62,7 @@ public class InsufficientAmountFlow implements Flow {
 	{
 		MenuBuilder menuBuilder = new MenuBuilder();
 		menuBuilder
-				.command("1", "Make drink and don't return change",
+				.command("1", "Make drink and return only available change",
 						new Executable() {
 
 							@Override

@@ -12,7 +12,6 @@ import coffeeMachine.DrinkListFlow;
 import coffeeMachine.InsufficientAmountFlow;
 import coffeeMachine.MoneyAmount;
 import coffeeMachine.OrderFinalizeFlow;
-import coffeeMachine.RequestResultStatus;
 import coffeeMachine.Withdraw;
 
 public class InsufficientAmountTests {
@@ -25,7 +24,7 @@ public class InsufficientAmountTests {
 		Drink drink = new Drink("Coffee", 45);
 		MoneyAmount userCoins = new MoneyAmount();
 		Withdraw withdraw = new Withdraw(
-				RequestResultStatus.INSUFFICIENT_AMOUNT, new MoneyAmount());
+				Withdraw.WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT, new MoneyAmount());
 
 		flow = new InsufficientAmountFlow(drink, userCoins, withdraw);
 	}

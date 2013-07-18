@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
+
 public class OrderFlowTests {
 
 	private OrderFlow orderFlow;
@@ -26,7 +28,7 @@ public class OrderFlowTests {
 		
 		Withdraw withdrawResult = orderFlow.getWithdraw();
 		Withdraw expectedWithdraw = new Withdraw(
-				RequestResultStatus.SUCCESSFUL, new MoneyAmount(0, 0, 1, 0, 1));
+				WithdrawRequestResultStatus.SUCCESSFUL, new MoneyAmount(0, 0, 1, 0, 1));
 		boolean isEqual = false;
 
 		if (withdrawResult.equals(expectedWithdraw))
@@ -45,7 +47,7 @@ public class OrderFlowTests {
 		
 		Withdraw withdrawResult = orderFlow.getWithdraw();
 		Withdraw expectedWithdraw = new Withdraw(
-				RequestResultStatus.INSUFFICIENT_AMOUNT, new MoneyAmount(1, 1, 1, 0, 1));
+				WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT, new MoneyAmount(1, 1, 1, 0, 1));
 		System.out.println("Expected " + expectedWithdraw.toString());
 		boolean isEqual = false;
 

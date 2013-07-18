@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Collections;
 
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 import coffeeMachine.exceptions.InvalidWithdrawAmountException;
 import coffeeMachine.exceptions.MoneyAmountException;
 
@@ -136,7 +137,7 @@ public class MoneyAmount {
 					"Invalid withdraw amount. Cannot be less than zero");
 
 		if (amount == 0)
-			return new Withdraw(RequestResultStatus.SUCCESSFUL, requestedCoins);
+			return new Withdraw(WithdrawRequestResultStatus.SUCCESSFUL, requestedCoins);
 
 		for (Coin c : getSortedCoinTypes()) {
 			if (amount > 0 && (amount - c.getValue() >= 0)) {
@@ -156,10 +157,10 @@ public class MoneyAmount {
 		}
 
 		if (amount == 0) {
-			return new Withdraw(RequestResultStatus.SUCCESSFUL, requestedCoins);
+			return new Withdraw(WithdrawRequestResultStatus.SUCCESSFUL, requestedCoins);
 		}
 
-		return new Withdraw(RequestResultStatus.INSUFFICIENT_AMOUNT,
+		return new Withdraw(WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT,
 				requestedCoins);
 	}
 

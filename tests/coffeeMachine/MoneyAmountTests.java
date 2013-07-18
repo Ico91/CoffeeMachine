@@ -11,8 +11,8 @@ import org.junit.Test;
 
 import coffeeMachine.Coin;
 import coffeeMachine.MoneyAmount;
-import coffeeMachine.RequestResultStatus;
 import coffeeMachine.Withdraw;
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 import coffeeMachine.exceptions.InvalidWithdrawAmountException;
 
 //TODO test method names are too long
@@ -56,7 +56,7 @@ public class MoneyAmountTests {
 		int before = availableCoins.getSumOfCoinsValue();
 		
 		Withdraw withdraw =  availableCoins.withdraw(175);
-		assertEquals( RequestResultStatus.SUCCESSFUL, withdraw.getStatus() );
+		assertEquals( WithdrawRequestResultStatus.SUCCESSFUL, withdraw.getStatus() );
 		
 		int actual = availableCoins.getSumOfCoinsValue();
 		int expected = before - 175;
@@ -69,7 +69,7 @@ public class MoneyAmountTests {
 		requestedAmount = 175;
 		Withdraw amount = availableCoins.withdraw(requestedAmount);
 		assertEquals("Operation status should be successful",
-				amount.getStatus(), RequestResultStatus.SUCCESSFUL);
+				amount.getStatus(), WithdrawRequestResultStatus.SUCCESSFUL);
 	}
 
 	@Test
@@ -121,7 +121,7 @@ public class MoneyAmountTests {
 		try {
 			Withdraw amount = availableCoins.withdraw(requestedAmount);
 			assertEquals("Operation status should not be successful",
-					amount.getStatus(), RequestResultStatus.INSUFFICIENT_AMOUNT);
+					amount.getStatus(), WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT);
 		} catch (InvalidWithdrawAmountException e) {
 			//TODO shouldn't this fail the test ?
 			
