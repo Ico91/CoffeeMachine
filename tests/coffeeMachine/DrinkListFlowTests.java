@@ -6,12 +6,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Andrey
+ * Tests DrinkListFlow class
+ */
+
 public class DrinkListFlowTests {
 	DrinkListFlow drinkFlow;
 	CoffeeMachineState coffeeMachine;
 
+	//initCoffeeMachine, adds 3 drink and coins
 	@Before
-	public void testExecute_SetUpObject() {
+	public void initCoffeeMachine() {
 		drinkFlow = new DrinkListFlow();
 		MoneyAmount moneyAmount = new MoneyAmount(10, 10, 10, 10, 10);
 		DrinksContainer drinksContainer = new DrinksContainer();
