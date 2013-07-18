@@ -33,11 +33,11 @@ public class OrderFinalizeFlowTests {
 
 		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30),
 				money.withdraw(30));
-		int expected = coffeeMachine.getCoins().getSumOfCoinsValue() - 30;
+		int expected = coffeeMachine.getCoins().sumOfCoins() - 30;
 
 		orderFinalizeFlow.removeChangeFromMachine(coffeeMachine);
 
-		int actual = coffeeMachine.getCoins().getSumOfCoinsValue();
+		int actual = coffeeMachine.getCoins().sumOfCoins();
 
 		assertTrue(expected == actual);
 	}

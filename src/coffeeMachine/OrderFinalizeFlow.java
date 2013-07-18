@@ -39,7 +39,7 @@ public class OrderFinalizeFlow implements Flow {
 	}
 
 	void removeChangeFromMachine(CoffeeMachineState machine) {
-		machine.getCoins().withdraw(this.change.getChange().getSumOfCoinsValue());
+		machine.getCoins().withdraw(this.change.getChange().sumOfCoins());
 	}
 
 	private void printOrderInformation() {

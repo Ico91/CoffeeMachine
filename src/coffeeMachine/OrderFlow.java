@@ -40,7 +40,7 @@ public class OrderFlow implements Flow {
 
 		allCoins = coffeeMachine.getCoins().mergeWith(userCoins);
 		
-		int change = userCoins.getSumOfCoinsValue() - drink.getPrice();
+		int change = userCoins.sumOfCoins() - drink.getPrice();
 		
 		this.withdraw = allCoins.withdraw(change);
 		
