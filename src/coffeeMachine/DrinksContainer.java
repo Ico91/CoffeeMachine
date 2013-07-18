@@ -50,7 +50,7 @@ public class DrinksContainer {
 	}
 
 	public Map<Drink, Integer> getDrinks() {
-		return drinks;
+		return new TreeMap<Drink, Integer>(drinks);
 	}
 
 	@Override

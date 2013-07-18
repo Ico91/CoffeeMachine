@@ -1,5 +1,7 @@
 package coffeeMachine;
 
+import java.util.Objects;
+
 /***
  * Finalizing order and print information about ordered drink and change
  * 
@@ -19,6 +21,9 @@ public class OrderFinalizeFlow implements Flow {
 	 *            - Returned change
 	 */
 	public OrderFinalizeFlow(Drink drink, Withdraw change) {
+		Objects.requireNonNull(drink, "Drink cannot be null");
+		Objects.requireNonNull(change, "Change cannot be null");
+		
 		this.drink = drink;
 		this.change = change;
 	}
@@ -48,8 +53,6 @@ public class OrderFinalizeFlow implements Flow {
 		}
 	}
 	
-	
-	// TODO: Refactoring
 	void finalizeDrinkOrder(CoffeeMachineState machine) {
 		machine.getDrinks().decreaseDrinkAmount(drink);
 	}

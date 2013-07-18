@@ -1,28 +1,21 @@
 package coffeeMachine;
 
-
 public class Drink implements Comparable<Drink> {
-	
+
 	private String name;
 	private int price;
 
-	public Drink() {
-		name = "";
-		price = 0;
-	}
-	
-	public String toString(){
-		return name+" "+Integer.toString(price);
+	public String toString() {
+		return name + " " + Integer.toString(price);
 	}
 
 	public Drink(String name, int price) {
-		if ( name == null || name.isEmpty() ) {
-			throw new IllegalArgumentException( "No name specified" );
+		if (name == null || name.isEmpty()) {
+			throw new IllegalArgumentException("No name specified");
 		}
 		this.name = name;
 		this.price = price;
 	}
-
 
 	public String getName() {
 		return name;
