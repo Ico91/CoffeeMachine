@@ -13,6 +13,7 @@ package coffeeMachine;
 public class OrderFlow implements Flow {
 	private Drink drink;
 	private MoneyAmount userCoins;
+	private Withdraw withdraw;
 	
 	public OrderFlow(Drink drink, MoneyAmount userCoins)
 	{
@@ -41,11 +42,16 @@ public class OrderFlow implements Flow {
 		
 		int change = userCoins.getSumOfCoinsValue() - drink.getPrice();
 		
-		Withdraw withdraw = allCoins.withdraw(change);
+		this.withdraw = allCoins.withdraw(change);
 		
 		if(withdraw.getStatus() == RequestResultStatus.SUCCESSFUL)
 			return new OrderFinalizeFlow(drink, withdraw);
 		
 		return new InsufficientAmountFlow(drink, userCoins, withdraw);
+	}
+	
+	public Withdraw getWithdraw()
+	{
+		return this.withdraw;
 	}
 }
