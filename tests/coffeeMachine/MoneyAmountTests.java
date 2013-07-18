@@ -11,10 +11,11 @@ import org.junit.Test;
 
 import coffeeMachine.Coin;
 import coffeeMachine.MoneyAmount;
-import coffeeMachine.RequestResultStatus;
 import coffeeMachine.Withdraw;
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 import coffeeMachine.exceptions.InvalidWithdrawAmountException;
 
+//TODO test method names are too long
 public class MoneyAmountTests {
 
 	private MoneyAmount availableCoins;
@@ -22,37 +23,41 @@ public class MoneyAmountTests {
 
 	@Before
 	public void testMoneyAmount_SetUpObject() {
-		availableCoins = new MoneyAmount();
-		availableCoins.add(Coin.FIVE, 5).add(Coin.TEN, 4).add(Coin.TWENTY, 3)
-				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
+		availableCoins =
+			new MoneyAmount()
+				.add(Coin.FIVE, 5)
+				.add(Coin.TEN, 4)
+				.add(Coin.TWENTY, 3)
+				.add(Coin.FIFTY, 2)
+				.add(Coin.LEV, 1);
 	}
 
 	@Test(expected = InvalidParameterException.class)
-	public void testExplicitConstructor_MustThrowInvalidParameterException() {
+	public void testInvalidConstructorParameter() {
 		availableCoins = new MoneyAmount(1, 1, -1, 1, 1);
 	}
 
 	@Test
 	public void testExplicitConstructor() {
-		try {
+//		try { TODO no need to use try-catch - the exception will break the test automatically
 			availableCoins = new MoneyAmount(1, 1, 1, 1, 1);
-		} catch (InvalidParameterException e) {
-			fail();
-		}
+//		} catch (InvalidParameterException e) {
+//			fail();
+//		}
 	}
 
 	@Test
 	public void testGetSumOfCoinsValue_MustReturnCorrectSum() {
-		int expected = 325;
-		int actual = availableCoins.getSumOfCoinsValue();
-
-		assertTrue(expected == actual);
+		assertEquals( 325, availableCoins.getSumOfCoinsValue() );
 	}
 
 	@Test
 	public void testGetSumOfCoinsValueAfterWithdraw_MustBeSuccess() {
 		int before = availableCoins.getSumOfCoinsValue();
-		availableCoins.withdraw(175);
+		
+		Withdraw withdraw =  availableCoins.withdraw(175);
+		assertEquals( WithdrawRequestResultStatus.SUCCESSFUL, withdraw.getStatus() );
+		
 		int actual = availableCoins.getSumOfCoinsValue();
 		int expected = before - 175;
 		assertTrue("Expected sum must be same as actual( " + expected + " "
@@ -64,9 +69,38 @@ public class MoneyAmountTests {
 		requestedAmount = 175;
 		Withdraw amount = availableCoins.withdraw(requestedAmount);
 		assertEquals("Operation status should be successful",
-				amount.getStatus(), RequestResultStatus.SUCCESSFUL);
+				amount.getStatus(), WithdrawRequestResultStatus.SUCCESSFUL);
 	}
 
+	@Test
+	public void testEquals() {
+		MoneyAmount ma1 = new MoneyAmount().add(Coin.FIVE, 5).add(Coin.TEN, 4);
+		MoneyAmount ma2 = new MoneyAmount().add(Coin.FIVE, 5).add(Coin.TEN, 4);
+		
+		assertEquals( ma1, ma2 );
+		
+		ma2.add( Coin.TWENTY, 20 );
+		
+		assertNotSame(ma1, ma2);
+	}
+	
+	@Test
+	public void addNullTest() {
+		new MoneyAmount().add(null, 12);
+		fail( "Added null where Coin is expected" );
+	}
+	
+	@Test
+	public void mergeTest() {
+		MoneyAmount ma1 = new MoneyAmount().add(Coin.FIFTY, 1);
+		MoneyAmount ma2 = new MoneyAmount().add(Coin.FIFTY, 2);
+		
+		ma1.mergeWith( ma2 ); //TODO this operation does not modify ma1 even though the javadoc mentions it
+		
+		Integer expectedFifties = 3;
+		assertEquals( expectedFifties, ma1.getCoins().get( Coin.FIFTY ) );
+	}
+	
 	@Test
 	public void testEqual_MustReturnFalse() {
 		MoneyAmount moneyAmount = new MoneyAmount(1, 1, 1, 1, 1);
@@ -87,8 +121,10 @@ public class MoneyAmountTests {
 		try {
 			Withdraw amount = availableCoins.withdraw(requestedAmount);
 			assertEquals("Operation status should not be successful",
-					amount.getStatus(), RequestResultStatus.INSUFFICIENT_AMOUNT);
+					amount.getStatus(), WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT);
 		} catch (InvalidWithdrawAmountException e) {
+			//TODO shouldn't this fail the test ?
+			
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

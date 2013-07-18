@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Collections;
 
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 import coffeeMachine.exceptions.InvalidWithdrawAmountException;
 import coffeeMachine.exceptions.MoneyAmountException;
 
@@ -40,6 +41,7 @@ public class MoneyAmount {
 	 * @param coinsOfLev
 	 *            Amount of coins of lev
 	 */
+	//TODO bad idea - depends on all available coin types
 	public MoneyAmount(int coinsOfFive, int coinsOfTen, int coinsOfTwenty,
 			int coinsOfFifty, int coinsOfLev) {
 		if (coinsOfFive < 0 || coinsOfTen < 0 || coinsOfTwenty < 0
@@ -48,6 +50,7 @@ public class MoneyAmount {
 					"The amount of coins cannot be negative number");
 		}
 
+		//TODO why TreeMap is used ?
 		coins = new TreeMap<Coin, Integer>();
 		this.coins.put(Coin.FIVE, coinsOfFive);
 		this.coins.put(Coin.TEN, coinsOfTen);
@@ -70,6 +73,7 @@ public class MoneyAmount {
 	 * 
 	 * @return Accumulated sum
 	 */
+	//TODO name too long
 	public int getSumOfCoinsValue() {
 		int amount = 0;
 		for (Coin c : coins.keySet()) {
@@ -85,6 +89,7 @@ public class MoneyAmount {
 	 */
 		public MoneyAmount add(Coin coin, int count) {
 			if (count < 0)
+				//TODO check the javadoc for this class and decide whether to use it
 				throw new InvalidParameterException(
 						"Count of coins cannot be negative number!");
 			int totalCount = this.coins.get(coin) + count;
@@ -101,6 +106,8 @@ public class MoneyAmount {
 	 *            MoneyAmount object to merge with
 	 * @return Result of merging
 	 */
+	//TODO as this class is not immutable such behavior could be surprising.
+	//why not update this object's state ?
 	public MoneyAmount mergeWith(MoneyAmount moneyAmount) {
 		MoneyAmount moneyAmountToReturn = new MoneyAmount();
 
@@ -130,7 +137,7 @@ public class MoneyAmount {
 					"Invalid withdraw amount. Cannot be less than zero");
 
 		if (amount == 0)
-			return new Withdraw(RequestResultStatus.SUCCESSFUL, requestedCoins);
+			return new Withdraw(WithdrawRequestResultStatus.SUCCESSFUL, requestedCoins);
 
 		for (Coin c : getSortedCoinTypes()) {
 			if (amount > 0 && (amount - c.getValue() >= 0)) {
@@ -150,10 +157,10 @@ public class MoneyAmount {
 		}
 
 		if (amount == 0) {
-			return new Withdraw(RequestResultStatus.SUCCESSFUL, requestedCoins);
+			return new Withdraw(WithdrawRequestResultStatus.SUCCESSFUL, requestedCoins);
 		}
 
-		return new Withdraw(RequestResultStatus.INSUFFICIENT_AMOUNT,
+		return new Withdraw(WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT,
 				requestedCoins);
 	}
 
@@ -171,6 +178,8 @@ public class MoneyAmount {
 		if (getClass() != obj.getClass())
 			return false;
 		MoneyAmount other = (MoneyAmount) obj;
+		
+		//TODO could coins ever be null ?
 		if (coins == null) {
 			if (other.coins != null)
 				return false;
