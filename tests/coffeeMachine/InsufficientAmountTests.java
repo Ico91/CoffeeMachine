@@ -67,7 +67,7 @@ public class InsufficientAmountTests {
 		assertEquals(
 				"Returned coins should be the same as the user had inserted",
 				expectedCoins.toString(), flow.getUserCoins().toString());
-		System.out.println("\nExpected: " + expectedCoins.getSumOfCoinsValue());
+		System.out.println("\nExpected: " + expectedCoins.sumOfCoins());
 	}
 
 	@After

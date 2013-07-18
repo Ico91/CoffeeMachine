@@ -42,7 +42,6 @@ public class MenuController {
 					break;
 				}
 			} catch (InvalidCommandException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Invalid choice command" + System.lineSeparator());
 			}
 			

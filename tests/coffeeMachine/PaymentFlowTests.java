@@ -31,7 +31,7 @@ public class PaymentFlowTests {
 		MoneyAmount userCoins = payment.getUserCoins();
 
 		boolean isMoneyEnough = false;
-		if (drinkPrice <= userCoins.getSumOfCoinsValue())
+		if (drinkPrice <= userCoins.sumOfCoins())
 			isMoneyEnough = true;
 
 		assertTrue(isMoneyEnough);
