@@ -73,7 +73,6 @@ public class InsufficientAmountFlow implements Flow {
 
 							@Override
 							public ParamRequirements requirements() {
-								// TODO Auto-generated method stub
 								return new ParamRequirements();
 							}
 
@@ -87,13 +86,12 @@ public class InsufficientAmountFlow implements Flow {
 								return new ResultStatus(
 										"Your money has been returned to you: "
 												+ userCoins
-														.getSumOfCoinsValue(),
+														.sumOfCoins(),
 										true);
 							}
 
 							@Override
 							public ParamRequirements requirements() {
-								// TODO Auto-generated method stub
 								return new ParamRequirements();
 							}
 

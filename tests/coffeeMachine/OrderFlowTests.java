@@ -12,23 +12,28 @@ public class OrderFlowTests {
 
 	private OrderFlow orderFlow;
 	private CoffeeMachineState coffeeMachine;
-	
+
 	@Before
 	public void testOrderFlow_setUpObject() {
-		this.coffeeMachine = new CoffeeMachineState(new MoneyAmount(), new DrinksContainer());
+		this.coffeeMachine = new CoffeeMachineState(new MoneyAmount(),
+				new DrinksContainer());
 	}
 
 	@Test
 	public void testExecute_enoughCoinsToReturn() {
 		Drink drink = new Drink("Coffee", 65);
-		MoneyAmount userCoins = new MoneyAmount(1, 1, 1, 1, 1);
+		MoneyAmount userCoins = new MoneyAmount();
+		userCoins.add(Coin.FIVE, 1).add(Coin.TEN, 1).add(Coin.TWENTY, 1)
+				.add(Coin.FIFTY, 1).add(Coin.LEV, 1);
 		orderFlow = new OrderFlow(drink, userCoins);
 
 		orderFlow.execute(coffeeMachine);
-		
+
 		Withdraw withdrawResult = orderFlow.getWithdraw();
 		Withdraw expectedWithdraw = new Withdraw(
-				WithdrawRequestResultStatus.SUCCESSFUL, new MoneyAmount(0, 0, 1, 0, 1));
+				WithdrawRequestResultStatus.SUCCESSFUL, new MoneyAmount()
+						.add(Coin.FIVE, 0).add(Coin.TEN, 0).add(Coin.TWENTY, 1)
+						.add(Coin.FIFTY, 0).add(Coin.LEV, 1));
 		boolean isEqual = false;
 
 		if (withdrawResult.equals(expectedWithdraw))
@@ -40,14 +45,19 @@ public class OrderFlowTests {
 	@Test
 	public void testExecute_notEnoughCoinsToReturn() {
 		Drink drink = new Drink("Coffee", 45);
-		MoneyAmount userCoins = new MoneyAmount(1, 1, 1, 1, 1);
+		MoneyAmount userCoins = new MoneyAmount().add(Coin.FIVE, 1)
+				.add(Coin.TEN, 1).add(Coin.TWENTY, 1).add(Coin.FIFTY, 1)
+				.add(Coin.LEV, 1);
 		orderFlow = new OrderFlow(drink, userCoins);
 
 		orderFlow.execute(coffeeMachine);
-		
+
 		Withdraw withdrawResult = orderFlow.getWithdraw();
 		Withdraw expectedWithdraw = new Withdraw(
-				WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT, new MoneyAmount(1, 1, 1, 0, 1));
+				WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT,
+				new MoneyAmount().add(Coin.FIVE, 1).add(Coin.TEN, 1)
+						.add(Coin.TWENTY, 1).add(Coin.FIFTY, 0)
+						.add(Coin.LEV, 1));
 		System.out.println("Expected " + expectedWithdraw.toString());
 		boolean isEqual = false;
 

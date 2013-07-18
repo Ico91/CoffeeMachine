@@ -61,7 +61,6 @@ public class DrinkListFlow implements Flow{
 
 		@Override
 		public ParamRequirements requirements() {
-			// TODO Auto-generated method stub
 			return new ParamRequirements();
 		}
 

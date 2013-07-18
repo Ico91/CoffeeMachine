@@ -30,7 +30,7 @@ public class PaymentFlow implements Flow {
 			menuController.start();
 			if (isOrderCancelled)
 				return new DrinkListFlow();
-		} while (userCoins.getSumOfCoinsValue() < drink.getPrice());
+		} while (userCoins.sumOfCoins() < drink.getPrice());
 
 		return new OrderFlow(drink, userCoins);
 	}
@@ -44,12 +44,11 @@ public class PaymentFlow implements Flow {
 			public ResultStatus execute(List<String> params) {
 				userCoins.add(Coin.FIVE, 1);
 				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
+						+ String.valueOf(userCoins.sumOfCoins()), true);
 			}
 
 			@Override
 			public ParamRequirements requirements() {
-				// TODO Auto-generated method stub
 				return new ParamRequirements();
 			}
 
@@ -59,12 +58,11 @@ public class PaymentFlow implements Flow {
 			public ResultStatus execute(List<String> params) {
 				userCoins.add(Coin.TEN, 1);
 				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
+						+ String.valueOf(userCoins.sumOfCoins()), true);
 			}
 
 			@Override
 			public ParamRequirements requirements() {
-				// TODO Auto-generated method stub
 				return new ParamRequirements();
 			}
 
@@ -74,12 +72,11 @@ public class PaymentFlow implements Flow {
 			public ResultStatus execute(List<String> params) {
 				userCoins.add(Coin.TWENTY, 1);
 				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
+						+ String.valueOf(userCoins.sumOfCoins()), true);
 			}
 
 			@Override
 			public ParamRequirements requirements() {
-				// TODO Auto-generated method stub
 				return new ParamRequirements();
 			}
 
@@ -89,12 +86,11 @@ public class PaymentFlow implements Flow {
 			public ResultStatus execute(List<String> params) {
 				userCoins.add(Coin.FIFTY, 1);
 				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
+						+ String.valueOf(userCoins.sumOfCoins()), true);
 			}
 
 			@Override
 			public ParamRequirements requirements() {
-				// TODO Auto-generated method stub
 				return new ParamRequirements();
 			}
 
@@ -104,12 +100,11 @@ public class PaymentFlow implements Flow {
 			public ResultStatus execute(List<String> params) {
 				userCoins.add(Coin.LEV, 1);
 				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.getSumOfCoinsValue()), true);
+						+ String.valueOf(userCoins.sumOfCoins()), true);
 			}
 
 			@Override
 			public ParamRequirements requirements() {
-				// TODO Auto-generated method stub
 				return new ParamRequirements();
 			}
 
@@ -117,13 +112,11 @@ public class PaymentFlow implements Flow {
 
 			@Override
 			public ResultStatus execute(List<String> params) {
-				// TODO Auto-generated method stub
 				return new ResultStatus(cancelOrder(), true);
 			}
 
 			@Override
 			public ParamRequirements requirements() {
-				// TODO Auto-generated method stub
 				return new ParamRequirements();
 			}
 
@@ -135,7 +128,7 @@ public class PaymentFlow implements Flow {
 	private String cancelOrder() {
 		isOrderCancelled = true;
 		return "Your order has been cancelled. "
-				+ String.valueOf(userCoins.getSumOfCoinsValue()
+				+ String.valueOf(userCoins.sumOfCoins()
 						+ " stotinki has been returned to you.");
 	}
 

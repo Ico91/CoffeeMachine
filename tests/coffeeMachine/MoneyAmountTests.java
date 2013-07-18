@@ -3,8 +3,6 @@ package coffeeMachine;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.*;
 
-import java.security.InvalidParameterException;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,42 +21,36 @@ public class MoneyAmountTests {
 
 	@Before
 	public void testMoneyAmount_SetUpObject() {
-		availableCoins =
-			new MoneyAmount()
-				.add(Coin.FIVE, 5)
-				.add(Coin.TEN, 4)
-				.add(Coin.TWENTY, 3)
-				.add(Coin.FIFTY, 2)
-				.add(Coin.LEV, 1);
+		availableCoins = new MoneyAmount().add(Coin.FIVE, 5).add(Coin.TEN, 4)
+				.add(Coin.TWENTY, 3).add(Coin.FIFTY, 2).add(Coin.LEV, 1);
 	}
 
-	@Test(expected = InvalidParameterException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidConstructorParameter() {
-		availableCoins = new MoneyAmount(1, 1, -1, 1, 1);
+		availableCoins = new MoneyAmount();
+		availableCoins.add(Coin.FIVE, 1).add(Coin.TEN, 1).add(Coin.TWENTY, 3)
+				.add(Coin.FIFTY, 1).add(Coin.LEV, -1);
 	}
 
 	@Test
 	public void testExplicitConstructor() {
-//		try { TODO no need to use try-catch - the exception will break the test automatically
-			availableCoins = new MoneyAmount(1, 1, 1, 1, 1);
-//		} catch (InvalidParameterException e) {
-//			fail();
-//		}
+		availableCoins.add(Coin.FIVE, 5).add(Coin.TEN, 4).add(Coin.TWENTY, 3)
+				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
 	}
 
 	@Test
 	public void testGetSumOfCoinsValue_MustReturnCorrectSum() {
-		assertEquals( 325, availableCoins.getSumOfCoinsValue() );
+		assertEquals(325, availableCoins.sumOfCoins());
 	}
 
 	@Test
 	public void testGetSumOfCoinsValueAfterWithdraw_MustBeSuccess() {
-		int before = availableCoins.getSumOfCoinsValue();
-		
-		Withdraw withdraw =  availableCoins.withdraw(175);
-		assertEquals( WithdrawRequestResultStatus.SUCCESSFUL, withdraw.getStatus() );
-		
-		int actual = availableCoins.getSumOfCoinsValue();
+		int before = availableCoins.sumOfCoins();
+
+		Withdraw withdraw = availableCoins.withdraw(175);
+		assertEquals(WithdrawRequestResultStatus.SUCCESSFUL, withdraw.getStatus());
+
+		int actual = availableCoins.sumOfCoins();
 		int expected = before - 175;
 		assertTrue("Expected sum must be same as actual( " + expected + " "
 				+ actual + ")", expected == actual);
@@ -74,43 +66,50 @@ public class MoneyAmountTests {
 
 	@Test
 	public void testEquals() {
-		MoneyAmount ma1 = new MoneyAmount().add(Coin.FIVE, 5).add(Coin.TEN, 4);
-		MoneyAmount ma2 = new MoneyAmount().add(Coin.FIVE, 5).add(Coin.TEN, 4);
-		
-		assertEquals( ma1, ma2 );
-		
-		ma2.add( Coin.TWENTY, 20 );
-		
-		assertNotSame(ma1, ma2);
+		MoneyAmount moneyAmount1 = new MoneyAmount().add(Coin.FIVE, 5).add(
+				Coin.TEN, 4);
+		MoneyAmount moneyAmount2 = new MoneyAmount().add(Coin.FIVE, 5).add(
+				Coin.TEN, 4);
+
+		assertEquals(moneyAmount1, moneyAmount2);
+
+		moneyAmount1.add(Coin.TWENTY, 20);
+
+		assertNotSame(moneyAmount1, moneyAmount2);
 	}
-	
-	@Test
+
+	@Test(expected = NullPointerException.class)
 	public void addNullTest() {
 		new MoneyAmount().add(null, 12);
-		fail( "Added null where Coin is expected" );
 	}
-	
+
 	@Test
 	public void mergeTest() {
-		MoneyAmount ma1 = new MoneyAmount().add(Coin.FIFTY, 1);
-		MoneyAmount ma2 = new MoneyAmount().add(Coin.FIFTY, 2);
-		
-		ma1.mergeWith( ma2 ); //TODO this operation does not modify ma1 even though the javadoc mentions it
-		
+		MoneyAmount moneyAmount1 = new MoneyAmount().add(Coin.FIFTY, 1);
+		MoneyAmount moneyAmount2 = new MoneyAmount().add(Coin.FIFTY, 2);
+
+		moneyAmount1.add(moneyAmount2);
+
 		Integer expectedFifties = 3;
-		assertEquals( expectedFifties, ma1.getCoins().get( Coin.FIFTY ) );
+		assertEquals("Expected must be equal to actual value", expectedFifties,
+				moneyAmount1.getCoins().get(Coin.FIFTY));
 	}
-	
+
 	@Test
 	public void testEqual_MustReturnFalse() {
-		MoneyAmount moneyAmount = new MoneyAmount(1, 1, 1, 1, 1);
+		MoneyAmount moneyAmount = new MoneyAmount();
+		moneyAmount.add(Coin.FIVE, 5).add(Coin.TEN, 4).add(Coin.TWENTY, 3)
+				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
 		assertNotSame(moneyAmount, availableCoins);
 	}
 
 	@Test
 	public void testWithdraw_requestedAmountLessThanAvailable_ExpectCorrectChangeResult() {
 		requestedAmount = 235;
-		MoneyAmount expected = new MoneyAmount(1, 1, 1, 2, 1);
+		MoneyAmount expected = new MoneyAmount();
+		expected.add(Coin.FIVE, 1).add(Coin.TEN, 1).add(Coin.TWENTY, 1)
+				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
+
 		Withdraw amount = availableCoins.withdraw(requestedAmount);
 		assertEquals(expected, amount.getChange());
 	}
@@ -118,16 +117,10 @@ public class MoneyAmountTests {
 	@Test
 	public void testWithdraw_requestedAmountMoreThanAvailable_ExpectInsufficientAmount() {
 		requestedAmount = 375;
-		try {
-			Withdraw amount = availableCoins.withdraw(requestedAmount);
-			assertEquals("Operation status should not be successful",
-					amount.getStatus(), WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT);
-		} catch (InvalidWithdrawAmountException e) {
-			//TODO shouldn't this fail the test ?
-			
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Withdraw amount = availableCoins.withdraw(requestedAmount);
+		assertEquals("Operation status should not be successful",
+				amount.getStatus(), WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT);
+
 	}
 
 	@Test(expected = InvalidWithdrawAmountException.class)
@@ -144,10 +137,8 @@ public class MoneyAmountTests {
 		availableCoins.add(Coin.FIVE, 10).add(Coin.TEN, 9).add(Coin.TWENTY, 8)
 				.add(Coin.FIFTY, 7).add(Coin.LEV, 6);
 
-		int expected = availableCoins.getSumOfCoinsValue()
-				+ moneyAmount.getSumOfCoinsValue();
-		int actual = (availableCoins.mergeWith(moneyAmount))
-				.getSumOfCoinsValue();
+		int expected = availableCoins.sumOfCoins() + moneyAmount.sumOfCoins();
+		int actual = (availableCoins.add(moneyAmount)).sumOfCoins();
 
 		assertTrue("Expected sum must be same as actual", expected == actual);
 	}
