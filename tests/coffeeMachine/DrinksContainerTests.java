@@ -14,7 +14,7 @@ public class DrinksContainerTests {
 	private DrinksContainer drinks;
 
 	@Before
-	public void testDrinksContainer_SetUpObject() {
+	public void setUpObject() {
 		drinks = new DrinksContainer();
 		drinks.add(new Drink("Coffee", 45), 3)
 				.add(new Drink("Tea", 60), 2)
@@ -22,7 +22,7 @@ public class DrinksContainerTests {
 	}
 
 	@Test
-	public void testAddDrink_addToExistingDrink_expectCorrectQuantity() {
+	public void addToExistingDrink() {
 		Drink drink = new Drink("Coffee", 45);
 		drinks.add(drink, 3);
 		int expectedDrinkQuantity = 6;
@@ -32,7 +32,7 @@ public class DrinksContainerTests {
 	}
 
 	@Test
-	public void testAddDrink_addNewDrink_expectCorrectQuantity() {
+	public void addNewDrink() {
 		Drink drink = new Drink("Nescafe", 30);
 		drinks.add(drink, 10);
 
@@ -43,14 +43,14 @@ public class DrinksContainerTests {
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void testAddDrink_addNewDrinkAndCloseAddition_expectException() {
+	public void closeAdditionAndAddDrink() {
 		Drink drink = new Drink("Nescafe", 30);
 		drinks.add(drink, 10).commit();
 		drinks.add(drink, 5);
 	}
 
 	@Test
-	public void testDecreaseDrinkAmount_chooseAvailableDrink_expectLowerAmount() {
+	public void pickAvailableDrink() {
 		Drink drink = new Drink("Coffee", 45);
 		drinks.decreaseDrinkAmount(drink);
 
@@ -62,13 +62,13 @@ public class DrinksContainerTests {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testDecreaseDrinkAmount_chooseNotAvailableDrink_expectException() {
+	public void pickNotAvailableDrink() {
 		Drink drink = new Drink("Nescafe", 30);
 		drinks.decreaseDrinkAmount(drink);
 	}
 
 	@After
-	public void testDrinksContainer_TearDownObject() {
+	public void tearDownObject() {
 		drinks = null;
 	}
 }

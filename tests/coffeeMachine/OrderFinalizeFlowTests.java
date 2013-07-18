@@ -16,7 +16,7 @@ public class OrderFinalizeFlowTests {
 	private OrderFinalizeFlow orderFinalizeFlow;
 
 	@Before
-	public void testMoneyAmount_SetUpObject() {
+	public void setUpObject() {
 		DrinksContainer drinksContainer = new DrinksContainer();
 		drinksContainer.add(new Drink("Coffee", 30), 10)
 				.add(new Drink("Tea", 40), 10)
