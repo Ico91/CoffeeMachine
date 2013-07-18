@@ -53,7 +53,16 @@ public class MoneyAmount {
 		}
 		return amount;
 	}
-
+	
+	/***
+	 * Return amount of coins from specified type
+	 * @param coin Type of coin
+	 * @return Available coins of this type
+	 */
+	public int getCoin(Coin coin) {
+		return this.coins.get(coin);
+	}
+	
 	/***
 	 * Add coins to current available coins
 	 * 
