@@ -1,4 +1,4 @@
-package coffeeMachine.main;
+package coffeeMachine.exceptions;
 
 @SuppressWarnings("serial")
 public class MoneyAmountException extends RuntimeException {

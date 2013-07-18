@@ -1,4 +1,4 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 
 public class Drink implements Comparable<Drink> {

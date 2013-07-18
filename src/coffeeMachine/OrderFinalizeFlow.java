@@ -1,4 +1,4 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 /***
  * Finalizing order and print information about ordered drink and change

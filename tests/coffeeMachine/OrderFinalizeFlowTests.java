@@ -1,8 +1,15 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Drink;
+import coffeeMachine.DrinksContainer;
+import coffeeMachine.MoneyAmount;
+import coffeeMachine.OrderFinalizeFlow;
+import coffeeMachine.Withdraw;
 
 public class OrderFinalizeFlowTests {
 	private CoffeeMachineState coffeeMachine;

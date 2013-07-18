@@ -1,10 +1,13 @@
-package coffeeMachine.main;
+package coffeeMachine;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import coffeeMachine.Drink;
+import coffeeMachine.DrinksContainer;
 
 public class DrinksContainerTests {
 
