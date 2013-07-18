@@ -123,6 +123,8 @@ public class MoneyAmountTests {
 			assertEquals("Operation status should not be successful",
 					amount.getStatus(), RequestResultStatus.INSUFFICIENT_AMOUNT);
 		} catch (InvalidWithdrawAmountException e) {
+			//TODO shouldn't this fail the test ?
+			
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
