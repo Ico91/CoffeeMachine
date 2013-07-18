@@ -160,7 +160,7 @@ public class MoneyAmount {
 		}
 
 		return new Withdraw(RequestResultStatus.INSUFFICIENT_AMOUNT,
-				new MoneyAmount());
+				requestedCoins);
 	}
 
 	@Override
