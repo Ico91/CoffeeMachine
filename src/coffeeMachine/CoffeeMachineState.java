@@ -22,6 +22,10 @@ public class CoffeeMachineState {
 		this.initialDrinksAmount = drinks;
 	}
 
+	/**
+	 * Get information of the currently contained coins in the machine.
+	 * @return MoneyAmount object, holding information of the coins in the machine.
+	 */
 	public MoneyAmount getCoins() {
 		return coins;
 	}
@@ -30,14 +34,29 @@ public class CoffeeMachineState {
 		this.coins = coins;
 	}
 
+	/**
+	 * Get the information of the currently
+	 * contained drinks in the machine
+	 * @return DrinksContainer object, holding information of the currently available drinks
+	 */
 	public DrinksContainer getCurrentDrinks() {
 		return this.currentDrinksAmount;
 	}
 	
+	/**
+	 * Get the information of the contained drinks 
+	 * when the machine was initialized.
+	 * @return DrinksContainer object, holding information of the initially available drinks
+	 */
 	public DrinksContainer getInitialDrinks() {
 		return this.initialDrinksAmount;
 	}
 	
+	/**
+	 * Use this method to get a list of the currently available
+	 * drinks in the machine, which amount is more than zero.
+	 * @return a list of the available drinks in the machine
+	 */
 	public List<Drink> getFiltratedDrinks(){  // by Andrey
 		List<Drink> drinksList=new ArrayList<Drink>();
 		for(Map.Entry<Drink, Integer> entry: this.currentDrinksAmount.getDrinks().entrySet()){

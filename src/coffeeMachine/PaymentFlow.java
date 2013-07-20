@@ -10,6 +10,13 @@ import modules.menuModule.MenuModel;
 import modules.menuModule.ParamRequirements;
 import modules.menuModule.ResultStatus;
 
+/**
+ * Gives the ability to accumulate money by inserting 
+ * coins into a temporary stored container. 
+ * Also holds information for the selected drink. 
+ * @author Hristo
+ *
+ */
 public class PaymentFlow implements Flow {
 	private Drink drink;
 	private MoneyAmount userCoins;
@@ -20,6 +27,17 @@ public class PaymentFlow implements Flow {
 		userCoins = new MoneyAmount();
 	}
 
+	/**
+	 * Initializes menu for inserting different coins into
+	 * the temporary user coin container. The coin input
+	 * cycle can be interrupted either by inserting enough
+	 * money to buy the drink (equal to or more than the
+	 * drink's price), or by canceling the order from the
+	 * menu.
+	 * 
+	 * @param machine - the current state of the Coffee Machine
+	 * @return interface Flow object
+	 */
 	@Override
 	public Flow execute(CoffeeMachineState machine) {
 		MenuController menuController = new MenuController(buildMenu());

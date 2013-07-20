@@ -1,14 +1,22 @@
 package coffeeMachine;
 
+/**
+ * Holds information for a certain drink type.
+ * This includes the name and the price of the drink.
+ * @author Hristo
+ *
+ */
 public class Drink implements Comparable<Drink> {
 
 	private String name;
 	private int price;
 
-	public String toString() {
-		return name + " " + Integer.toString(price);
-	}
-
+	/**
+	 * Creates a new drink. Throws a IllegalArgumentException
+	 * if the specified name is empty or null.
+	 * @param name - the name of the drink
+	 * @param price - the price of the drink.
+	 */
 	public Drink(String name, int price) {
 		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("No name specified");
@@ -54,6 +62,10 @@ public class Drink implements Comparable<Drink> {
 			return false;
 		Drink other = (Drink) obj;
 		return name.equals(other.name);
+	}
+	
+	public String toString() {
+		return name + " " + Integer.toString(price);
 	}
 
 }
