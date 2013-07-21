@@ -2,7 +2,13 @@ package coffeeMachine;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import coffeeMachine.CoffeeMachineState;
@@ -16,7 +22,15 @@ import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 public class OrderFinalizeFlowTests {
 	private CoffeeMachineState coffeeMachine;
 	private OrderFinalizeFlow orderFinalizeFlow;
-
+	private static InputStream in;
+	private static PrintStream out;
+	
+	@BeforeClass
+	public static void SetUpClass() {
+		in = System.in;
+		out = System.out;
+	}
+	
 	@Before
 	public void setUpObject() {
 		DrinksContainer drinksContainer = new DrinksContainer();
@@ -33,22 +47,37 @@ public class OrderFinalizeFlowTests {
 
 	@Test
 	public void executeWithSuccessfulChange() {
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(output));
 		Withdraw withdraw = new Withdraw(
 				WithdrawRequestResultStatus.SUCCESSFUL, new MoneyAmount().add(
 						Coin.TEN, 30));
+		String expected = "Your Coffee is ready." + System.lineSeparator()
+				+ "Your change is: ";
+		expected += withdraw.getChange().toString() + System.lineSeparator();
+
 		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30),
 				withdraw);
 		orderFinalizeFlow.execute(coffeeMachine);
+
+		assertEquals(expected, output.toString());
 	}
 
 	@Test
 	public void executeWithInsufficienAmount() {
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(output));
 		Withdraw withdraw = new Withdraw(
 				WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT,
 				new MoneyAmount().add(Coin.FIFTY, 1));
 		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30),
 				withdraw);
+		String expected = "Your Coffee is ready." + System.lineSeparator()
+				+ "You receive: " + withdraw.getChange().toString()
+				+ " as change." + System.lineSeparator();
+
 		orderFinalizeFlow.execute(coffeeMachine);
+		assertEquals(expected, output.toString());
 	}
 
 	@Test
@@ -85,5 +114,11 @@ public class OrderFinalizeFlowTests {
 		int actual = coffeeMachine.getCurrentDrinks().getDrinks().get(drink);
 
 		assertTrue(expected == actual);
+	}
+	
+	@After
+	public void tearDownObject() {
+		System.setIn(in);
+		System.setOut(out);
 	}
 }

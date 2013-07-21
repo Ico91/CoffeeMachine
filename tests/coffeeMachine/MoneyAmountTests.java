@@ -12,6 +12,7 @@ import coffeeMachine.MoneyAmount;
 import coffeeMachine.Withdraw;
 import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 import coffeeMachine.exceptions.InvalidWithdrawAmountException;
+import coffeeMachine.exceptions.MoneyAmountException;
 
 public class MoneyAmountTests {
 
@@ -29,6 +30,17 @@ public class MoneyAmountTests {
 		int expected = 5;
 		int actual = availableCoins.getCoin(Coin.FIVE);
 		assertTrue("Actual coins must be 5", expected == actual);
+	}
+	
+	@Test(expected=MoneyAmountException.class)
+	public void getCoinsWithHigherValue() {
+		this.availableCoins.getCoins(Coin.LEV, 100);
+	}
+	
+	@Test
+	public void withdrawWithZeroAmount() {
+		Withdraw expected = new Withdraw(WithdrawRequestResultStatus.SUCCESSFUL, new MoneyAmount());
+		assertEquals(expected, this.availableCoins.withdraw(0));
 	}
 	
 	@Test

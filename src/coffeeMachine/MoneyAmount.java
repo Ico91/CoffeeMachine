@@ -180,7 +180,7 @@ public class MoneyAmount {
 	}
 
 	// Get coins from current available coins
-	private void getCoins(Coin coin, int count) {
+	void getCoins(Coin coin, int count) {
 		int availableCoins = this.coins.get(coin);
 		if (availableCoins < count)
 			throw new MoneyAmountException(
