@@ -100,18 +100,35 @@ public class InsufficientAmountFlow implements Flow {
 		return new MenuModel(menuBuilder);
 	}
 
+	/**
+	 * Holds information of the user inserted coins
+	 * @return MoneyAmount object containing coins information
+	 */
 	public MoneyAmount getUserCoins() {
 		return userCoins;
 	}
 
+	/**
+	 * Gives information whether the withdraw operation was
+	 * successful or not, and the coins which were withdrawn.
+	 * @return Withdraw object
+	 */
 	public Withdraw getWithdraw() {
 		return withdraw;
 	}
 
+	/**
+	 * Get the currently chosen drink to make.
+	 * @return Drink object holding the name and the price of the chosen drink.
+	 */
 	public Drink getDrink() {
 		return drink;
 	}
 
+	/**
+	 * Get the next point of the order execution.
+	 * @return interface Flow object
+	 */
 	public Flow getNextFlow() {
 		return nextFlow;
 	}

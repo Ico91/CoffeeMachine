@@ -1,5 +1,12 @@
 package coffeeMachine;
 
+/**
+ * Used as a transport object and contains information
+ * whether the withdraw operation was successful or not
+ * and the coins which were successfully withdrawn. 
+ * @author Hristo
+ *
+ */
 public class Withdraw {
 	private WithdrawRequestResultStatus status;
 	private MoneyAmount change;
@@ -9,10 +16,18 @@ public class Withdraw {
 		this.change = change;
 	}
 
+	/**
+	 * 
+	 * @return the status of the withdraw operation
+	 */
 	public WithdrawRequestResultStatus getStatus() {
 		return status;
 	}
 
+	/**
+	 * 
+	 * @return the successfully withdrawn money
+	 */
 	public MoneyAmount getChange() {
 		return change;
 	}
