@@ -18,18 +18,19 @@ import modules.menuModule.ResultStatus;
  * 
  */
 
-public class DrinkListFlow implements Flow{
+public class DrinkListFlow implements Flow {
 	private Drink drink;
+	private Flow flow;
 
 	public DrinkListFlow() {
-		
+
 	}
-	
-	public Flow execute(CoffeeMachineState cm){
-		
-		MenuBuilder menuBuilder=new MenuBuilder();
-		int index=1;
-		for(Drink d:cm.getFiltratedDrinks()){
+
+	public Flow execute(CoffeeMachineState cm) {
+
+		MenuBuilder menuBuilder = new MenuBuilder();
+		int index = 1;
+		for (Drink d : cm.getFiltratedDrinks()) {
 			menuBuilder.command(
 					Integer.toString(index),
 					cm.getFiltratedDrinks().get(index - 1).getName()
@@ -38,17 +39,31 @@ public class DrinkListFlow implements Flow{
 					new DrinkSelection(d));
 			index++;
 		}
+		menuBuilder.hiddenCommand("secret", new Executable() {
 
+			@Override
+			public ResultStatus execute(List<String> params) {
+				setFlow(new AdministrationFlow());
+				return new ResultStatus("", true);
+			}
+
+			@Override
+			public ParamRequirements requirements() {
+				return new ParamRequirements();
+			}
+
+		});
 		menuBuilder.build();
 		MenuModel menuModel = new MenuModel(menuBuilder);
 		MenuController menuControler = new MenuController(menuModel);
 		menuControler.start();
 
-		return new PaymentFlow(drink);
+		return this.flow;
 	}
 
 	private class DrinkSelection implements Executable {
 		private Drink selectedDrink;
+
 		public DrinkSelection(Drink drink) {
 			this.selectedDrink = drink;
 		}
@@ -56,6 +71,8 @@ public class DrinkListFlow implements Flow{
 		@Override
 		public ResultStatus execute(List<String> params) {
 			drink = new Drink(selectedDrink.getName(), selectedDrink.getPrice());
+			setFlow(new PaymentFlow(getDrink()));
+
 			return new ResultStatus("", true);
 		}
 
@@ -65,8 +82,16 @@ public class DrinkListFlow implements Flow{
 		}
 
 	}
-	
+
 	public Drink getDrink() {
 		return this.drink;
+	}
+
+	public Flow getFlow() {
+		return flow;
+	}
+
+	public void setFlow(Flow flow) {
+		this.flow = flow;
 	}
 }

@@ -7,7 +7,7 @@ public class DrinksReportFlow implements Flow {
 	@Override
 	public Flow execute(CoffeeMachineState machine) {
 		// TODO Auto-generated method stub
-		return null;
+		return new DrinkListFlow();
 	}
 
 }
