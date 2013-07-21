@@ -1,6 +1,7 @@
 package coffeeMachine;
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import coffeeMachine.DrinksContainer;
 import coffeeMachine.MoneyAmount;
 import coffeeMachine.OrderFinalizeFlow;
 import coffeeMachine.Withdraw;
+import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 
 public class OrderFinalizeFlowTests {
 	private CoffeeMachineState coffeeMachine;
@@ -27,6 +29,26 @@ public class OrderFinalizeFlowTests {
 				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
 		this.coffeeMachine = new CoffeeMachineState(availableCoins,
 				drinksContainer);
+	}
+
+	@Test
+	public void executeWithSuccessfulChange() {
+		Withdraw withdraw = new Withdraw(
+				WithdrawRequestResultStatus.SUCCESSFUL, new MoneyAmount().add(
+						Coin.TEN, 30));
+		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30),
+				withdraw);
+		orderFinalizeFlow.execute(coffeeMachine);
+	}
+
+	@Test
+	public void executeWithInsufficienAmount() {
+		Withdraw withdraw = new Withdraw(
+				WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT,
+				new MoneyAmount().add(Coin.FIFTY, 1));
+		orderFinalizeFlow = new OrderFinalizeFlow(new Drink("Coffee", 30),
+				withdraw);
+		orderFinalizeFlow.execute(coffeeMachine);
 	}
 
 	@Test
@@ -52,7 +74,7 @@ public class OrderFinalizeFlowTests {
 		MoneyAmount change = new MoneyAmount();
 		change.add(Coin.FIVE, 2).add(Coin.TEN, 2).add(Coin.TWENTY, 0)
 				.add(Coin.FIFTY, 0).add(Coin.LEV, 0);
-		
+
 		Withdraw withdraw = change.withdraw(30);
 		Drink drink = new Drink("Coffee", 30);
 		int expected = coffeeMachine.getCurrentDrinks().getDrinks().get(drink) - 1;
