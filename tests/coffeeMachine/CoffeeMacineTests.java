@@ -11,7 +11,6 @@ import javax.xml.bind.Unmarshaller;
 
 
 import org.junit.Before;
-import org.junit.Test;
 
 public class CoffeeMacineTests {
 	CoffeeMachineDTO mm ; 
