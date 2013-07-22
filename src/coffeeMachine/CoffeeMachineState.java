@@ -13,13 +13,19 @@ import java.util.Map;
  */
 public class CoffeeMachineState {
 	private MoneyAmount coins;
-	private DrinksContainer drinks;
+	private DrinksContainer currentDrinksAmount;
+	private final DrinksContainer initialDrinksAmount;
 	
 	public CoffeeMachineState(MoneyAmount coins, DrinksContainer drinks) {
 		this.coins = coins;
-		this.drinks = drinks;
+		this.currentDrinksAmount = drinks;
+		this.initialDrinksAmount = drinks;
 	}
 
+	/**
+	 * Get information of the currently contained coins in the machine.
+	 * @return MoneyAmount object, holding information of the coins in the machine.
+	 */
 	public MoneyAmount getCoins() {
 		return coins;
 	}
@@ -28,17 +34,32 @@ public class CoffeeMachineState {
 		this.coins = coins;
 	}
 
-	public DrinksContainer getDrinks() {
-		return drinks;
-	}
-
-	public void setDrinks(DrinksContainer drinks) {
-		this.drinks = drinks;
+	/**
+	 * Get the information of the currently
+	 * contained drinks in the machine
+	 * @return DrinksContainer object, holding information of the currently available drinks
+	 */
+	public DrinksContainer getCurrentDrinks() {
+		return this.currentDrinksAmount;
 	}
 	
+	/**
+	 * Get the information of the contained drinks 
+	 * when the machine was initialized.
+	 * @return DrinksContainer object, holding information of the initially available drinks
+	 */
+	public DrinksContainer getInitialDrinks() {
+		return this.initialDrinksAmount;
+	}
+	
+	/**
+	 * Use this method to get a list of the currently available
+	 * drinks in the machine, which amount is more than zero.
+	 * @return a list of the available drinks in the machine
+	 */
 	public List<Drink> getFiltratedDrinks(){  // by Andrey
 		List<Drink> drinksList=new ArrayList<Drink>();
-		for(Map.Entry<Drink, Integer> entry: drinks.getDrinks().entrySet()){
+		for(Map.Entry<Drink, Integer> entry: this.currentDrinksAmount.getDrinks().entrySet()){
 			if(entry.getValue()!=0){
 				drinksList.add(entry.getKey());
 			}

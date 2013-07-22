@@ -2,8 +2,14 @@ package coffeeMachine;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import coffeeMachine.CoffeeMachineState;
@@ -18,21 +24,32 @@ public class InsufficientAmountTests {
 
 	private InsufficientAmountFlow flow;
 	private CoffeeMachineState coffeeMachine;
+	private static InputStream in;
+	private static PrintStream out;
+
+	@BeforeClass
+	public static void setUpClass() {
+		in = System.in;
+		out = System.out;
+	}
 
 	@Before
-	public void testExecute_SetUpObject() {
+	public void setUpObject() {
 		Drink drink = new Drink("Coffee", 45);
 		MoneyAmount userCoins = new MoneyAmount();
 		Withdraw withdraw = new Withdraw(
-				Withdraw.WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT, new MoneyAmount());
+				Withdraw.WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT,
+				new MoneyAmount());
 
 		flow = new InsufficientAmountFlow(drink, userCoins, withdraw);
 	}
 
 	@Test
-	public void testExecute_continueMakingDrinkAndDontReturnChange() {
-		System.out.println("***** TEST 2 *****"
-				+ "\nExpect continuing the order" + System.lineSeparator());
+	public void continueOrderFlow() {
+		String input = "1" + System.lineSeparator();
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		System.setOut(new PrintStream(new ByteArrayOutputStream()));
+
 		flow.execute(coffeeMachine);
 
 		boolean isOrderFinalizeFlow = false;
@@ -42,11 +59,12 @@ public class InsufficientAmountTests {
 
 		assertTrue(isOrderFinalizeFlow);
 	}
-	
+
 	@Test
-	public void testExecute_cancelOrderAndReturnUserCoins() {
-		System.out.println("***** TEST 1 *****"
-				+ "\nExpect cancelling the order" + System.lineSeparator());
+	public void cancelOrder() {
+		String input = "2" + System.lineSeparator();
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		System.setOut(new PrintStream(new ByteArrayOutputStream()));
 
 		flow.execute(coffeeMachine);
 		boolean isDrinkListFlow = false;
@@ -58,8 +76,10 @@ public class InsufficientAmountTests {
 	}
 
 	@Test
-	public void testExecute_cancelOrder_expectReturnUserCoins() {
-		System.out.println("\n***** TEST Cancel order*****");
+	public void returnUserCoins() {
+		String input = "2" + System.lineSeparator();
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		System.setOut(new PrintStream(new ByteArrayOutputStream()));
 
 		flow.execute(coffeeMachine);
 		MoneyAmount expectedCoins = new MoneyAmount();
@@ -67,11 +87,12 @@ public class InsufficientAmountTests {
 		assertEquals(
 				"Returned coins should be the same as the user had inserted",
 				expectedCoins.toString(), flow.getUserCoins().toString());
-		System.out.println("\nExpected: " + expectedCoins.sumOfCoins());
 	}
 
 	@After
-	public void testExecute_TearDownObject() {
+	public void tearDownObject() {
 		flow = null;
+		System.setIn(in);
+		System.setOut(out);
 	}
 }

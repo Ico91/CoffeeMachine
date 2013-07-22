@@ -2,12 +2,11 @@ package modules.menuModule;
 import java.util.Scanner;
 
 class InputReader {
+	Scanner scanner;
 	public InputReader() {
-		
+		this.scanner = new Scanner(System.in);
 	}
 	public String readInput() {
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
 		String input = scanner.nextLine();
 		return input;
 	}

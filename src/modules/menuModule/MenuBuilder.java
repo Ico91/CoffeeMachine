@@ -3,10 +3,12 @@ import java.util.*;
 
 public class MenuBuilder {
 	private Map<String, Executable> commands;
+	private Map<String, Executable> hiddenCommands;
 	private List<String> commandsInformation;
 
 	public MenuBuilder() {
 		this.commands = new TreeMap<String, Executable>();
+		this.hiddenCommands = new TreeMap<String, Executable>();
 		this.commandsInformation = new ArrayList<String>();
 	}
 
@@ -14,6 +16,12 @@ public class MenuBuilder {
 			Executable executable) {
 		this.commands.put(command, executable);
 		this.commandsInformation.add(command + " - " + commandInformation);
+		return this;
+	}
+	
+	public MenuBuilder hiddenCommand(String hiddenCommand,
+			Executable executable) {
+		this.hiddenCommands.put(hiddenCommand, executable);
 		return this;
 	}
 	
@@ -35,5 +43,9 @@ public class MenuBuilder {
 
 	public void setCommandsInformation(List<String> commandsInformation) {
 		this.commandsInformation = commandsInformation;
+	}
+
+	public Map<String, Executable> getHiddenCommands() {
+		return hiddenCommands;
 	}
 }

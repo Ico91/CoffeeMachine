@@ -52,6 +52,11 @@ public class OrderFlow implements Flow {
 		return new InsufficientAmountFlow(drink, userCoins, withdraw);
 	}
 	
+	/**
+	 * Gives information whether the withdraw operation was
+	 * successful or not, and the coins which were withdrawn.
+	 * @return Withdraw object
+	 */
 	public Withdraw getWithdraw()
 	{
 		return this.withdraw;

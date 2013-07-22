@@ -14,13 +14,13 @@ public class OrderFlowTests {
 	private CoffeeMachineState coffeeMachine;
 
 	@Before
-	public void testOrderFlow_setUpObject() {
+	public void setUpObject() {
 		this.coffeeMachine = new CoffeeMachineState(new MoneyAmount(),
 				new DrinksContainer());
 	}
 
 	@Test
-	public void testExecute_enoughCoinsToReturn() {
+	public void testEnoughCoinsToReturn() {
 		Drink drink = new Drink("Coffee", 65);
 		MoneyAmount userCoins = new MoneyAmount();
 		userCoins.add(Coin.FIVE, 1).add(Coin.TEN, 1).add(Coin.TWENTY, 1)
@@ -43,7 +43,7 @@ public class OrderFlowTests {
 	}
 
 	@Test
-	public void testExecute_notEnoughCoinsToReturn() {
+	public void testNotEnoughCoinsToReturn() {
 		Drink drink = new Drink("Coffee", 45);
 		MoneyAmount userCoins = new MoneyAmount().add(Coin.FIVE, 1)
 				.add(Coin.TEN, 1).add(Coin.TWENTY, 1).add(Coin.FIFTY, 1)
@@ -68,7 +68,7 @@ public class OrderFlowTests {
 	}
 
 	@After
-	public void testOrderFlow_tearDown() {
+	public void tearDown() {
 		orderFlow = null;
 	}
 
