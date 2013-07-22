@@ -42,7 +42,7 @@ public class DrinkListFlowTests {
 	
 	@Test
 	public void testCoffeeMachineDrinksAmount(){
-		assertNotNull("No drinks in machine", coffeeMachine.getDrinks().getDrinks());
+		assertNotNull("No drinks in machine", coffeeMachine.getFiltratedDrinks());
 		
 	}
 	
