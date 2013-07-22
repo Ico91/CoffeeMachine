@@ -4,22 +4,31 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+
+import org.xml.sax.SAXException;
 
 import coffeeMachine.CoffeeMachineDTO;
 
 public class XMLIO {
 
 	public Object read(XMLDocumentMetaData xmlMeta) throws JAXBException,
-			FileNotFoundException {
-		JAXBContext context = JAXBContext.newInstance(xmlMeta.getClass());
+			FileNotFoundException, SAXException {
+		JAXBContext context = JAXBContext.newInstance(xmlMeta.getDtoClass());
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
+		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema schema = factory.newSchema(new File(xmlMeta.getPathToSchema()));
+		unmarshaller.setSchema(schema);
+		
 		FileReader file = new FileReader(xmlMeta.getPathToFile());
-
+		
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) unmarshaller
 				.unmarshal(file);
 
