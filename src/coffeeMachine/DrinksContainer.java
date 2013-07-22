@@ -74,6 +74,14 @@ public class DrinksContainer {
 			return false;
 		return true;
 	}
-
+	// by Andrey
+	@Override
+	public String toString(){
+		String map="";
+		for (Map.Entry<Drink, Integer> entry : drinks.entrySet()) {
+		     map+="Key: " + entry.getKey().toString() + ". Value: " + entry.getValue();
+		}
+		return map;
+		}
 	
 }
