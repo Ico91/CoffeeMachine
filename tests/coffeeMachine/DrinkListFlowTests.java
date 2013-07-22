@@ -19,7 +19,7 @@ public class DrinkListFlowTests {
 	@Before
 	public void initCoffeeMachine() {
 		drinkFlow = new DrinkListFlow();
-		MoneyAmount moneyAmount = new MoneyAmount(10, 10, 10, 10, 10);
+		MoneyAmount moneyAmount = new MoneyAmount();
 		DrinksContainer drinksContainer = new DrinksContainer();
 		drinksContainer.add(new Drink("Coffee", 30), 10)
 				.add(new Drink("Choko", 50), 10)
