@@ -12,6 +12,7 @@ import coffeeMachine.exceptions.CoffeeMachineStateException;
 import coffeeMachine.transformers.fromDto.DTOToCoffeeMachineState;
 import coffeeMachine.transformers.fromDto.exceptions.DTOToCoffeeMachineException;
 import modules.xmlModule.*;
+import modules.xmlModule.exceptions.XMLIOException;
 
 /***
  * 
@@ -24,7 +25,8 @@ public class CoffeeMachineStorage {
 
 	}
 
-	public CoffeeMachineState load(String xmlFilePath, String xsdSchemePath) throws CoffeeMachineStateException {
+	public CoffeeMachineState load(String xmlFilePath, String xsdSchemePath)
+			throws CoffeeMachineStateException {
 		XMLDocumentMetaData xmlDocumentMetadata = new XMLDocumentMetaData(
 				CoffeeMachineDTO.class, xmlFilePath, xsdSchemePath);
 		XMLIO xmlIO = new XMLIO();
@@ -35,15 +37,11 @@ public class CoffeeMachineStorage {
 			DTOToCoffeeMachineState transformer = new DTOToCoffeeMachineState();
 			return transformer.transform(coffeeMachineDTO);
 
-		} catch (FileNotFoundException e) {
-			throw new CoffeeMachineStateException("XML file not found!");
-		} catch (JAXBException e) {
-			throw new CoffeeMachineStateException(
-					"Cannot create marshal object");
-		} catch (SAXException e) {
+		} catch (XMLIOException e) {
 			throw new CoffeeMachineStateException(e.getMessage());
 		} catch (DTOToCoffeeMachineException e) {
-			throw new CoffeeMachineStateException(e.getMessage());
+			throw new CoffeeMachineStateException(
+					"Cannot transform CoffeeMachineDTO to CoffeeMachineState");
 		}
 	}
 }

@@ -13,13 +13,14 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import modules.xmlModule.exceptions.XMLIOException;
+
 import org.xml.sax.SAXException;
 
 public class XMLIO {
 
-	public Object read(XMLDocumentMetaData xmlMeta) throws JAXBException,
-			FileNotFoundException, SAXException {
-		
+	public Object read(XMLDocumentMetaData xmlMeta) throws XMLIOException  {
+		try {
 		File fileToRead = new File(xmlMeta.getPathToFile());
 		File schemaFile = new File(xmlMeta.getPathToSchema());
 		
@@ -41,6 +42,9 @@ public class XMLIO {
 				.unmarshal(file));
 
 		return objectToReturn;
+		} catch(SAXException | JAXBException | FileNotFoundException e) {
+			throw new XMLIOException(e.getMessage());
+		}
 	}
 
 	public void write(XMLDocumentMetaData xmlMeta, Object objectToWrite)
@@ -55,8 +59,9 @@ public class XMLIO {
 		
 		JAXBContext context = JAXBContext.newInstance(xmlMeta.getDtoClass());
 		Marshaller marshaller = context.createMarshaller();
-
-		//marshaller.marshal(objectToWrite, System.out);
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		
+		marshaller.marshal(objectToWrite, System.out);
 		marshaller.marshal(objectToWrite, file);
 
 	}
