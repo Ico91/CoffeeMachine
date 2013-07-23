@@ -1,12 +1,13 @@
 package coffeeMachine;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
+import coffeeMachine.flows.OrderFlow;
 
 public class OrderFlowTests {
 

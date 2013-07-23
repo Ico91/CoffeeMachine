@@ -1,6 +1,6 @@
 package coffeeMachine;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,10 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import coffeeMachine.CoffeeMachineState;
-import coffeeMachine.Drink;
-import coffeeMachine.MoneyAmount;
-import coffeeMachine.PaymentFlow;
+import coffeeMachine.flows.PaymentFlow;
 
 public class PaymentFlowTests {
 

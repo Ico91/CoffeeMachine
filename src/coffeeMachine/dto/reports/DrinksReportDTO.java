@@ -279,6 +279,35 @@ public class DrinksReportDTO {
 						+ String.valueOf(this.amount);
 				return output;
 			}
+
+			@Override
+			public int hashCode() {
+				final int prime = 31;
+				int result = 1;
+				result = prime * result + amount;
+				result = prime * result
+						+ ((name == null) ? 0 : name.hashCode());
+				return result;
+			}
+
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj)
+					return true;
+				if (obj == null)
+					return false;
+				if (!(obj instanceof Drink))
+					return false;
+				Drink other = (Drink) obj;
+				if (amount != other.amount)
+					return false;
+				if (name == null) {
+					if (other.name != null)
+						return false;
+				} else if (!name.equals(other.name))
+					return false;
+				return true;
+			}
 		}
 		
 		@Override
@@ -291,11 +320,62 @@ public class DrinksReportDTO {
 			return output;
 		}
 
+		@Override
+		public int hashCode() {
+			return drink.hashCode();
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (!(obj instanceof OrderedDrinks))
+				return false;
+			OrderedDrinks other = (OrderedDrinks) obj;
+			if (drink == null) {
+				if (other.drink != null)
+					return false;
+			} else if (!drink.equals(other.drink))
+				return false;
+			return true;
+		}
+
 	}
 
 	@Override
 	public String toString() {
 		return orderedDrinks.toString() + System.lineSeparator() + "Total: " + total;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((orderedDrinks == null) ? 0 : orderedDrinks.hashCode());
+		result = prime * result + total;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof DrinksReportDTO))
+			return false;
+		DrinksReportDTO other = (DrinksReportDTO) obj;
+		if (orderedDrinks == null) {
+			if (other.orderedDrinks != null)
+				return false;
+		} else if (!orderedDrinks.equals(other.orderedDrinks))
+			return false;
+		if (total != other.total)
+			return false;
+		return true;
 	}
 
 }

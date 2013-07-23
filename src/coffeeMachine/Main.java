@@ -1,29 +1,26 @@
 package coffeeMachine;
 
+import coffeeMachine.exceptions.CoffeeMachineStateException;
 import coffeeMachine.flows.DrinkListFlow;
 import coffeeMachine.flows.Flow;
+import coffeeMachine.storages.CoffeeMachineStorage;
 
 public class Main {
-	
-	public static void main(String[] args) {
-		// TODO: Initializations...
-		
-		CoffeeMachineState coffeeMachine;
-		DrinksContainer drinksContainer = new DrinksContainer();
-		drinksContainer.add(new Drink("Coffee", 30), 10)
-				.add(new Drink("Tea", 40), 10)
-				.add(new Drink("Hot chocolate", 50), 5).commit();
 
-		MoneyAmount availableCoins = new MoneyAmount();
-		availableCoins.add(Coin.FIVE, 5).add(Coin.TEN, 4).add(Coin.TWENTY, 3)
-				.add(Coin.FIFTY, 2).add(Coin.LEV, 1);
-		coffeeMachine = new CoffeeMachineState(availableCoins,
-				drinksContainer);
+	public static void main(String[] args) {
+		CoffeeMachineStorage coffeeMachineStorage = new CoffeeMachineStorage();
+		CoffeeMachineState coffeeMachineState;
 		
-		Flow flow = new DrinkListFlow();
-		while(true) {
-			flow = flow.execute(coffeeMachine);
+		try {
+			coffeeMachineState = coffeeMachineStorage.load(
+					"resources/coffeeMachine.xml", "src/CoffeeMachineDTO.xsd");
+			Flow flow = new DrinkListFlow();
+			while (true) {
+				flow = flow.execute(coffeeMachineState);
+			}
+		} catch (CoffeeMachineStateException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Machine cannot start!");
 		}
 	}
-	
 }

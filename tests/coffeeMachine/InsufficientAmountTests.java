@@ -1,6 +1,7 @@
 package coffeeMachine;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,13 +13,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import coffeeMachine.CoffeeMachineState;
-import coffeeMachine.Drink;
-import coffeeMachine.DrinkListFlow;
-import coffeeMachine.InsufficientAmountFlow;
-import coffeeMachine.MoneyAmount;
-import coffeeMachine.OrderFinalizeFlow;
-import coffeeMachine.Withdraw;
+import coffeeMachine.flows.DrinkListFlow;
+import coffeeMachine.flows.InsufficientAmountFlow;
+import coffeeMachine.flows.OrderFinalizeFlow;
 
 public class InsufficientAmountTests {
 

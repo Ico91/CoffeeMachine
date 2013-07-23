@@ -76,7 +76,7 @@ public class DrinksReportFlow implements Flow {
 		DateFormat dateFormat = new SimpleDateFormat("HH;mm;ss - dd-MM-yyyy");
 		Calendar cal = Calendar.getInstance();
 
-		String fileName = dateFormat.format(cal.getTime()) + ".xml";
+		String fileName = "reports/" + dateFormat.format(cal.getTime()) + ".xml";
 
 		return fileName;
 	}

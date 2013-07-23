@@ -19,7 +19,6 @@ import coffeeMachine.DrinksContainer;
 import coffeeMachine.MoneyAmount;
 import coffeeMachine.Withdraw;
 import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
-import coffeeMachine.flows.OrderFinalizeFlow;
 
 public class OrderFinalizeFlowTests {
 	private CoffeeMachineState coffeeMachine;
