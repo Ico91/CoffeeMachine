@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+=======
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+>>>>>>> 7c497448eecd52bedb05b3f176fa5d49d8ee5f4e
   <xs:element name="Report">
     <xs:complexType>
       <xs:sequence>

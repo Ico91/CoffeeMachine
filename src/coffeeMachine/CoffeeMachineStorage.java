@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 import org.xml.sax.SAXException;
 
 import coffeeMachine.exceptions.CoffeeMachineStateException;
+import coffeeMachine.exceptions.DTOToCoffeeMachineStateException;
 
 import modules.xmlModule.*;
 
@@ -21,15 +22,16 @@ public class CoffeeMachineStorage {
 
 	}
 
-	public CoffeeMachineState load(String xmlFilePath, String xsdSchemePath) {
+	public CoffeeMachineState load(String xmlFilePath, String xsdSchemePath) throws CoffeeMachineStateException {
 		XMLDocumentMetaData xmlDocumentMetadata = new XMLDocumentMetaData(
 				CoffeeMachineDTO.class, xmlFilePath, xsdSchemePath);
 		XMLIO xmlIO = new XMLIO();
+
 		try {
 			CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO
 					.read(xmlDocumentMetadata);
-			return new CoffeeMachineState(loadMoneyAmount(coffeeMachineDTO),
-					loadDrinksContainer(coffeeMachineDTO));
+			DTOToCoffeeMachineState transformer = new DTOToCoffeeMachineState();
+			return transformer.transform(coffeeMachineDTO);
 
 		} catch (FileNotFoundException e) {
 			throw new CoffeeMachineStateException("XML file not found!");
@@ -38,44 +40,8 @@ public class CoffeeMachineStorage {
 					"Cannot create marshal object");
 		} catch (SAXException e) {
 			throw new CoffeeMachineStateException(e.getMessage());
+		} catch (DTOToCoffeeMachineStateException e) {
+			throw new CoffeeMachineStateException(e.getMessage());
 		}
-	}
-
-	private MoneyAmount loadMoneyAmount(CoffeeMachineDTO coffeeMachineDTO) {
-		MoneyAmount moneyAmount = new MoneyAmount();
-		for (coffeeMachine.CoffeeMachineDTO.Money.Coin c : coffeeMachineDTO
-				.getMoney().getCoin()) {
-			moneyAmount.add(convertToCoin(c.getType()), c.getAmount());
-		}
-
-		return moneyAmount;
-	}
-
-	private DrinksContainer loadDrinksContainer(
-			CoffeeMachineDTO coffeeMachineDTO) {
-		DrinksContainer drinksContainer = new DrinksContainer();
-
-		for (coffeeMachine.CoffeeMachineDTO.Drinks.Drink d : coffeeMachineDTO
-				.getDrinks().getDrink()) {
-			drinksContainer.add(new Drink(d.getName(), d.getPrice()),
-					d.getAmount());
-		}
-
-		return drinksContainer;
-	}
-	
-	private Coin convertToCoin(String coinType) {
-		if (coinType.equals("FIVE"))
-			return Coin.FIVE;
-		if (coinType.equals("TEN"))
-			return Coin.TEN;
-		if (coinType.equals("TWENTY"))
-			return Coin.TWENTY;
-		if (coinType.equals("FIFTY"))
-			return Coin.FIFTY;
-		if (coinType.equals("LEV"))
-			return Coin.LEV;
-
-		throw new CoffeeMachineStateException("Invalid coin type in xml file");
 	}
 }
