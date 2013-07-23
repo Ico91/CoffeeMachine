@@ -36,7 +36,7 @@ public class DrinkListFlow implements Flow {
 		for (Drink d : cm.getFiltratedDrinks()) {
 			menuBuilder.command(
 					Integer.toString(index),
-					cm.getFiltratedDrinks().get(index - 1).getName()
+					cm.getFiltratedDrinks().get(index - 1).getName() + " - "
 							+ Integer.toString(cm.getFiltratedDrinks()
 									.get(index - 1).getPrice()),
 					new DrinkSelection(d));
