@@ -74,5 +74,48 @@ public class CoffeeMachineState {
 		}
 		return drinksList;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((coins == null) ? 0 : coins.hashCode());
+		result = prime
+				* result
+				+ ((currentDrinksAmount == null) ? 0 : currentDrinksAmount
+						.hashCode());
+		result = prime
+				* result
+				+ ((initialDrinksAmount == null) ? 0 : initialDrinksAmount
+						.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CoffeeMachineState other = (CoffeeMachineState) obj;
+		if (coins == null) {
+			if (other.coins != null)
+				return false;
+		} else if (!coins.equals(other.coins))
+			return false;
+		if (currentDrinksAmount == null) {
+			if (other.currentDrinksAmount != null)
+				return false;
+		} else if (!currentDrinksAmount.equals(other.currentDrinksAmount))
+			return false;
+		if (initialDrinksAmount == null) {
+			if (other.initialDrinksAmount != null)
+				return false;
+		} else if (!initialDrinksAmount.equals(other.initialDrinksAmount))
+			return false;
+		return true;
+	}
 	
 }
