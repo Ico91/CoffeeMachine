@@ -55,8 +55,9 @@ public class XMLIO {
 		
 		JAXBContext context = JAXBContext.newInstance(xmlMeta.getDtoClass());
 		Marshaller marshaller = context.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-		//marshaller.marshal(objectToWrite, System.out);
+		marshaller.marshal(objectToWrite, System.out);
 		marshaller.marshal(objectToWrite, file);
 
 	}
