@@ -19,7 +19,14 @@ public class CoffeeMachineState {
 	public CoffeeMachineState(MoneyAmount coins, DrinksContainer drinks) {
 		this.coins = coins;
 		this.currentDrinksAmount = drinks;
-		this.initialDrinksAmount = drinks;
+		this.initialDrinksAmount = new DrinksContainer();
+		
+		for(Drink drink : currentDrinksAmount.getDrinks().keySet())
+		{
+			this.initialDrinksAmount.add(drink, currentDrinksAmount.getDrinkQuantity(drink));
+		}
+		this.initialDrinksAmount.commit();
+
 	}
 
 	/**

@@ -3,6 +3,7 @@ package modules.xmlModule;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -18,6 +19,15 @@ public class XMLIO {
 
 	public Object read(XMLDocumentMetaData xmlMeta) throws JAXBException,
 			FileNotFoundException, SAXException {
+		
+		File fileToRead = new File(xmlMeta.getPathToFile());
+		File schemaFile = new File(xmlMeta.getPathToSchema());
+		
+		if(!fileToRead.exists())
+			throw new FileNotFoundException("Specified file to read was not found!");
+		if(!schemaFile.exists())
+			throw new FileNotFoundException("Schema file not found!");
+		
 		JAXBContext context = JAXBContext.newInstance(xmlMeta.getDtoClass());
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
@@ -34,17 +44,19 @@ public class XMLIO {
 	}
 
 	public void write(XMLDocumentMetaData xmlMeta, Object objectToWrite)
-			throws JAXBException {
+			throws JAXBException, IOException {
+		
 		if (!objectToWrite.getClass().equals(xmlMeta.getDtoClass()))
 			throw new IllegalArgumentException(
 					"Provided object is not of the same class as specified in xml meta file");
+		File file = new File(xmlMeta.getPathToFile());
+		if(!file.exists())
+			file.createNewFile();
 		
-		JAXBContext context = JAXBContext.newInstance(xmlMeta.getClass());
+		JAXBContext context = JAXBContext.newInstance(xmlMeta.getDtoClass());
 		Marshaller marshaller = context.createMarshaller();
 
-		File file = new File(xmlMeta.getPathToFile());
-
-		marshaller.marshal(objectToWrite, System.out);
+		//marshaller.marshal(objectToWrite, System.out);
 		marshaller.marshal(objectToWrite, file);
 
 	}

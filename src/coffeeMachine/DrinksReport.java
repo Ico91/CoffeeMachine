@@ -5,7 +5,6 @@
 // Generated on: 2013.07.23 at 11:41:46 AM EEST 
 //
 
-
 package coffeeMachine;
 
 import java.util.ArrayList;
@@ -16,14 +15,17 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -60,231 +62,240 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "orderedDrinks",
-    "total"
-})
+@XmlType(name = "", propOrder = { "orderedDrinks", "total" })
 @XmlRootElement(name = "Report")
+@XmlSeeAlso({DrinksReport.OrderedDrinks.class, DrinksReport.OrderedDrinks.Drink.class})
 public class DrinksReport {
 
-    @XmlElement(name = "Ordered-Drinks", required = true)
-    protected DrinksReport.OrderedDrinks orderedDrinks;
-    @XmlElement(name = "Total", required = true)
-    @XmlSchemaType(name = "nonNegativeInteger")
-    protected int total;
+	@XmlElement(name = "Ordered-Drinks", required = true)
+	protected DrinksReport.OrderedDrinks orderedDrinks;
+	@XmlElement(name = "Total", required = true)
+	@XmlSchemaType(name = "nonNegativeInteger")
+	protected int total;
 
-    /**
-     * Gets the value of the orderedDrinks property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DrinksReport.OrderedDrinks }
-     *     
-     */
-    public DrinksReport.OrderedDrinks getOrderedDrinks() {
-        return orderedDrinks;
-    }
+	/**
+	 * Gets the value of the orderedDrinks property.
+	 * 
+	 * @return possible object is {@link DrinksReport.OrderedDrinks }
+	 * 
+	 */
+	public DrinksReport.OrderedDrinks getOrderedDrinks() {
+		return orderedDrinks;
+	}
 
-    /**
-     * Sets the value of the orderedDrinks property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DrinksReport.OrderedDrinks }
-     *     
-     */
-    public void setOrderedDrinks(DrinksReport.OrderedDrinks value) {
-        this.orderedDrinks = value;
-    }
+	/**
+	 * Sets the value of the orderedDrinks property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link DrinksReport.OrderedDrinks }
+	 * 
+	 */
+	public void setOrderedDrinks(DrinksReport.OrderedDrinks value) {
+		this.orderedDrinks = value;
+	}
 
-    /**
-     * Gets the value of the total property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link int }
-     *     
-     */
-    public int getTotal() {
-        return total;
-    }
+	/**
+	 * Gets the value of the total property.
+	 * 
+	 * @return possible object is {@link int }
+	 * 
+	 */
+	public int getTotal() {
+		return total;
+	}
 
-    /**
-     * Sets the value of the total property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link int }
-     *     
-     */
-    public void setTotal(int value) {
-        this.total = value;
-    }
+	/**
+	 * Sets the value of the total property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link int }
+	 * 
+	 */
+	public void setTotal(int value) {
+		this.total = value;
+	}
 
+	/**
+	 * <p>
+	 * Java class for anonymous complex type.
+	 * 
+	 * <p>
+	 * The following schema fragment specifies the expected content contained
+	 * within this class.
+	 * 
+	 * <pre>
+	 * &lt;complexType>
+	 *   &lt;complexContent>
+	 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+	 *       &lt;sequence>
+	 *         &lt;element name="drink" maxOccurs="unbounded" minOccurs="0">
+	 *           &lt;complexType>
+	 *             &lt;simpleContent>
+	 *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+	 *                 &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+	 *                 &lt;attribute name="amount" use="required" type="{http://www.w3.org/2001/XMLSchema}byte" />
+	 *               &lt;/extension>
+	 *             &lt;/simpleContent>
+	 *           &lt;/complexType>
+	 *         &lt;/element>
+	 *       &lt;/sequence>
+	 *     &lt;/restriction>
+	 *   &lt;/complexContent>
+	 * &lt;/complexType>
+	 * </pre>
+	 * 
+	 * 
+	 */
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "", propOrder = { "drink" })
+	@XmlSeeAlso({DrinksReport.OrderedDrinks.Drink.class})
+	public static class OrderedDrinks {
 
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="drink" maxOccurs="unbounded" minOccurs="0">
-     *           &lt;complexType>
-     *             &lt;simpleContent>
-     *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *                 &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="amount" use="required" type="{http://www.w3.org/2001/XMLSchema}byte" />
-     *               &lt;/extension>
-     *             &lt;/simpleContent>
-     *           &lt;/complexType>
-     *         &lt;/element>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "drink"
-    })
-    public static class OrderedDrinks {
+		protected List<DrinksReport.OrderedDrinks.Drink> drink;
 
-        protected List<DrinksReport.OrderedDrinks.Drink> drink;
+		/**
+		 * Gets the value of the drink property.
+		 * 
+		 * <p>
+		 * This accessor method returns a reference to the live list, not a
+		 * snapshot. Therefore any modification you make to the returned list
+		 * will be present inside the JAXB object. This is why there is not a
+		 * <CODE>set</CODE> method for the drink property.
+		 * 
+		 * <p>
+		 * For example, to add a new item, do as follows:
+		 * 
+		 * <pre>
+		 * getDrink().add(newItem);
+		 * </pre>
+		 * 
+		 * 
+		 * <p>
+		 * Objects of the following type(s) are allowed in the list
+		 * {@link DrinksReport.OrderedDrinks.Drink }
+		 * 
+		 * 
+		 */
+		public List<DrinksReport.OrderedDrinks.Drink> getDrink() {
+			if (drink == null) {
+				drink = new ArrayList<DrinksReport.OrderedDrinks.Drink>();
+			}
+			return this.drink;
+		}
 
-        /**
-         * Gets the value of the drink property.
-         * 
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the drink property.
-         * 
-         * <p>
-         * For example, to add a new item, do as follows:
-         * <pre>
-         *    getDrink().add(newItem);
-         * </pre>
-         * 
-         * 
-         * <p>
-         * Objects of the following type(s) are allowed in the list
-         * {@link DrinksReport.OrderedDrinks.Drink }
-         * 
-         * 
-         */
-        public List<DrinksReport.OrderedDrinks.Drink> getDrink() {
-            if (drink == null) {
-                drink = new ArrayList<DrinksReport.OrderedDrinks.Drink>();
-            }
-            return this.drink;
-        }
+		/**
+		 * <p>
+		 * Java class for anonymous complex type.
+		 * 
+		 * <p>
+		 * The following schema fragment specifies the expected content
+		 * contained within this class.
+		 * 
+		 * <pre>
+		 * &lt;complexType>
+		 *   &lt;simpleContent>
+		 *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+		 *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+		 *       &lt;attribute name="amount" use="required" type="{http://www.w3.org/2001/XMLSchema}byte" />
+		 *     &lt;/extension>
+		 *   &lt;/simpleContent>
+		 * &lt;/complexType>
+		 * </pre>
+		 * 
+		 * 
+		 */
+		@XmlAccessorType(XmlAccessType.FIELD)
+		@XmlType(name = "", propOrder = { "value" })
+		public static class Drink {
 
+			@XmlValue
+			protected String value;
+			@XmlAttribute(name = "name", required = true)
+			protected String name;
+			@XmlAttribute(name = "amount", required = true)
+			protected int amount;
 
-        /**
-         * <p>Java class for anonymous complex type.
-         * 
-         * <p>The following schema fragment specifies the expected content contained within this class.
-         * 
-         * <pre>
-         * &lt;complexType>
-         *   &lt;simpleContent>
-         *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-         *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="amount" use="required" type="{http://www.w3.org/2001/XMLSchema}byte" />
-         *     &lt;/extension>
-         *   &lt;/simpleContent>
-         * &lt;/complexType>
-         * </pre>
-         * 
-         * 
-         */
-        @XmlAccessorType(XmlAccessType.FIELD)
-        @XmlType(name = "", propOrder = {
-            "value"
-        })
-        public static class Drink {
+			/**
+			 * Gets the value of the value property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getValue() {
+				return value;
+			}
 
-            @XmlValue
-            protected String value;
-            @XmlAttribute(name = "name", required = true)
-            protected String name;
-            @XmlAttribute(name = "amount", required = true)
-            protected int amount;
+			/**
+			 * Sets the value of the value property.
+			 * 
+			 * @param value
+			 *            allowed object is {@link String }
+			 * 
+			 */
+			public void setValue(String value) {
+				this.value = value;
+			}
 
-            /**
-             * Gets the value of the value property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getValue() {
-                return value;
-            }
+			/**
+			 * Gets the value of the name property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getName() {
+				return name;
+			}
 
-            /**
-             * Sets the value of the value property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setValue(String value) {
-                this.value = value;
-            }
+			/**
+			 * Sets the value of the name property.
+			 * 
+			 * @param value
+			 *            allowed object is {@link String }
+			 * 
+			 */
+			public void setName(String value) {
+				this.name = value;
+			}
 
-            /**
-             * Gets the value of the name property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getName() {
-                return name;
-            }
+			/**
+			 * Gets the value of the amount property.
+			 * 
+			 */
+			public int getAmount() {
+				return amount;
+			}
 
-            /**
-             * Sets the value of the name property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setName(String value) {
-                this.name = value;
-            }
+			/**
+			 * Sets the value of the amount property.
+			 * 
+			 */
+			public void setAmount(int value) {
+				this.amount = value;
+			}
 
-            /**
-             * Gets the value of the amount property.
-             * 
-             */
-            public int getAmount() {
-                return amount;
-            }
+			@Override
+			public String toString() {
+				String output = System.lineSeparator() + this.name + " - "
+						+ String.valueOf(this.amount);
+				return output;
+			}
+		}
+		
+		@Override
+		public String toString() {
+			String output = System.lineSeparator();
+			for(OrderedDrinks.Drink d : drink)
+			{
+				output += d.toString();
+			}
+			return output;
+		}
 
-            /**
-             * Sets the value of the amount property.
-             * 
-             */
-            public void setAmount(int value) {
-                this.amount = value;
-            }
+	}
 
-        }
-
-    }
+	@Override
+	public String toString() {
+		return orderedDrinks.toString() + System.lineSeparator() + "Total: " + total;
+	}
 
 }
