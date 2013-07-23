@@ -14,8 +14,6 @@ import javax.xml.validation.SchemaFactory;
 
 import org.xml.sax.SAXException;
 
-import coffeeMachine.CoffeeMachineDTO;
-
 public class XMLIO {
 
 	public Object read(XMLDocumentMetaData xmlMeta) throws JAXBException,
@@ -29,15 +27,15 @@ public class XMLIO {
 		
 		FileReader file = new FileReader(xmlMeta.getPathToFile());
 		
-		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) unmarshaller
-				.unmarshal(file);
+		Object objectToReturn = xmlMeta.getDtoClass().cast(unmarshaller
+				.unmarshal(file));
 
-		return coffeeMachineDTO;
+		return objectToReturn;
 	}
 
 	public void write(XMLDocumentMetaData xmlMeta, Object objectToWrite)
 			throws JAXBException {
-		if (!objectToWrite.getClass().equals(xmlMeta.getClass()))
+		if (!objectToWrite.getClass().equals(xmlMeta.getDtoClass()))
 			throw new IllegalArgumentException(
 					"Provided object is not of the same class as specified in xml meta file");
 		
