@@ -1,7 +1,7 @@
 package coffeeMachine.exceptions;
 
 @SuppressWarnings("serial")
-public class DTOToMoneyAmountException extends RuntimeException {
+public class DTOToMoneyAmountException extends Exception {
 	public DTOToMoneyAmountException(String message) {
 		super(message);
 	}

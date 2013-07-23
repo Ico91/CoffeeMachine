@@ -1,7 +1,6 @@
 package coffeeMachine;
 
 import coffeeMachine.exceptions.DTOToCoffeeMachineStateException;
-import coffeeMachine.exceptions.DTOToDrinksContainerException;
 import coffeeMachine.exceptions.DTOToMoneyAmountException;
 import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
 public class DTOToCoffeeMachineState {
@@ -24,7 +23,7 @@ public class DTOToCoffeeMachineState {
 			// TODO: Validations if needed
 			return coffeeMachineState;
 
-		} catch (DTOToDrinksContainerException | DTOToMoneyAmountException e) {
+		} catch (DTOToMoneyAmountException e) {
 			throw new DTOToCoffeeMachineStateException(e.getMessage());
 		}
 	}
