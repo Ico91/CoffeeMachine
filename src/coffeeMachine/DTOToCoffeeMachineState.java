@@ -3,7 +3,7 @@ package coffeeMachine;
 import coffeeMachine.exceptions.DTOToCoffeeMachineStateException;
 import coffeeMachine.exceptions.DTOToDrinksContainerException;
 import coffeeMachine.exceptions.DTOToMoneyAmountException;
-
+import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
 public class DTOToCoffeeMachineState {
 	public DTOToCoffeeMachineState() {
 

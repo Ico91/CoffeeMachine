@@ -1,6 +1,8 @@
 package coffeeMachine;
 
 import coffeeMachine.exceptions.DTOToMoneyAmountException;
+import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
+import coffeeMachine.DTO.coffeeMachineDTO.TypeCoin;
 
 /***
  * Class used to transform CoffeeMachineDTO.Money to MoneyAmount object
@@ -24,8 +26,8 @@ public class DTOToMoneyAmountTransformer {
 	 */
 	public MoneyAmount transform(CoffeeMachineDTO coffeeMachineDto) {
 		MoneyAmount moneyAmount = new MoneyAmount();
-		for (CoffeeMachineDTO.Money.Coin c : coffeeMachineDto.getMoney()
-				.getCoin()) {
+		for (coffeeMachine.DTO.coffeeMachineDTO.Coin c : coffeeMachineDto
+				.getMoney().getCoin()) {
 			Coin coin = coinTypeToCoin(c.getType());
 			if (coinAlreadyExist(coin, moneyAmount) == false) {
 				moneyAmount.add(coin, c.getAmount());
@@ -56,16 +58,16 @@ public class DTOToMoneyAmountTransformer {
 	}
 
 	// Convert coin type to new coin object
-	private Coin coinTypeToCoin(String coinType) {
-		if (coinType.equals("FIVE"))
+	private Coin coinTypeToCoin(coffeeMachine.DTO.coffeeMachineDTO.TypeCoin coinType) {
+		if (coinType == TypeCoin.FIVE)
 			return Coin.FIVE;
-		if (coinType.equals("TEN"))
+		if (coinType == TypeCoin.TEN)
 			return Coin.TEN;
-		if (coinType.equals("TWENTY"))
+		if (coinType == TypeCoin.TWENTY)
 			return Coin.TWENTY;
-		if (coinType.equals("FIFTY"))
+		if (coinType == TypeCoin.FIFTY)
 			return Coin.FIFTY;
-		if (coinType.equals("LEV"))
+		if (coinType == TypeCoin.LEV)
 			return Coin.LEV;
 
 		throw new DTOToMoneyAmountException("Invalid coin type.");

@@ -1,5 +1,6 @@
 package coffeeMachine;
 
+import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
 import coffeeMachine.exceptions.DTOToDrinksContainerException;
 
 /***
@@ -23,7 +24,7 @@ public class DTOToDrinksContainerTransformer {
 	 */
 	public DrinksContainer transform(CoffeeMachineDTO coffeeMachineDTO) {
 		DrinksContainer drinksContainer = new DrinksContainer();
-		for (CoffeeMachineDTO.Drinks.Drink d : coffeeMachineDTO.getDrinks()
+		for (coffeeMachine.DTO.coffeeMachineDTO.Drink d : coffeeMachineDTO.getDrinks()
 				.getDrink()) {
 			Drink drink = new Drink(d.getName(), d.getPrice());
 			if(drinkAlreadyExist(drink, drinksContainer) == false) {

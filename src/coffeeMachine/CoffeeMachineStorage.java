@@ -6,9 +6,9 @@ import javax.xml.bind.JAXBException;
 
 import org.xml.sax.SAXException;
 
+import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
 import coffeeMachine.exceptions.CoffeeMachineStateException;
 import coffeeMachine.exceptions.DTOToCoffeeMachineStateException;
-
 import modules.xmlModule.*;
 
 /***
