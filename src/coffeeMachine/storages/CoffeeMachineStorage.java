@@ -1,11 +1,5 @@
 package coffeeMachine.storages;
 
-import java.io.FileNotFoundException;
-
-import javax.xml.bind.JAXBException;
-
-import org.xml.sax.SAXException;
-
 import coffeeMachine.CoffeeMachineState;
 import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
 import coffeeMachine.exceptions.CoffeeMachineStateException;
