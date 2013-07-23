@@ -1,20 +1,17 @@
 package coffeeMachine.flows;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import javax.xml.bind.JAXBException;
-
+import modules.xmlModule.XMLDocumentMetaData;
+import modules.xmlModule.XMLIO;
+import modules.xmlModule.exceptions.XMLIOException;
 import coffeeMachine.CoffeeMachineState;
 import coffeeMachine.Drink;
 import coffeeMachine.DrinksContainer;
 import coffeeMachine.dto.reports.DrinksReportDTO;
 import coffeeMachine.transformers.toDto.OrderedDrinksContainerToDTO;
-
-import modules.xmlModule.XMLDocumentMetaData;
-import modules.xmlModule.XMLIO;
 
 /**
  * 
@@ -32,9 +29,6 @@ public class DrinksReportFlow implements Flow {
 		OrderedDrinksContainerToDTO transformer = new OrderedDrinksContainerToDTO();
 
 		DrinksReportDTO drinksReport = transformer.transform(orderedDrinks);
-
-		System.out.print(drinksReport.toString());
-		
 		save(drinksReport);
 
 		return new DrinkListFlow();
@@ -57,17 +51,15 @@ public class DrinksReportFlow implements Flow {
 
 	private void save(DrinksReportDTO drinksReport) {
 		XMLIO xml = new XMLIO();
+		String filename = generateReportName();
 		XMLDocumentMetaData xmlMeta = new XMLDocumentMetaData(
-				drinksReport.getClass(), generateReportName(), "report.xsd");
+				drinksReport.getClass(), filename, "report.xsd");
 
 		try {
+			System.out.println("Report: " + filename + drinksReport.toString() + System.lineSeparator());
 			xml.write(xmlMeta, drinksReport);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch(XMLIOException e) {
+			System.out.println("Cannot write report to file!");
 		}
 	}
 
@@ -80,4 +72,5 @@ public class DrinksReportFlow implements Flow {
 
 		return fileName;
 	}
+	
 }
