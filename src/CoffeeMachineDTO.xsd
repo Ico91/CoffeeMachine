@@ -1,41 +1,61 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="coffeeMachine">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element name="drinks">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="drink" maxOccurs="unbounded" minOccurs="1">                
-		<xs:complexType>
-                  <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                      <xs:attribute type="xs:nonNegativeInteger" name="amount" use="required"/>
-                      <xs:attribute type="xs:string" name="name" use="required"/>
-                      <xs:attribute type="xs:nonNegativeInteger" name="price" use="required"/>
-                    </xs:extension>
-                  </xs:simpleContent>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="money">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="coin" maxOccurs="unbounded" minOccurs="1">
-                <xs:complexType>
-                  <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                      <xs:attribute type="xs:string" name="type" use="required"/>
-                      <xs:attribute type="xs:nonNegativeInteger" name="amount" use="required"/>
-                    </xs:extension>
-                  </xs:simpleContent>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
+<?xml version="1.0"?>
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+    
+    
+    <xs:complexType name="drink">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string" use="required"/>
+                <xs:attribute name="price" type="xs:positiveInteger" use="required"/>
+                <xs:attribute name="amount" type="xs:nonNegativeInteger" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
-  </xs:element>
+    <xs:complexType name="drinks">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="drink" type="drink"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="typeCoin">
+       <xs:restriction base="xs:string">
+        <xs:enumeration value="FIVE" />
+        <xs:enumeration value="TEN" />
+        <xs:enumeration value="TWENTY" />
+        <xs:enumeration value="FIFTY" />
+        <xs:enumeration value="LEV" />
+       </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="coin">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="typeCoin" use="required"/>
+                <xs:attribute name="amount" type="xs:nonNegativeInteger" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="money">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="coin" type="coin"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="coffeeMachine"> 
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="drinks" type="drinks"></xs:element>
+                <xs:element name="money" type="money"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="uniqueDrink">
+            <xs:selector xpath="drinks/drink"/>
+            <xs:field xpath="@name"/>
+        </xs:unique>
+		<xs:unique name="uniqueCoin">
+            <xs:selector xpath="money/coin"/>
+            <xs:field xpath="@type"/>
+        </xs:unique>
+    </xs:element>
 </xs:schema>
