@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<coffeeMachineDTO>
-    <drinksDTO amount="10" name="Coffee" price="30"/>
-</coffeeMachineDTO>
