@@ -4,8 +4,9 @@ import coffeeMachine.exceptions.DTOToMoneyAmountException;
 
 /***
  * Class used to transform CoffeeMachineDTO.Money to MoneyAmount object
+ * 
  * @author Krasimir Nikolov Atanasov
- *
+ * 
  */
 public class DTOToMoneyAmountTransformer {
 
@@ -15,7 +16,9 @@ public class DTOToMoneyAmountTransformer {
 
 	/***
 	 * Transform CoffeeMachineDTO.Money to MoneyAmount object
-	 * @param coffeeMachineDto CoffeeMachineDTO object
+	 * 
+	 * @param coffeeMachineDto
+	 *            CoffeeMachineDTO object
 	 * @return MoneyAmount object
 	 * @throws DTOToMoneyAmountException
 	 */
@@ -24,7 +27,7 @@ public class DTOToMoneyAmountTransformer {
 		for (CoffeeMachineDTO.Money.Coin c : coffeeMachineDto.getMoney()
 				.getCoin()) {
 			Coin coin = coinTypeToCoin(c.getType());
-			if (doesCoinAlreadyExist(coin, moneyAmount)) {
+			if (coinAlreadyExist(coin, moneyAmount) == false) {
 				moneyAmount.add(coin, c.getAmount());
 			} else
 				throw new DTOToMoneyAmountException(
@@ -33,23 +36,26 @@ public class DTOToMoneyAmountTransformer {
 
 		return moneyAmount;
 	}
-	
+
 	/***
 	 * Check if the specified coin is already exist in MoneyAmount
-	 * @param coin Coin to check
+	 * 
+	 * @param coin
+	 *            Coin to check
 	 * @param moneyAmount
 	 * @return True if the coin already exist, false otherwise
 	 */
-	private boolean doesCoinAlreadyExist(Coin coin, MoneyAmount moneyAmount) {
+	private boolean coinAlreadyExist(Coin coin, MoneyAmount moneyAmount) {
+		// TODO: ??? Based on exception ????
 		try {
 			moneyAmount.getCoin(coin);
-			return false;
-		} catch (NullPointerException e) {
 			return true;
+		} catch (NullPointerException e) {
+			return false;
 		}
 	}
 
-	//	Convert coin type to new coin object
+	// Convert coin type to new coin object
 	private Coin coinTypeToCoin(String coinType) {
 		if (coinType.equals("FIVE"))
 			return Coin.FIVE;
