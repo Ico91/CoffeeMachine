@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -6,6 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.xml.bind.JAXBException;
+
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Drink;
+import coffeeMachine.DrinksContainer;
+import coffeeMachine.dto.reports.DrinksReportDTO;
+import coffeeMachine.transformers.toDto.OrderedDrinksContainerToDTO;
 
 import modules.xmlModule.XMLDocumentMetaData;
 import modules.xmlModule.XMLIO;
@@ -25,7 +31,7 @@ public class DrinksReportFlow implements Flow {
 
 		OrderedDrinksContainerToDTO transformer = new OrderedDrinksContainerToDTO();
 
-		DrinksReport drinksReport = transformer.transform(orderedDrinks);
+		DrinksReportDTO drinksReport = transformer.transform(orderedDrinks);
 
 		System.out.print(drinksReport.toString());
 		
@@ -49,7 +55,7 @@ public class DrinksReportFlow implements Flow {
 		return orderedDrinks;
 	}
 
-	private void save(DrinksReport drinksReport) {
+	private void save(DrinksReportDTO drinksReport) {
 		XMLIO xml = new XMLIO();
 		XMLDocumentMetaData xmlMeta = new XMLDocumentMetaData(
 				drinksReport.getClass(), generateReportName(), "report.xsd");

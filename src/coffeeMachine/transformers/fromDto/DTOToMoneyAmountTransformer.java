@@ -1,8 +1,10 @@
-package coffeeMachine;
+package coffeeMachine.transformers.fromDto;
 
-import coffeeMachine.exceptions.DTOToMoneyAmountException;
-import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
-import coffeeMachine.DTO.coffeeMachineDTO.TypeCoin;
+import coffeeMachine.Coin;
+import coffeeMachine.MoneyAmount;
+import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
+import coffeeMachine.dto.coffeeMachine.TypeCoin;
+import coffeeMachine.transformers.fromDto.exceptions.DTOToMoneyAmountException;
 
 /***
  * Class used to transform CoffeeMachineDTO.Money to MoneyAmount object
@@ -27,7 +29,7 @@ public class DTOToMoneyAmountTransformer {
 	public MoneyAmount transform(CoffeeMachineDTO coffeeMachineDto)
 			throws DTOToMoneyAmountException {
 		MoneyAmount moneyAmount = new MoneyAmount();
-		for (coffeeMachine.DTO.coffeeMachineDTO.Coin c : coffeeMachineDto
+		for (coffeeMachine.dto.coffeeMachine.Coin c : coffeeMachineDto
 				.getMoney().getCoin()) {
 			Coin coin = coinTypeToCoin(c.getType());
 			moneyAmount.add(coin, c.getAmount());
@@ -38,7 +40,7 @@ public class DTOToMoneyAmountTransformer {
 
 	// Convert coin type to new coin object
 	private Coin coinTypeToCoin(
-			coffeeMachine.DTO.coffeeMachineDTO.TypeCoin coinType)
+			coffeeMachine.dto.coffeeMachine.TypeCoin coinType)
 			throws DTOToMoneyAmountException {
 		if (coinType == TypeCoin.FIVE)
 			return Coin.FIVE;

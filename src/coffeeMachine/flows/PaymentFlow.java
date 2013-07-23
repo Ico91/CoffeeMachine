@@ -1,7 +1,12 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
 
 import java.util.List;
+
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Coin;
+import coffeeMachine.Drink;
+import coffeeMachine.MoneyAmount;
 
 import modules.menuModule.Executable;
 import modules.menuModule.MenuBuilder;

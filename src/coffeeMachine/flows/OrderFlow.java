@@ -1,5 +1,9 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Drink;
+import coffeeMachine.MoneyAmount;
+import coffeeMachine.Withdraw;
 import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 
 

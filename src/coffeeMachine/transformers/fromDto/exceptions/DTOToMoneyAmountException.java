@@ -1,4 +1,4 @@
-package coffeeMachine.exceptions;
+package coffeeMachine.transformers.fromDto.exceptions;
 
 @SuppressWarnings("serial")
 public class DTOToMoneyAmountException extends Exception {

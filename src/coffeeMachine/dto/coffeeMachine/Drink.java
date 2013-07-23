@@ -6,7 +6,7 @@
 //
 
 
-package coffeeMachine.DTO.coffeeMachineDTO;
+package coffeeMachine.dto.coffeeMachine;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,15 +17,16 @@ import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for coin complex type.
+ * <p>Java class for drink complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="coin">
+ * &lt;complexType name="drink">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *       &lt;attribute name="type" use="required" type="{}typeCoin" />
+ *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="price" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
  *       &lt;attribute name="amount" use="required" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
@@ -35,15 +36,18 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "coin", propOrder = {
+@XmlType(name = "drink", propOrder = {
     "value"
 })
-public class Coin {
+public class Drink {
 
     @XmlValue
     protected String value;
-    @XmlAttribute(name = "type", required = true)
-    protected TypeCoin type;
+    @XmlAttribute(name = "name", required = true)
+    protected String name;
+    @XmlAttribute(name = "price", required = true)
+    @XmlSchemaType(name = "positiveInteger")
+    protected int price;
     @XmlAttribute(name = "amount", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected int amount;
@@ -73,27 +77,51 @@ public class Coin {
     }
 
     /**
-     * Gets the value of the type property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
-     *     {@link TypeCoin }
+     *     {@link String }
      *     
      */
-    public TypeCoin getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the type property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TypeCoin }
+     *     {@link String }
      *     
      */
-    public void setType(TypeCoin value) {
-        this.type = value;
+    public void setName(String value) {
+        this.name = value;
+    }
+
+    /**
+     * Gets the value of the price property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link int }
+     *     
+     */
+    public int getPrice() {
+        return price;
+    }
+
+    /**
+     * Sets the value of the price property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link int }
+     *     
+     */
+    public void setPrice(int value) {
+        this.price = value;
     }
 
     /**
@@ -113,7 +141,7 @@ public class Coin {
      * 
      * @param value
      *     allowed object is
-     *     {@link int }
+     *     {@link iny }
      *     
      */
     public void setAmount(int value) {

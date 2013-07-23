@@ -1,7 +1,10 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
 import java.util.Objects;
 
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Drink;
+import coffeeMachine.Withdraw;
 import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 
 /***

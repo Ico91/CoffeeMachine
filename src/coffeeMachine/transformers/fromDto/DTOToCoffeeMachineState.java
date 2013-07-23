@@ -1,14 +1,17 @@
-package coffeeMachine;
+package coffeeMachine.transformers.fromDto;
 
-import coffeeMachine.exceptions.DTOToCoffeeMachineStateException;
-import coffeeMachine.exceptions.DTOToMoneyAmountException;
-import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.DrinksContainer;
+import coffeeMachine.MoneyAmount;
+import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
+import coffeeMachine.transformers.fromDto.exceptions.DTOToCoffeeMachineException;
+import coffeeMachine.transformers.fromDto.exceptions.DTOToMoneyAmountException;
 public class DTOToCoffeeMachineState {
 	public DTOToCoffeeMachineState() {
 
 	}
 
-	public CoffeeMachineState transform(CoffeeMachineDTO coffeeMachineDTO) throws DTOToCoffeeMachineStateException {
+	public CoffeeMachineState transform(CoffeeMachineDTO coffeeMachineDTO) throws DTOToCoffeeMachineException {
 		DTOToDrinksContainerTransformer dtoToDrinksContainer = new DTOToDrinksContainerTransformer();
 		DTOToMoneyAmountTransformer dtoToMoneyAmountTransformer = new DTOToMoneyAmountTransformer();
 		DrinksContainer drinksContainer = dtoToDrinksContainer
@@ -24,7 +27,7 @@ public class DTOToCoffeeMachineState {
 			return coffeeMachineState;
 
 		} catch (DTOToMoneyAmountException e) {
-			throw new DTOToCoffeeMachineStateException(e.getMessage());
+			throw new DTOToCoffeeMachineException(e.getMessage());
 		}
 	}
 }

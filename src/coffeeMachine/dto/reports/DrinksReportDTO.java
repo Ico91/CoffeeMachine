@@ -5,7 +5,7 @@
 // Generated on: 2013.07.23 at 11:41:46 AM EEST 
 //
 
-package coffeeMachine;
+package coffeeMachine.dto.reports;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +64,11 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "orderedDrinks", "total" })
 @XmlRootElement(name = "Report")
-@XmlSeeAlso({DrinksReport.OrderedDrinks.class, DrinksReport.OrderedDrinks.Drink.class})
-public class DrinksReport {
+@XmlSeeAlso({DrinksReportDTO.OrderedDrinks.class, DrinksReportDTO.OrderedDrinks.Drink.class})
+public class DrinksReportDTO {
 
 	@XmlElement(name = "Ordered-Drinks", required = true)
-	protected DrinksReport.OrderedDrinks orderedDrinks;
+	protected DrinksReportDTO.OrderedDrinks orderedDrinks;
 	@XmlElement(name = "Total", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	protected int total;
@@ -76,10 +76,10 @@ public class DrinksReport {
 	/**
 	 * Gets the value of the orderedDrinks property.
 	 * 
-	 * @return possible object is {@link DrinksReport.OrderedDrinks }
+	 * @return possible object is {@link DrinksReportDTO.OrderedDrinks }
 	 * 
 	 */
-	public DrinksReport.OrderedDrinks getOrderedDrinks() {
+	public DrinksReportDTO.OrderedDrinks getOrderedDrinks() {
 		return orderedDrinks;
 	}
 
@@ -87,10 +87,10 @@ public class DrinksReport {
 	 * Sets the value of the orderedDrinks property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link DrinksReport.OrderedDrinks }
+	 *            allowed object is {@link DrinksReportDTO.OrderedDrinks }
 	 * 
 	 */
-	public void setOrderedDrinks(DrinksReport.OrderedDrinks value) {
+	public void setOrderedDrinks(DrinksReportDTO.OrderedDrinks value) {
 		this.orderedDrinks = value;
 	}
 
@@ -148,10 +148,10 @@ public class DrinksReport {
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "", propOrder = { "drink" })
-	@XmlSeeAlso({DrinksReport.OrderedDrinks.Drink.class})
+	@XmlSeeAlso({DrinksReportDTO.OrderedDrinks.Drink.class})
 	public static class OrderedDrinks {
 
-		protected List<DrinksReport.OrderedDrinks.Drink> drink;
+		protected List<DrinksReportDTO.OrderedDrinks.Drink> drink;
 
 		/**
 		 * Gets the value of the drink property.
@@ -172,13 +172,13 @@ public class DrinksReport {
 		 * 
 		 * <p>
 		 * Objects of the following type(s) are allowed in the list
-		 * {@link DrinksReport.OrderedDrinks.Drink }
+		 * {@link DrinksReportDTO.OrderedDrinks.Drink }
 		 * 
 		 * 
 		 */
-		public List<DrinksReport.OrderedDrinks.Drink> getDrink() {
+		public List<DrinksReportDTO.OrderedDrinks.Drink> getDrink() {
 			if (drink == null) {
-				drink = new ArrayList<DrinksReport.OrderedDrinks.Drink>();
+				drink = new ArrayList<DrinksReportDTO.OrderedDrinks.Drink>();
 			}
 			return this.drink;
 		}

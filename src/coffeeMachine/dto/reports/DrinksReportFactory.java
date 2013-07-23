@@ -6,9 +6,10 @@
 //
 
 
-package coffeeMachine;
+package coffeeMachine.dto.reports;
 
 import javax.xml.bind.annotation.XmlRegistry;
+
 
 
 /**
@@ -37,27 +38,27 @@ public class DrinksReportFactory {
     }
 
     /**
-     * Create an instance of {@link DrinksReport }
+     * Create an instance of {@link DrinksReportDTO }
      * 
      */
-    public DrinksReport createReport() {
-        return new DrinksReport();
+    public DrinksReportDTO createReport() {
+        return new DrinksReportDTO();
     }
 
     /**
-     * Create an instance of {@link DrinksReport.OrderedDrinks }
+     * Create an instance of {@link DrinksReportDTO.OrderedDrinks }
      * 
      */
-    public DrinksReport.OrderedDrinks createReportOrderedDrinks() {
-        return new DrinksReport.OrderedDrinks();
+    public DrinksReportDTO.OrderedDrinks createReportOrderedDrinks() {
+        return new DrinksReportDTO.OrderedDrinks();
     }
 
     /**
-     * Create an instance of {@link DrinksReport.OrderedDrinks.Drink }
+     * Create an instance of {@link DrinksReportDTO.OrderedDrinks.Drink }
      * 
      */
-    public DrinksReport.OrderedDrinks.Drink createReportOrderedDrinksDrink() {
-        return new DrinksReport.OrderedDrinks.Drink();
+    public DrinksReportDTO.OrderedDrinks.Drink createReportOrderedDrinksDrink() {
+        return new DrinksReportDTO.OrderedDrinks.Drink();
     }
 
 }

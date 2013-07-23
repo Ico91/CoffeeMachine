@@ -1,5 +1,8 @@
 package coffeeMachine;
 
+import coffeeMachine.flows.DrinkListFlow;
+import coffeeMachine.flows.Flow;
+
 public class Main {
 	
 	public static void main(String[] args) {

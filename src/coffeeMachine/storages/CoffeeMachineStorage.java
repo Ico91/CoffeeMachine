@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeeMachine.storages;
 
 import java.io.FileNotFoundException;
 
@@ -6,9 +6,11 @@ import javax.xml.bind.JAXBException;
 
 import org.xml.sax.SAXException;
 
-import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
 import coffeeMachine.exceptions.CoffeeMachineStateException;
-import coffeeMachine.exceptions.DTOToCoffeeMachineStateException;
+import coffeeMachine.transformers.fromDto.DTOToCoffeeMachineState;
+import coffeeMachine.transformers.fromDto.exceptions.DTOToCoffeeMachineException;
 import modules.xmlModule.*;
 
 /***
@@ -40,7 +42,7 @@ public class CoffeeMachineStorage {
 					"Cannot create marshal object");
 		} catch (SAXException e) {
 			throw new CoffeeMachineStateException(e.getMessage());
-		} catch (DTOToCoffeeMachineStateException e) {
+		} catch (DTOToCoffeeMachineException e) {
 			throw new CoffeeMachineStateException(e.getMessage());
 		}
 	}

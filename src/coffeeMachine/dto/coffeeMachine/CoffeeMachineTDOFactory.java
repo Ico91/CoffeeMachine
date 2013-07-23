@@ -6,7 +6,7 @@
 //
 
 
-package coffeeMachine.DTO.coffeeMachineDTO;
+package coffeeMachine.dto.coffeeMachine;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

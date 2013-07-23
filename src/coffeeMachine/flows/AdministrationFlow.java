@@ -1,6 +1,8 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
 import java.util.List;
+
+import coffeeMachine.CoffeeMachineState;
 
 import modules.menuModule.Executable;
 import modules.menuModule.MenuBuilder;

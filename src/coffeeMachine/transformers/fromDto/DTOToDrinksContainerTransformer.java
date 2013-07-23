@@ -1,6 +1,8 @@
-package coffeeMachine;
+package coffeeMachine.transformers.fromDto;
 
-import coffeeMachine.DTO.coffeeMachineDTO.CoffeeMachineDTO;
+import coffeeMachine.Drink;
+import coffeeMachine.DrinksContainer;
+import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
 
 /***
  * Class used to transform CoffeeMachine.Drinks to DrinksContainer
@@ -26,7 +28,7 @@ public class DTOToDrinksContainerTransformer {
 	 */
 	public DrinksContainer transform(CoffeeMachineDTO coffeeMachineDTO) {
 		DrinksContainer drinksContainer = new DrinksContainer();
-		for (coffeeMachine.DTO.coffeeMachineDTO.Drink d : coffeeMachineDTO
+		for (coffeeMachine.dto.coffeeMachine.Drink d : coffeeMachineDTO
 				.getDrinks().getDrink()) {
 			Drink drink = new Drink(d.getName(), d.getPrice());
 			drinksContainer.add(drink, d.getAmount());
