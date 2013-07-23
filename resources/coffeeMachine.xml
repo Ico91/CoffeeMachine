@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coffeeMachine>
+  <drinks>
+    <drink name="Coffee" price="30" amount="100" />
+    <drink name="Tea" price="40" amount="100" />
+    <drink name="Hot Chocolate" price="50" amount="100" />
+  </drinks>
+  <money>
+      <coin type="FIVE" amount="100" />
+	  <coin type="TEN" amount="50" />
+	  <coin type="TWENTY" amount="10" />
+	  <coin type="FIFTY" amount="10" />
+	  <coin type="LEV" amount="5" />
+  </money>
+</coffeeMachine>
