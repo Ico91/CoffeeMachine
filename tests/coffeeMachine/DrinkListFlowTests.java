@@ -1,11 +1,14 @@
 package coffeeMachine;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import coffeeMachine.flows.DrinkListFlow;
 
 /**
  * @author Andrey
@@ -40,18 +43,7 @@ public class DrinkListFlowTests {
 		drinkFlow.execute(coffeeMachine);
 		assertEquals("Selected drink not equals to given drink",new Drink("Coffee", 30), drinkFlow.getDrink());
 	}
-	
-	@Ignore
-	@Test
-	public void testCoffeeMachineDrinksAmount(){
-<<<<<<< HEAD
-		assertNotNull("No drinks in machine", coffeeMachine.getFiltratedDrinks());
-=======
-		//assertNotNull("No drinks in machine", coffeeMachine.getDrinks().getDrinks());
->>>>>>> c7cdae9c7ae7e953912c861c5980af4e32b26ecf
-		
-	}
-	
+
 	
 
 	@After

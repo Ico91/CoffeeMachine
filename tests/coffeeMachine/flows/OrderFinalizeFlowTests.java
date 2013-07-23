@@ -1,6 +1,7 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -12,10 +13,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Coin;
 import coffeeMachine.Drink;
 import coffeeMachine.DrinksContainer;
 import coffeeMachine.MoneyAmount;
-import coffeeMachine.OrderFinalizeFlow;
 import coffeeMachine.Withdraw;
 import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 

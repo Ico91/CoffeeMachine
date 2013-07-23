@@ -1,6 +1,6 @@
 package coffeeMachine;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,6 +11,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import coffeeMachine.flows.AdministrationFlow;
+import coffeeMachine.flows.DrinkListFlow;
+import coffeeMachine.flows.DrinksReportFlow;
+import coffeeMachine.flows.Flow;
 
 public class AdministrationFlowTests {
 	private Flow administrationFlow;
