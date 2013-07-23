@@ -24,41 +24,22 @@ public class DTOToMoneyAmountTransformer {
 	 * @return MoneyAmount object
 	 * @throws DTOToMoneyAmountException
 	 */
-	public MoneyAmount transform(CoffeeMachineDTO coffeeMachineDto) {
+	public MoneyAmount transform(CoffeeMachineDTO coffeeMachineDto)
+			throws DTOToMoneyAmountException {
 		MoneyAmount moneyAmount = new MoneyAmount();
 		for (coffeeMachine.DTO.coffeeMachineDTO.Coin c : coffeeMachineDto
 				.getMoney().getCoin()) {
 			Coin coin = coinTypeToCoin(c.getType());
-			if (coinAlreadyExist(coin, moneyAmount) == false) {
-				moneyAmount.add(coin, c.getAmount());
-			} else
-				throw new DTOToMoneyAmountException(
-						"Duplicated values for coin of type " + c.getType());
+			moneyAmount.add(coin, c.getAmount());
 		}
 
 		return moneyAmount;
 	}
 
-	/***
-	 * Check if the specified coin is already exist in MoneyAmount
-	 * 
-	 * @param coin
-	 *            Coin to check
-	 * @param moneyAmount
-	 * @return True if the coin already exist, false otherwise
-	 */
-	private boolean coinAlreadyExist(Coin coin, MoneyAmount moneyAmount) {
-		// TODO: ??? Based on exception ????
-		try {
-			moneyAmount.getCoin(coin);
-			return true;
-		} catch (NullPointerException e) {
-			return false;
-		}
-	}
-
 	// Convert coin type to new coin object
-	private Coin coinTypeToCoin(coffeeMachine.DTO.coffeeMachineDTO.TypeCoin coinType) {
+	private Coin coinTypeToCoin(
+			coffeeMachine.DTO.coffeeMachineDTO.TypeCoin coinType)
+			throws DTOToMoneyAmountException {
 		if (coinType == TypeCoin.FIVE)
 			return Coin.FIVE;
 		if (coinType == TypeCoin.TEN)
