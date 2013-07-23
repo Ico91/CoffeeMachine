@@ -1,16 +1,11 @@
 package coffeeMachine;
 
-import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
-
-import javax.xml.bind.JAXBException;
-
+import static org.junit.Assert.assertEquals;
 import modules.xmlModule.XMLDocumentMetaData;
 import modules.xmlModule.XMLIO;
+import modules.xmlModule.exceptions.XMLIOException;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
 import coffeeMachine.transformers.fromDto.DTOToCoffeeMachineState;
@@ -24,7 +19,7 @@ import coffeeMachine.transformers.fromDto.exceptions.DTOToCoffeeMachineException
 public class DTOToCoffeeMachineStateTests {
 
 	@Test
-	public void testDTOToMoneyTransformer() throws FileNotFoundException, JAXBException, SAXException, DTOToCoffeeMachineException {
+	public void testDTOToMoneyTransformer() throws XMLIOException, DTOToCoffeeMachineException {
 		XMLIO xmlIO = new XMLIO();
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO.read(new XMLDocumentMetaData(CoffeeMachineDTO.class,
 					"resources\\TestXMLs\\CoffeeMachineDTO.xml",
