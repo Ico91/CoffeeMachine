@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<CoffeeMachine>
+    <Drinks>
+    <Drink name="" price="" amount=""></Drink>
+    </Drinks>
+    <Money>
+        <Coin type="" amount=""></Coin>
+    </Money>
+</CoffeeMachine>

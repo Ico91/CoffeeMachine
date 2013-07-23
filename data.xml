@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<coffeeMachine>
+	<drinks>
+		<drink amount="1000" name="Coffee" price="300"/>
+		<drink amount="12" name="Choco" price="23"/>
+	</drinks>	
+	<money>
+		<coin type="five" amount="100" />
+		<coin type="ten" amount="1000" />
+	</money>
+</coffeeMachine>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Report>
+	<Ordered-Drinks>
+		<drink name="Coffee" amount="20"/>
+		<drink name="Tea" amount="10" />
+		<drink name="Hot Chocolate" amount="50"/>
+	</Ordered-Drinks>
+	<Total>350</Total>
+</Report>

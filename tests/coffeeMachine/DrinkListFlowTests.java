@@ -44,7 +44,11 @@ public class DrinkListFlowTests {
 	@Ignore
 	@Test
 	public void testCoffeeMachineDrinksAmount(){
+<<<<<<< HEAD
+		assertNotNull("No drinks in machine", coffeeMachine.getFiltratedDrinks());
+=======
 		//assertNotNull("No drinks in machine", coffeeMachine.getDrinks().getDrinks());
+>>>>>>> c7cdae9c7ae7e953912c861c5980af4e32b26ecf
 		
 	}
 	
