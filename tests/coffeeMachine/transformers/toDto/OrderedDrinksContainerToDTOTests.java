@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeeMachine.transformers.toDto;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import coffeeMachine.Drink;
+import coffeeMachine.DrinksContainer;
 import coffeeMachine.dto.reports.DrinksReportDTO;
 import coffeeMachine.transformers.toDto.OrderedDrinksContainerToDTO;
 

@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeeMachine.transformers.fromDto;
 
 import static org.junit.Assert.assertEquals;
 import modules.xmlModule.XMLDocumentMetaData;
@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import coffeeMachine.Coin;
+import coffeeMachine.MoneyAmount;
 import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
 import coffeeMachine.transformers.fromDto.DTOToMoneyAmountTransformer;
 import coffeeMachine.transformers.fromDto.exceptions.DTOToMoneyAmountException;

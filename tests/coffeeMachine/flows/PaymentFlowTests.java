@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
 import static org.junit.Assert.assertTrue;
 
@@ -12,6 +12,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Drink;
+import coffeeMachine.MoneyAmount;
 import coffeeMachine.flows.PaymentFlow;
 
 public class PaymentFlowTests {

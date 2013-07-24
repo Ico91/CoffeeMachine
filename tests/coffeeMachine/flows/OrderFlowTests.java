@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,6 +6,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Coin;
+import coffeeMachine.Drink;
+import coffeeMachine.DrinksContainer;
+import coffeeMachine.MoneyAmount;
+import coffeeMachine.Withdraw;
 import coffeeMachine.Withdraw.WithdrawRequestResultStatus;
 import coffeeMachine.flows.OrderFlow;
 

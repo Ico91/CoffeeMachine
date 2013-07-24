@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,11 +13,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import coffeeMachine.flows.DrinkListFlow;
-import coffeeMachine.flows.InsufficientAmountFlow;
-import coffeeMachine.flows.OrderFinalizeFlow;
+import coffeeMachine.CoffeeMachineState;
+import coffeeMachine.Drink;
+import coffeeMachine.MoneyAmount;
+import coffeeMachine.Withdraw;
 
-public class InsufficientAmountTests {
+public class InsufficientAmountFlowTests {
 
 	private InsufficientAmountFlow flow;
 	private CoffeeMachineState coffeeMachine;
