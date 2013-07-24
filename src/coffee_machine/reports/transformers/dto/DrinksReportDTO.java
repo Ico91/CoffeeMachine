@@ -301,10 +301,7 @@ public class DrinksReportDTO {
 				Drink other = (Drink) obj;
 				if (amount != other.amount)
 					return false;
-				if (name == null) {
-					if (other.name != null)
-						return false;
-				} else if (!name.equals(other.name))
+				if (!name.equals(other.name))
 					return false;
 				return true;
 			}
@@ -334,10 +331,7 @@ public class DrinksReportDTO {
 			if (!(obj instanceof OrderedDrinks))
 				return false;
 			OrderedDrinks other = (OrderedDrinks) obj;
-			if (drink == null) {
-				if (other.drink != null)
-					return false;
-			} else if (!drink.equals(other.drink))
+			 if (!drink.equals(other.drink))
 				return false;
 			return true;
 		}
@@ -368,10 +362,7 @@ public class DrinksReportDTO {
 		if (!(obj instanceof DrinksReportDTO))
 			return false;
 		DrinksReportDTO other = (DrinksReportDTO) obj;
-		if (orderedDrinks == null) {
-			if (other.orderedDrinks != null)
-				return false;
-		} else if (!orderedDrinks.equals(other.orderedDrinks))
+		if (!orderedDrinks.equals(other.orderedDrinks))
 			return false;
 		if (total != other.total)
 			return false;
