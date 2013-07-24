@@ -50,10 +50,17 @@ public class OrderedDrinksContainerToDTOTests {
 		assertEquals("Expected DrinkReportDTO should be equal to the generated", expectedReport, drinksReport);
 		
 	}
+	
+	@Test (expected = NullPointerException.class)
+	public void testTransformWithNull()
+	{
+		DrinksContainer orderedDrinks = null;
+		transformer.transform(orderedDrinks);
+	}
 
 	@After
 	public void tearDown()
 	{
-		
+		transformer = null;
 	}
 }

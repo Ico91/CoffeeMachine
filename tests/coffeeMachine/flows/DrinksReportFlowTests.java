@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeeMachine.flows;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import coffeeMachine.flows.DrinksReportFlow;
+import coffeeMachine.Drink;
+import coffeeMachine.DrinksContainer;
+import coffeeMachine.dto.reports.DrinksReportDTO;
 
 public class DrinksReportFlowTests {
 
@@ -37,6 +39,23 @@ public class DrinksReportFlowTests {
 
 		assertEquals("Expected ordered drinks should be equal to calculated",
 				expectedOrderedDrinks, orderedDrinks);
+	}
+	
+	@Test (expected = NullPointerException.class)
+	public void testCalculateOrderedDrinksWithNull()
+	{
+		DrinksContainer currentDrinks = null;
+		DrinksContainer initialDrinks = null;
+		
+		report.calculateOrderedDrinks(currentDrinks, initialDrinks);
+	}
+	
+	@Test (expected = NullPointerException.class)
+	public void testSaveWithNull()
+	{
+		DrinksReportDTO drinksReport = null;
+		report.save(drinksReport);
+		
 	}
 
 	@After
