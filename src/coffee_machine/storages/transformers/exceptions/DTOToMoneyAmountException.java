@@ -1,7 +1,8 @@
 package coffee_machine.storages.transformers.exceptions;
 
-@SuppressWarnings("serial")
 public class DTOToMoneyAmountException extends Exception {
+	private static final long serialVersionUID = 1L;
+
 	public DTOToMoneyAmountException(String message) {
 		super(message);
 	}

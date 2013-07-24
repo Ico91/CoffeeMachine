@@ -1,7 +1,8 @@
 package coffee_machine.model.exceptions;
 
-@SuppressWarnings("serial")
 public class CoffeeMachineStateException extends Exception {
+	private static final long serialVersionUID = 1L;
+
 	public CoffeeMachineStateException(String message) {
 		super(message);
 	}

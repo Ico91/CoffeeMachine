@@ -1,7 +1,8 @@
 package coffee_machine.model.exceptions;
 
-@SuppressWarnings("serial")
 public class MoneyAmountException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
 
 	public MoneyAmountException() {
 		super();

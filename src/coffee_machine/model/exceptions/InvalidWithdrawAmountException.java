@@ -1,7 +1,8 @@
 package coffee_machine.model.exceptions;
 
-@SuppressWarnings("serial")
 public class InvalidWithdrawAmountException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
+
 	public InvalidWithdrawAmountException(String message)
 	{
 		super(message);
