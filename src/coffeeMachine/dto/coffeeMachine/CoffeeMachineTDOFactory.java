@@ -45,35 +45,35 @@ public class CoffeeMachineTDOFactory {
     }
 
     /**
-     * Create an instance of {@link Drinks }
+     * Create an instance of {@link DrinksDTO }
      * 
      */
-    public Drinks createDrinks() {
-        return new Drinks();
+    public DrinksDTO createDrinks() {
+        return new DrinksDTO();
     }
 
     /**
-     * Create an instance of {@link Money }
+     * Create an instance of {@link MoneyDTO }
      * 
      */
-    public Money createMoney() {
-        return new Money();
+    public MoneyDTO createMoney() {
+        return new MoneyDTO();
     }
 
     /**
-     * Create an instance of {@link Coin }
+     * Create an instance of {@link CoinDTO }
      * 
      */
-    public Coin createCoin() {
-        return new Coin();
+    public CoinDTO createCoin() {
+        return new CoinDTO();
     }
 
     /**
-     * Create an instance of {@link Drink }
+     * Create an instance of {@link DrinkDTO }
      * 
      */
-    public Drink createDrink() {
-        return new Drink();
+    public DrinkDTO createDrink() {
+        return new DrinkDTO();
     }
 
 }

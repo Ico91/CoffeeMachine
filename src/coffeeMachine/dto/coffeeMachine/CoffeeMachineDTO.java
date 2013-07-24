@@ -44,19 +44,19 @@ import javax.xml.bind.annotation.XmlType;
 public class CoffeeMachineDTO {
 
     @XmlElement(required = true)
-    protected Drinks drinks;
+    protected DrinksDTO drinks;
     @XmlElement(required = true)
-    protected Money money;
+    protected MoneyDTO money;
 
     /**
      * Gets the value of the drinks property.
      * 
      * @return
      *     possible object is
-     *     {@link Drinks }
+     *     {@link DrinksDTO }
      *     
      */
-    public Drinks getDrinks() {
+    public DrinksDTO getDrinks() {
         return drinks;
     }
 
@@ -65,10 +65,10 @@ public class CoffeeMachineDTO {
      * 
      * @param value
      *     allowed object is
-     *     {@link Drinks }
+     *     {@link DrinksDTO }
      *     
      */
-    public void setDrinks(Drinks value) {
+    public void setDrinks(DrinksDTO value) {
         this.drinks = value;
     }
 
@@ -77,10 +77,10 @@ public class CoffeeMachineDTO {
      * 
      * @return
      *     possible object is
-     *     {@link Money }
+     *     {@link MoneyDTO }
      *     
      */
-    public Money getMoney() {
+    public MoneyDTO getMoney() {
         return money;
     }
 
@@ -89,10 +89,10 @@ public class CoffeeMachineDTO {
      * 
      * @param value
      *     allowed object is
-     *     {@link Money }
+     *     {@link MoneyDTO }
      *     
      */
-    public void setMoney(Money value) {
+    public void setMoney(MoneyDTO value) {
         this.money = value;
     }
 

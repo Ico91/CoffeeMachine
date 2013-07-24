@@ -17,16 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for drinks complex type.
+ * <p>Java class for money complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="drinks">
+ * &lt;complexType name="money">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="drink" type="{}drink" maxOccurs="unbounded"/>
+ *         &lt;element name="coin" type="{}coin" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,41 +36,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "drinks", propOrder = {
-    "drink"
+@XmlType(name = "money", propOrder = {
+    "coin"
 })
-public class Drinks {
+public class MoneyDTO {
 
     @XmlElement(required = true)
-    protected List<Drink> drink;
+    protected List<CoinDTO> coin;
 
     /**
-     * Gets the value of the drink property.
+     * Gets the value of the coin property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the drink property.
+     * This is why there is not a <CODE>set</CODE> method for the coin property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDrink().add(newItem);
+     *    getCoin().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Drink }
+     * {@link CoinDTO }
      * 
      * 
      */
-    public List<Drink> getDrink() {
-        if (drink == null) {
-            drink = new ArrayList<Drink>();
+    public List<CoinDTO> getCoin() {
+        if (coin == null) {
+            coin = new ArrayList<CoinDTO>();
         }
-        return this.drink;
+        return this.coin;
     }
 
 }

@@ -28,7 +28,7 @@ public class DTOToDrinksContainerTransformer {
 	 */
 	public DrinksContainer transform(CoffeeMachineDTO coffeeMachineDTO) {
 		DrinksContainer drinksContainer = new DrinksContainer();
-		for (coffeeMachine.dto.coffeeMachine.Drink d : coffeeMachineDTO
+		for (coffeeMachine.dto.coffeeMachine.DrinkDTO d : coffeeMachineDTO
 				.getDrinks().getDrink()) {
 			Drink drink = new Drink(d.getName(), d.getPrice());
 			drinksContainer.add(drink, d.getAmount());

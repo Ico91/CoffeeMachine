@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "typeCoin")
 @XmlEnum
-public enum TypeCoin {
+public enum TypeCoinDTO {
 
     FIVE,
     TEN,
@@ -44,7 +44,7 @@ public enum TypeCoin {
         return name();
     }
 
-    public static TypeCoin fromValue(String v) {
+    public static TypeCoinDTO fromValue(String v) {
         return valueOf(v);
     }
 

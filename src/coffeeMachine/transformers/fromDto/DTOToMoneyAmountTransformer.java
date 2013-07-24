@@ -3,7 +3,7 @@ package coffeeMachine.transformers.fromDto;
 import coffeeMachine.Coin;
 import coffeeMachine.MoneyAmount;
 import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
-import coffeeMachine.dto.coffeeMachine.TypeCoin;
+import coffeeMachine.dto.coffeeMachine.TypeCoinDTO;
 import coffeeMachine.transformers.fromDto.exceptions.DTOToMoneyAmountException;
 
 /***
@@ -31,7 +31,7 @@ public class DTOToMoneyAmountTransformer {
 	public MoneyAmount transform(CoffeeMachineDTO coffeeMachineDto)
 			throws DTOToMoneyAmountException {
 		MoneyAmount moneyAmount = new MoneyAmount();
-		for (coffeeMachine.dto.coffeeMachine.Coin c : coffeeMachineDto
+		for (coffeeMachine.dto.coffeeMachine.CoinDTO c : coffeeMachineDto
 				.getMoney().getCoin()) {
 			Coin coin = coinTypeToCoin(c.getType());
 			moneyAmount.add(coin, c.getAmount());
@@ -42,17 +42,17 @@ public class DTOToMoneyAmountTransformer {
 
 	// Convert coin type to new coin object
 	private Coin coinTypeToCoin(
-			coffeeMachine.dto.coffeeMachine.TypeCoin coinType)
+			coffeeMachine.dto.coffeeMachine.TypeCoinDTO coinType)
 			throws DTOToMoneyAmountException {
-		if (coinType == TypeCoin.FIVE)
+		if (coinType == TypeCoinDTO.FIVE)
 			return Coin.FIVE;
-		if (coinType == TypeCoin.TEN)
+		if (coinType == TypeCoinDTO.TEN)
 			return Coin.TEN;
-		if (coinType == TypeCoin.TWENTY)
+		if (coinType == TypeCoinDTO.TWENTY)
 			return Coin.TWENTY;
-		if (coinType == TypeCoin.FIFTY)
+		if (coinType == TypeCoinDTO.FIFTY)
 			return Coin.FIFTY;
-		if (coinType == TypeCoin.LEV)
+		if (coinType == TypeCoinDTO.LEV)
 			return Coin.LEV;
 		//	Must not be thrown if DTO object is readed from XML file
 		throw new DTOToMoneyAmountException("Invalid coin type.");
