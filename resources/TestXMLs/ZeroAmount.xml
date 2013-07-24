@@ -2,7 +2,7 @@
 <coffeeMachine>
   <drinks>
     <drink name="Coffee" price="30" amount="100" />
-    <drink name="Tea" price="40" amount="100" />
+    <drink name="Tea" price="40" amount="0" />
   </drinks>
   <money>
       <coin type="FIVE" amount="100" />
