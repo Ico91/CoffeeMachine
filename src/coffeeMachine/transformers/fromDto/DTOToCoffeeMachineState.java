@@ -6,12 +6,32 @@ import coffeeMachine.MoneyAmount;
 import coffeeMachine.dto.coffeeMachine.CoffeeMachineDTO;
 import coffeeMachine.transformers.fromDto.exceptions.DTOToCoffeeMachineException;
 import coffeeMachine.transformers.fromDto.exceptions.DTOToMoneyAmountException;
+
+/**
+ * Class used to transform CoffeeMachineDTO to CoffeeMachineState
+ * 
+ * @author Krasimir Nikolov Atanasov
+ * 
+ */
 public class DTOToCoffeeMachineState {
+
+	/**
+	 * Constructs new DTOToCoffeeMachineState object
+	 */
 	public DTOToCoffeeMachineState() {
 
 	}
 
-	public CoffeeMachineState transform(CoffeeMachineDTO coffeeMachineDTO) throws DTOToCoffeeMachineException {
+	/**
+	 * Transform CoffeeMachineDTO object to CoffeeMachineState object
+	 * 
+	 * @param coffeeMachineDTO
+	 *            CoffeeMachineDTO object to transform
+	 * @return CoffeeMachineState object
+	 * @throws DTOToCoffeeMachineException
+	 */
+	public CoffeeMachineState transform(CoffeeMachineDTO coffeeMachineDTO)
+			throws DTOToCoffeeMachineException {
 		DTOToDrinksContainerTransformer dtoToDrinksContainer = new DTOToDrinksContainerTransformer();
 		DTOToMoneyAmountTransformer dtoToMoneyAmountTransformer = new DTOToMoneyAmountTransformer();
 		DrinksContainer drinksContainer = dtoToDrinksContainer

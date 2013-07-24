@@ -13,7 +13,9 @@ import coffeeMachine.transformers.fromDto.exceptions.DTOToMoneyAmountException;
  * 
  */
 public class DTOToMoneyAmountTransformer {
-
+	/**
+	 * Constructs new DTOToMoneyAmountTransformer object
+	 */
 	public DTOToMoneyAmountTransformer() {
 
 	}
@@ -52,7 +54,7 @@ public class DTOToMoneyAmountTransformer {
 			return Coin.FIFTY;
 		if (coinType == TypeCoin.LEV)
 			return Coin.LEV;
-
+		//	Must not be thrown if DTO object is readed from XML file
 		throw new DTOToMoneyAmountException("Invalid coin type.");
 	}
 }

@@ -13,12 +13,31 @@ import modules.xmlModule.exceptions.XMLIOException;
  * @author Krasimir Nikolov Atanasov
  * 
  */
+/***
+ * Class used to load CoffeeMachineState from xml file.
+ * 
+ * @author Krasimir Nikolov Atanasov
+ * 
+ */
 public class CoffeeMachineStorage {
-	// TODO: Need changes!!!
+
+	/***
+	 * Creates new CoffeeMAchineStorage object
+	 */
 	public CoffeeMachineStorage() {
 
 	}
 
+	/***
+	 * Load CoffeeMachineState from specified in xmlFilePath xml file
+	 * 
+	 * @param xmlFilePath
+	 *            path to XML file containing CoffeeMachineState data
+	 * @param xsdSchemePath
+	 *            XSD schema used to validate xml file
+	 * @return new CoffeeMachineState builded from specified xml file
+	 * @throws CoffeeMachineStateException
+	 */
 	public CoffeeMachineState load(String xmlFilePath, String xsdSchemePath)
 			throws CoffeeMachineStateException {
 		XMLDocumentMetaData xmlDocumentMetadata = new XMLDocumentMetaData(
