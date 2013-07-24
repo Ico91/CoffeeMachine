@@ -59,7 +59,6 @@ public class OrderFlowTests {
 				new MoneyAmount().add(Coin.FIVE, 1).add(Coin.TEN, 1)
 						.add(Coin.TWENTY, 1).add(Coin.FIFTY, 0)
 						.add(Coin.LEV, 1));
-		System.out.println("Expected " + expectedWithdraw.toString());
 		boolean isEqual = false;
 
 		if (withdrawResult.equals(expectedWithdraw))
