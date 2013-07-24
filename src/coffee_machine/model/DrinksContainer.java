@@ -130,10 +130,7 @@ public class DrinksContainer {
 		if (!(obj instanceof DrinksContainer))
 			return false;
 		DrinksContainer other = (DrinksContainer) obj;
-		if (drinks == null) {
-			if (other.drinks != null)
-				return false;
-		} else if (!drinks.equals(other.drinks))
+		if (!drinks.equals(other.drinks))
 			return false;
 		return true;
 	}

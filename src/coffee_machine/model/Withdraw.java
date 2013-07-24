@@ -50,10 +50,7 @@ public class Withdraw {
 		if (!(obj instanceof Withdraw))
 			return false;
 		Withdraw other = (Withdraw) obj;
-		if (change == null) {
-			if (other.change != null)
-				return false;
-		} else if (!change.equals(other.change))
+		if (!change.equals(other.change))
 			return false;
 		if (status != other.status)
 			return false;
