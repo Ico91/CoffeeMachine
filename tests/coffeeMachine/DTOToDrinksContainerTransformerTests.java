@@ -5,6 +5,7 @@ import modules.xmlModule.XMLDocumentMetaData;
 import modules.xmlModule.XMLIO;
 import modules.xmlModule.exceptions.XMLIOException;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class DTOToDrinksContainerTransformerTests {
 	public void testDTOToMoneyTransformer() throws XMLIOException {
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO
 				.read(new XMLDocumentMetaData(CoffeeMachineDTO.class,
-						"resources/TestXMLs/CoffeeMachineDTO.xml",
+						"resources/TestXMLs/DTOToDrinksContainerXML/CoffeeMachineDTO.xml",
 						"src/CoffeeMachineDTO.xsd"));
 		DTOToDrinksContainerTransformer dtoToDrinksContainerTransformer = new DTOToDrinksContainerTransformer();
 		DrinksContainer expectedDrinksContainer = dtoToDrinksContainerTransformer
@@ -44,7 +45,7 @@ public class DTOToDrinksContainerTransformerTests {
 	public void testTransformWithDuplicatedDrinks() throws XMLIOException {
 		XMLDocumentMetaData xmlDocumentMetaData = new XMLDocumentMetaData(
 				CoffeeMachineDTO.class,
-				"resources/TestXMLs/DuplicatedDrinks.xml",
+				"resources/TestXMLs/DTOToDrinksContainerXML/DuplicatedDrinks.xml",
 				"src/CoffeeMachineDTO.xsd");
 		@SuppressWarnings("unused")
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO
@@ -55,7 +56,7 @@ public class DTOToDrinksContainerTransformerTests {
 	public void testTransformWithNegativeDrinkPrice() throws XMLIOException {
 		XMLDocumentMetaData xmlDocumentMetaData = new XMLDocumentMetaData(
 				CoffeeMachineDTO.class,
-				"resources/TestXMLs/NegativeDrinkPrice.xml",
+				"resources/TestXMLs/DTOToDrinksContainerXML/NegativeDrinkPrice.xml",
 				"src/CoffeeMachineDTO.xsd");
 		@SuppressWarnings("unused")
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO
@@ -66,7 +67,7 @@ public class DTOToDrinksContainerTransformerTests {
 	@Test(expected = XMLIOException.class)
 	public void testTransformWithoutDrinks() throws XMLIOException {
 		XMLDocumentMetaData xmlDocumentMetaData = new XMLDocumentMetaData(
-				CoffeeMachineDTO.class, "resources/TestXMLs/WithoutDrinks.xml",
+				CoffeeMachineDTO.class, "resources/TestXMLs/DTOToDrinksContainerXML/WithoutDrinks.xml",
 				"src/CoffeeMachineDTO.xsd");
 		@SuppressWarnings("unused")
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO
@@ -77,7 +78,7 @@ public class DTOToDrinksContainerTransformerTests {
 	@Test(expected = XMLIOException.class)
 	public void testTransformWithZeroPrice() throws XMLIOException {
 		XMLDocumentMetaData xmlDocumentMetaData = new XMLDocumentMetaData(
-				CoffeeMachineDTO.class, "resources/TestXMLs/ZeroPrice.xml",
+				CoffeeMachineDTO.class, "resources/TestXMLs/DTOToDrinksContainerXML/ZeroPrice.xml",
 				"src/CoffeeMachineDTO.xsd");
 		@SuppressWarnings("unused")
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO
@@ -88,7 +89,7 @@ public class DTOToDrinksContainerTransformerTests {
 	@Test
 	public void testTransformWithZeroAmount() throws XMLIOException {
 		XMLDocumentMetaData xmlDocumentMetaData = new XMLDocumentMetaData(
-				CoffeeMachineDTO.class, "resources/TestXMLs/ZeroAmount.xml",
+				CoffeeMachineDTO.class, "resources/TestXMLs/DTOToDrinksContainerXML/ZeroAmount.xml",
 				"src/CoffeeMachineDTO.xsd");
 		@SuppressWarnings("unused")
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO
@@ -99,11 +100,16 @@ public class DTOToDrinksContainerTransformerTests {
 	@Test(expected = XMLIOException.class)
 	public void testTransformWithNegativeAmount() throws XMLIOException {
 		XMLDocumentMetaData xmlDocumentMetaData = new XMLDocumentMetaData(
-				CoffeeMachineDTO.class, "resources/TestXMLs/NegativeAmount.xml",
+				CoffeeMachineDTO.class, "resources/TestXMLs/DTOToDrinksContainerXML/NegativeAmount.xml",
 				"src/CoffeeMachineDTO.xsd");
 		@SuppressWarnings("unused")
 		CoffeeMachineDTO coffeeMachineDTO = (CoffeeMachineDTO) xmlIO
 				.read(xmlDocumentMetaData);
 
+	}
+	
+	@After
+	public void tearDownObject() {
+		xmlIO = null;
 	}
 }
