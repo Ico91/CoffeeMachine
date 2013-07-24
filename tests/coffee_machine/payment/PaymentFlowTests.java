@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Drink;
+import coffee_machine.model.DrinksContainer;
 import coffee_machine.model.MoneyAmount;
 import coffee_machine.payment.PaymentFlow;
 
@@ -33,6 +34,7 @@ public class PaymentFlowTests {
 	@Before
 	public void setUpObject() {
 		payment = new PaymentFlow(new Drink("Coffee", 45));
+		coffeeMachine = new CoffeeMachineState(new MoneyAmount(), new DrinksContainer());
 	}
 
 	@Test

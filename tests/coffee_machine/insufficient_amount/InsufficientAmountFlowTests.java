@@ -18,6 +18,7 @@ import coffee_machine.insufficient_amount.InsufficientAmountFlow;
 import coffee_machine.list_drinks.DrinkListFlow;
 import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Drink;
+import coffee_machine.model.DrinksContainer;
 import coffee_machine.model.MoneyAmount;
 import coffee_machine.model.Withdraw;
 
@@ -38,6 +39,7 @@ public class InsufficientAmountFlowTests {
 	public void setUpObject() {
 		Drink drink = new Drink("Coffee", 45);
 		MoneyAmount userCoins = new MoneyAmount();
+		coffeeMachine = new CoffeeMachineState(new MoneyAmount(), new DrinksContainer());
 		Withdraw withdraw = new Withdraw(
 				Withdraw.WithdrawRequestResultStatus.INSUFFICIENT_AMOUNT,
 				new MoneyAmount());
