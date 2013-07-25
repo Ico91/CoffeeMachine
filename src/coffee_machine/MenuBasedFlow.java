@@ -2,7 +2,7 @@ package coffee_machine;
 
 import java.util.List;
 
-import coffee_machine.menu.Executable;
+import coffee_machine.menu.Command;
 import coffee_machine.menu.MenuBuilder;
 import coffee_machine.menu.MenuController;
 import coffee_machine.menu.MenuModel;
@@ -31,10 +31,10 @@ public abstract class MenuBasedFlow implements Flow {
 		return next;
 	}
 
-	protected Executable navigationCommand(Flow flow) {
+	protected Command navigationCommand(Flow flow) {
 		return new ChangeFlowCommand(flow);
 	}
-	protected Executable navigationCommandWithOutput(Flow flow, String output) {
+	protected Command navigationCommandWithOutput(Flow flow, String output) {
 		return new ChangeFlowCommand(flow, output);
 	}
 	public Flow getNext() {
@@ -45,7 +45,7 @@ public abstract class MenuBasedFlow implements Flow {
 		this.next = next;
 	}
 
-	private class ChangeFlowCommand implements Executable {
+	private class ChangeFlowCommand implements Command {
 		private Flow nextFlow;
 		private String output;
 		

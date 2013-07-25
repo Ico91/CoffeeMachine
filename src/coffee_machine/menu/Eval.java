@@ -4,7 +4,7 @@ class Eval {
 	public Eval() {
 	}
 	
-	public ResultStatus runCommand(Executable command, List<String> params) {
+	public ResultStatus runCommand(Command command, List<String> params) {
 		return command.execute(params);
 	}
 }

@@ -2,25 +2,25 @@ package coffee_machine.menu;
 import java.util.*;
 
 public class MenuBuilder {
-	private Map<String, Executable> commands;
-	private Map<String, Executable> hiddenCommands;
+	private Map<String, Command> commands;
+	private Map<String, Command> hiddenCommands;
 	private List<String> commandsInformation;
 
 	public MenuBuilder() {
-		this.commands = new TreeMap<String, Executable>();
-		this.hiddenCommands = new TreeMap<String, Executable>();
+		this.commands = new TreeMap<String, Command>();
+		this.hiddenCommands = new TreeMap<String, Command>();
 		this.commandsInformation = new ArrayList<String>();
 	}
 
 	public MenuBuilder command(String command, String commandInformation,
-			Executable executable) {
+			Command executable) {
 		this.commands.put(command, executable);
 		this.commandsInformation.add(command + " - " + commandInformation);
 		return this;
 	}
 	
 	public MenuBuilder hiddenCommand(String hiddenCommand,
-			Executable executable) {
+			Command executable) {
 		this.hiddenCommands.put(hiddenCommand, executable);
 		return this;
 	}
@@ -29,11 +29,11 @@ public class MenuBuilder {
 		return new MenuModel(this);
 	}
 	
-	public Map<String, Executable> getCommands() {
+	public Map<String, Command> getCommands() {
 		return commands;
 	}
 
-	public void setCommands(Map<String, Executable> commands) {
+	public void setCommands(Map<String, Command> commands) {
 		this.commands = commands;
 	}
 
@@ -45,7 +45,7 @@ public class MenuBuilder {
 		this.commandsInformation = commandsInformation;
 	}
 
-	public Map<String, Executable> getHiddenCommands() {
+	public Map<String, Command> getHiddenCommands() {
 		return hiddenCommands;
 	}
 }

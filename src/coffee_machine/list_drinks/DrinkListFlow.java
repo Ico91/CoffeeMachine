@@ -4,7 +4,7 @@ import java.util.List;
 
 import coffee_machine.MenuBasedFlow;
 import coffee_machine.administration.AdministrationFlow;
-import coffee_machine.menu.Executable;
+import coffee_machine.menu.Command;
 import coffee_machine.menu.ParamRequirements;
 import coffee_machine.menu.ResultStatus;
 import coffee_machine.model.CoffeeMachineState;
@@ -27,7 +27,7 @@ public class DrinkListFlow extends MenuBasedFlow {
 
 	}
 
-	private class DrinkSelection implements Executable {
+	private class DrinkSelection implements Command {
 		private Drink selectedDrink;
 
 		public DrinkSelection(Drink drink) {

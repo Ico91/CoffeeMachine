@@ -4,14 +4,13 @@ import java.util.List;
 
 import coffee_machine.MenuBasedFlow;
 import coffee_machine.list_drinks.DrinkListFlow;
-import coffee_machine.menu.Executable;
+import coffee_machine.menu.Command;
 import coffee_machine.menu.ParamRequirements;
 import coffee_machine.menu.ResultStatus;
 import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Coin;
 import coffee_machine.model.Drink;
 import coffee_machine.model.MoneyAmount;
-import coffee_machine.order.OrderFlow;
 
 /**
  * Gives the ability to accumulate money by inserting coins into a temporary
@@ -29,7 +28,7 @@ public class PaymentFlow extends MenuBasedFlow {
 		userCoins = new MoneyAmount();
 	}
 
-	private class CoinInsertinCommand implements Executable {
+	private class CoinInsertinCommand implements Command {
 		private Coin coin;
 
 		private CoinInsertinCommand(Coin coin) {
