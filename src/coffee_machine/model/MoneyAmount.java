@@ -76,7 +76,7 @@ public class MoneyAmount {
 		if (count < 0)
 			throw new IllegalArgumentException(
 					"Count of coins cannot be negative number!");
-		int totalCount = this.coins.get(coin) + count;
+		int totalCount = getCoin(coin) + count;
 		this.coins.put(coin, totalCount);
 
 		return this;
@@ -92,9 +92,7 @@ public class MoneyAmount {
 	 */
 	public MoneyAmount add(MoneyAmount moneyAmount) {
 		for (Coin c : this.coins.keySet()) {
-			int totalCoinsToAdd = this.coins.get(c)
-					+ moneyAmount.getCoins().get(c);
-			this.coins.put(c, totalCoinsToAdd);
+			this.add(c, moneyAmount.getCoin(c));
 		}
 
 		return this;
@@ -181,7 +179,7 @@ public class MoneyAmount {
 
 	// Get coins from current available coins
 	void getCoins(Coin coin, int count) {
-		int availableCoins = this.coins.get(coin);
+		int availableCoins = getCoin(coin);
 		if (availableCoins < count)
 			throw new MoneyAmountException(
 					"Cannot get more coins than the available!");
