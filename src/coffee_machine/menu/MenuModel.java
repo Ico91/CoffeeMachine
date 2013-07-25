@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public class MenuModel {
-	private Map<String, Executable> commands;
+	private Map<String, Command> commands;
 	private List<String> commandsInformation;
-	private Map<String, Executable> hiddenCommands;
+	private Map<String, Command> hiddenCommands;
 
 	public MenuModel(MenuBuilder menuBuilder) {
 		this.commands = menuBuilder.getCommands();
@@ -18,8 +18,8 @@ public class MenuModel {
 		return this.commandsInformation;
 	}
 
-	public Executable getCommand(String command) throws InvalidCommandException {
-		Executable executable = this.commands.get(command);
+	public Command getCommand(String command) throws InvalidCommandException {
+		Command executable = this.commands.get(command);
 		if (executable == null) {
 			executable = this.hiddenCommands.get(command);
 		}

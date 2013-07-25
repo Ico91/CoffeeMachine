@@ -4,7 +4,7 @@ import java.util.List;
 
 import coffee_machine.MenuBasedFlow;
 import coffee_machine.list_drinks.DrinkListFlow;
-import coffee_machine.menu.Executable;
+import coffee_machine.menu.Command;
 import coffee_machine.menu.MenuBuilder;
 import coffee_machine.menu.ParamRequirements;
 import coffee_machine.menu.ResultStatus;
@@ -12,7 +12,6 @@ import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Coin;
 import coffee_machine.model.Drink;
 import coffee_machine.model.MoneyAmount;
-import coffee_machine.order.OrderFlow;
 
 /**
  * Gives the ability to accumulate money by inserting coins into a temporary
@@ -30,7 +29,7 @@ public class PaymentFlow extends MenuBasedFlow {
 		userCoins = new MoneyAmount();
 	}
 
-	private class CoinInsertinCommand implements Executable {
+	private class CoinInsertinCommand implements Command {
 		private Coin coin;
 
 		private CoinInsertinCommand(Coin coin) {
@@ -42,14 +41,10 @@ public class PaymentFlow extends MenuBasedFlow {
 			userCoins.add(this.coin, 1);
 			printOrderInfo();
 
-			if (userCoins.sumOfCoins() < drink.getPrice()) {
-				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.sumOfCoins()), false);
-			} else {
-				setNext(new OrderFlow(drink, userCoins));
-				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.sumOfCoins()), true);
-			}
+			boolean exit = (userCoins.sumOfCoins() < drink.getPrice()) ? false
+					: true;
+			return new ResultStatus("Accumulated sum: "
+					+ String.valueOf(userCoins.sumOfCoins()), exit);
 		}
 
 		@Override
@@ -58,10 +53,12 @@ public class PaymentFlow extends MenuBasedFlow {
 		}
 
 	}
+
 	public void printOrderInfo() {
 		System.out.println("Drink: " + drink.getName());
 		System.out.println("Price: " + drink.getPrice());
 	}
+
 	public Drink getDrink() {
 		return drink;
 	}
@@ -73,7 +70,7 @@ public class PaymentFlow extends MenuBasedFlow {
 	@Override
 	protected void initMenu( CoffeeMachineState cm, MenuBuilder menuBuilder ) {
 		printOrderInfo();
-		
+
 		menuBuilder
 				.command("1", "0.05 lv", new CoinInsertinCommand(Coin.FIVE))
 				.command("2", "0.10 lv", new CoinInsertinCommand(Coin.TEN))

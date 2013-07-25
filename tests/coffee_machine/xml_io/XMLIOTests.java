@@ -36,7 +36,7 @@ public class XMLIOTests {
 		xml.read(xmlMeta);
 	}
 
-	@Test(expected = XMLIOException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testWriteWithWrongObjectClass() throws XMLIOException {
 		xmlMeta = new XMLDocumentMetaData(DrinksReportDTO.class, "report.xml",
 				"src/DrinksReport.xsd");

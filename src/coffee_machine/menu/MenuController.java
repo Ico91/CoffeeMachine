@@ -24,7 +24,7 @@ public class MenuController {
 				this.printer.print(commandInfo);
 			}
 
-			Executable executable;
+			Command executable;
 			try {
 				executable = this.menuModel.getCommand(this.inputReader
 						.readInput());
