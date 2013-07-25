@@ -41,14 +41,10 @@ public class PaymentFlow extends MenuBasedFlow {
 			userCoins.add(this.coin, 1);
 			printOrderInfo();
 
-			if (userCoins.sumOfCoins() < drink.getPrice()) {
-				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.sumOfCoins()), false);
-			} else {
-				setNext(new OrderFlow(drink, userCoins));
-				return new ResultStatus("Accumulated sum: "
-						+ String.valueOf(userCoins.sumOfCoins()), true);
-			}
+			boolean exit = (userCoins.sumOfCoins() < drink.getPrice()) ? false
+					: true;
+			return new ResultStatus("Accumulated sum: "
+					+ String.valueOf(userCoins.sumOfCoins()), exit);
 		}
 
 		@Override
@@ -57,10 +53,12 @@ public class PaymentFlow extends MenuBasedFlow {
 		}
 
 	}
+
 	public void printOrderInfo() {
 		System.out.println("Drink: " + drink.getName());
 		System.out.println("Price: " + drink.getPrice());
 	}
+
 	public Drink getDrink() {
 		return drink;
 	}
@@ -72,7 +70,7 @@ public class PaymentFlow extends MenuBasedFlow {
 	@Override
 	protected void initMenu(CoffeeMachineState cm) {
 		printOrderInfo();
-		
+
 		menuBuilder
 				.command("1", "0.05 lv", new CoinInsertinCommand(Coin.FIVE))
 				.command("2", "0.10 lv", new CoinInsertinCommand(Coin.TEN))
