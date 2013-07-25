@@ -14,7 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import coffee_machine.finalize_order.OrderFinalizeFlow;
-import coffee_machine.insufficient_amount.InsufficientAmountFlow;
 import coffee_machine.list_drinks.DrinkListFlow;
 import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Drink;
