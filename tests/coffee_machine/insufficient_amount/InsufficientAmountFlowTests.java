@@ -1,7 +1,6 @@
 package coffee_machine.insufficient_amount;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,8 +12,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import coffee_machine.finalize_order.OrderFinalizeFlow;
-import coffee_machine.list_drinks.DrinkListFlow;
 import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Drink;
 import coffee_machine.model.DrinksContainer;
@@ -44,37 +41,6 @@ public class InsufficientAmountFlowTests {
 				new MoneyAmount());
 
 		flow = new InsufficientAmountFlow(drink, userCoins, withdraw);
-	}
-
-	@Test
-	public void continueOrderFlow() {
-		String input = "1" + System.lineSeparator();
-		System.setIn(new ByteArrayInputStream(input.getBytes()));
-		System.setOut(new PrintStream(new ByteArrayOutputStream()));
-
-		flow.execute(coffeeMachine);
-
-		boolean isOrderFinalizeFlow = false;
-
-		if (flow.getNextFlow() instanceof OrderFinalizeFlow)
-			isOrderFinalizeFlow = true;
-
-		assertTrue(isOrderFinalizeFlow);
-	}
-
-	@Test
-	public void cancelOrder() {
-		String input = "2" + System.lineSeparator();
-		System.setIn(new ByteArrayInputStream(input.getBytes()));
-		System.setOut(new PrintStream(new ByteArrayOutputStream()));
-
-		flow.execute(coffeeMachine);
-		boolean isDrinkListFlow = false;
-
-		if (flow.getNextFlow() instanceof DrinkListFlow)
-			isDrinkListFlow = true;
-
-		assertTrue(isDrinkListFlow);
 	}
 
 	@Test

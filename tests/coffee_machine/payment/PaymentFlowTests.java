@@ -57,18 +57,6 @@ public class PaymentFlowTests {
 		assertTrue(isMoneyEnough);
 	}
 
-	@Test
-	public void cancelOrder() {
-		String input = "1" + System.lineSeparator() + "1"
-				+ System.lineSeparator() + "2" + System.lineSeparator() + "6"
-				+ System.lineSeparator();
-		System.setIn(new ByteArrayInputStream(input.getBytes()));
-		System.setOut(new PrintStream(new ByteArrayOutputStream()));
-		payment.execute(coffeeMachine);
-
-		assertTrue(payment.isOrderCancelled());
-	}
-
 	@After
 	public void tearDownClass() {
 		System.setOut(out);

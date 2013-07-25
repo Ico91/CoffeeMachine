@@ -6,10 +6,10 @@
     <drink name="Hot Chocolate" price="50" amount="100" />
   </drinks>
   <money>
-      <coin type="FIVE" amount="100" />
-	  <coin type="TEN" amount="50" />
-	  <coin type="TWENTY" amount="10" />
-	  <coin type="FIFTY" amount="10" />
-	  <coin type="LEV" amount="5" />
+      <coin type="FIVE" amount="0" />
+	  <coin type="TEN" amount="0" />
+	  <coin type="TWENTY" amount="0" />
+	  <coin type="FIFTY" amount="0" />
+	  <coin type="LEV" amount="0" />
   </money>
 </coffeeMachine>

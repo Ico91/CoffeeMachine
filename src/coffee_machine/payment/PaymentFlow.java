@@ -2,12 +2,11 @@ package coffee_machine.payment;
 
 import java.util.List;
 
-import coffee_machine.Flow;
+import coffee_machine.MenuBasedFlow;
 import coffee_machine.list_drinks.DrinkListFlow;
 import coffee_machine.menu.Executable;
 import coffee_machine.menu.MenuBuilder;
 import coffee_machine.menu.MenuController;
-import coffee_machine.menu.MenuModel;
 import coffee_machine.menu.ParamRequirements;
 import coffee_machine.menu.ResultStatus;
 import coffee_machine.model.CoffeeMachineState;
@@ -23,64 +22,13 @@ import coffee_machine.order.OrderFlow;
  * @author Hristo
  * 
  */
-public class PaymentFlow implements Flow {
+public class PaymentFlow extends MenuBasedFlow {
 	private Drink drink;
 	private MoneyAmount userCoins;
-	private boolean isOrderCancelled = false;
 
 	public PaymentFlow(Drink drink) {
 		this.drink = drink;
 		userCoins = new MoneyAmount();
-	}
-
-	/**
-	 * Initializes menu for inserting different coins into the temporary user
-	 * coin container. The coin input cycle can be interrupted either by
-	 * inserting enough money to buy the drink (equal to or more than the
-	 * drink's price), or by canceling the order from the menu.
-	 * 
-	 * @param machine
-	 *            - the current state of the Coffee Machine
-	 * @return interface Flow object
-	 */
-	@Override
-	public Flow execute(CoffeeMachineState machine) {
-		MenuController menuController = new MenuController(buildMenu());
-
-		do {
-			System.out.println("Drink: " + drink.getName()
-					+ System.lineSeparator() + "Price: " + drink.getPrice());
-			menuController.start();
-			if (isOrderCancelled)
-				return new DrinkListFlow();
-		} while (userCoins.sumOfCoins() < drink.getPrice());
-
-		return new OrderFlow(drink, userCoins);
-	}
-
-	private MenuModel buildMenu() {
-		MenuBuilder menuBuilder = new MenuBuilder();
-
-		menuBuilder.command("1", "0.05 lv", new CoinInsertinCommand(Coin.FIVE))
-				.command("2", "0.10 lv", new CoinInsertinCommand(Coin.TEN))
-				.command("3", "0.20 lv", new CoinInsertinCommand(Coin.TWENTY))
-				.command("4", "0.50 lv", new CoinInsertinCommand(Coin.FIFTY))
-				.command("5", "1 lv", new CoinInsertinCommand(Coin.LEV))
-				.command("6", "Cancel payment.", new Executable() {
-
-					@Override
-					public ResultStatus execute(List<String> params) {
-						return new ResultStatus(cancelOrder(), true);
-					}
-
-					@Override
-					public ParamRequirements requirements() {
-						return new ParamRequirements();
-					}
-
-				}).build();
-
-		return new MenuModel(menuBuilder);
 	}
 
 	private class CoinInsertinCommand implements Executable {
@@ -93,8 +41,16 @@ public class PaymentFlow implements Flow {
 		@Override
 		public ResultStatus execute(List<String> params) {
 			userCoins.add(this.coin, 1);
-			return new ResultStatus("Accumulated sum: "
-					+ String.valueOf(userCoins.sumOfCoins()), true);
+			printOrderInfo();
+
+			if (userCoins.sumOfCoins() < drink.getPrice()) {
+				return new ResultStatus("Accumulated sum: "
+						+ String.valueOf(userCoins.sumOfCoins()), false);
+			} else {
+				setNext(new OrderFlow(drink, userCoins));
+				return new ResultStatus("Accumulated sum: "
+						+ String.valueOf(userCoins.sumOfCoins()), true);
+			}
 		}
 
 		@Override
@@ -103,14 +59,10 @@ public class PaymentFlow implements Flow {
 		}
 
 	}
-
-	private String cancelOrder() {
-		isOrderCancelled = true;
-		return "Your order has been cancelled. "
-				+ String.valueOf(userCoins.sumOfCoins()
-						+ " stotinki has been returned to you.");
+	public void printOrderInfo() {
+		System.out.println("Drink: " + drink.getName());
+		System.out.println("Price: " + drink.getPrice());
 	}
-
 	public Drink getDrink() {
 		return drink;
 	}
@@ -119,8 +71,27 @@ public class PaymentFlow implements Flow {
 		return userCoins;
 	}
 
-	public boolean isOrderCancelled() {
-		return isOrderCancelled;
-	}
+	@Override
+	protected void initMenu(CoffeeMachineState cm) {
+		MenuBuilder menuBuilder = new MenuBuilder();
+		printOrderInfo();
+		
+		menuBuilder
+				.command("1", "0.05 lv", new CoinInsertinCommand(Coin.FIVE))
+				.command("2", "0.10 lv", new CoinInsertinCommand(Coin.TEN))
+				.command("3", "0.20 lv", new CoinInsertinCommand(Coin.TWENTY))
+				.command("4", "0.50 lv", new CoinInsertinCommand(Coin.FIFTY))
+				.command("5", "1 lv", new CoinInsertinCommand(Coin.LEV))
+				.command(
+						"6",
+						"Cancel payment.",
+						navigationCommandWithOutput(
+								new DrinkListFlow(),
+								"Your order has been cancelled. "
+										+ String.valueOf(userCoins.sumOfCoins()
+												+ " stotinki has been returned to you.")));
 
+		menuModel = menuBuilder.build();
+		menuController = new MenuController(menuModel);
+	}
 }
