@@ -13,11 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import coffee_machine.Flow;
 import coffee_machine.list_drinks.DrinkListFlow;
 import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Drink;
 import coffee_machine.model.DrinksContainer;
 import coffee_machine.model.MoneyAmount;
+import coffee_machine.payment.PaymentFlow;
 
 /**
  * @author Andrey Tests DrinkListFlow class
@@ -53,11 +55,9 @@ public class DrinkListFlowTests {
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		System.setOut(new PrintStream(new ByteArrayOutputStream()));
 
-		drinkFlow.execute(coffeeMachine);
-		assertNotNull("Name of selected drink is NULL", drinkFlow.getDrink()
-				.getName());
-		assertNotNull("Price of selected drink is NULL", drinkFlow.getDrink()
-				.getPrice());
+		Flow next = drinkFlow.execute(coffeeMachine);
+		assertNotNull( next );
+		assertEquals( PaymentFlow.class, next.getClass() );
 	}
 
 	@Test
@@ -66,9 +66,14 @@ public class DrinkListFlowTests {
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		System.setOut(new PrintStream(new ByteArrayOutputStream()));
 
-		drinkFlow.execute(coffeeMachine);
+		Flow next = drinkFlow.execute(coffeeMachine);
+		assertNotNull( next );
+		assertEquals( PaymentFlow.class, next.getClass() );
+		
+		PaymentFlow paymentFlow = (PaymentFlow) next;
+		
 		assertEquals("Selected drink not equals to given drink", new Drink(
-				"Coffee", 30), drinkFlow.getDrink());
+				"Coffee", 30), paymentFlow.getDrink());
 	}
 
 	@After

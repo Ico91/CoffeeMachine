@@ -3,6 +3,7 @@ package coffee_machine.insufficient_amount;
 import coffee_machine.MenuBasedFlow;
 import coffee_machine.finalize_order.OrderFinalizeFlow;
 import coffee_machine.list_drinks.DrinkListFlow;
+import coffee_machine.menu.MenuBuilder;
 import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Drink;
 import coffee_machine.model.MoneyAmount;
@@ -59,7 +60,7 @@ public class InsufficientAmountFlow extends MenuBasedFlow {
 	}
 
 	@Override
-	protected void initMenu(CoffeeMachineState cm) {
+	protected void initMenu( CoffeeMachineState cm, MenuBuilder menuBuilder ) {
 		System.out
 				.println("The machine does not have the neccessary coins to return your change."
 						+ "\n What would you like to do: ");

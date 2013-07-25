@@ -5,6 +5,7 @@ import java.util.List;
 import coffee_machine.MenuBasedFlow;
 import coffee_machine.administration.AdministrationFlow;
 import coffee_machine.menu.Executable;
+import coffee_machine.menu.MenuBuilder;
 import coffee_machine.menu.ParamRequirements;
 import coffee_machine.menu.ResultStatus;
 import coffee_machine.model.CoffeeMachineState;
@@ -21,14 +22,10 @@ import coffee_machine.payment.PaymentFlow;
  */
 
 public class DrinkListFlow extends MenuBasedFlow {
-	private Drink drink;
-
-	public DrinkListFlow() {
-
-	}
 
 	private class DrinkSelection implements Executable {
-		private Drink selectedDrink;
+		
+		private final Drink selectedDrink;
 
 		public DrinkSelection(Drink drink) {
 			this.selectedDrink = drink;
@@ -36,8 +33,7 @@ public class DrinkListFlow extends MenuBasedFlow {
 
 		@Override
 		public ResultStatus execute(List<String> params) {
-			drink = new Drink(selectedDrink.getName(), selectedDrink.getPrice());
-			setNext(new PaymentFlow(getDrink()));
+			setNext( new PaymentFlow( selectedDrink ) );
 
 			return new ResultStatus("", true);
 		}
@@ -46,27 +42,22 @@ public class DrinkListFlow extends MenuBasedFlow {
 		public ParamRequirements requirements() {
 			return new ParamRequirements();
 		}
-
-	}
-
-	public Drink getDrink() {
-		return this.drink;
 	}
 
 	@Override
-	protected void initMenu(CoffeeMachineState cm) {
+	protected void initMenu( CoffeeMachineState cm, MenuBuilder menuBuilder ) {
 		int index = 1;
 		for (Drink d : cm.getFiltratedDrinks()) {
 			menuBuilder.command(
-					Integer.toString(index),
-					cm.getFiltratedDrinks().get(index - 1).getName()
-							+ " - "
-							+ Integer.toString(cm.getFiltratedDrinks()
-									.get(index - 1).getPrice()),
-					new DrinkSelection(d));
-			index++;
+					Integer.toString( index++ ),
+					drinkInfo( d ),
+					new DrinkSelection(d)
+			);
 		}
-		menuBuilder.hiddenCommand("secret",
-				navigationCommand(new AdministrationFlow()));
+		menuBuilder.hiddenCommand( "secret", navigationCommand( new AdministrationFlow() ) );
+	}
+
+	private static String drinkInfo(Drink d) {
+		return String.format( "%s - %d", d.getName(), d.getPrice() );
 	}
 }

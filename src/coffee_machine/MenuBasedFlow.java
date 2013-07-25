@@ -11,21 +11,19 @@ import coffee_machine.menu.ResultStatus;
 import coffee_machine.model.CoffeeMachineState;
 
 public abstract class MenuBasedFlow implements Flow {
+	
 	private Flow next;
-	protected MenuModel menuModel;
-	protected MenuController menuController;
-	protected MenuBuilder menuBuilder;
-	public MenuBasedFlow() {
-	}
-
-	protected abstract void initMenu(CoffeeMachineState cm);
+	
+	protected abstract void initMenu( CoffeeMachineState cm, MenuBuilder menuBuilder );
 
 	@Override
 	public final Flow execute(CoffeeMachineState machine) {
-		menuBuilder = new MenuBuilder();
-		initMenu(machine);
-		menuModel = menuBuilder.build();
-		menuController = new MenuController(menuModel);
+		
+		MenuBuilder menuBuilder = new MenuBuilder();
+		initMenu( machine, menuBuilder );
+		
+		MenuModel menuModel = menuBuilder.build();
+		MenuController menuController = new MenuController(menuModel);
 		
 		menuController.start();
 		return next;

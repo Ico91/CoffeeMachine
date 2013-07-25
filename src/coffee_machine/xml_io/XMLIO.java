@@ -101,8 +101,8 @@ public class XMLIO {
 				throw new IllegalArgumentException(
 						"Provided object is not of the same class as specified in xml meta file");
 			File file = new File(xmlMeta.getPathToFile());
-			if (!file.exists())
-				file.createNewFile();
+			
+			prepareStorage(file);
 
 			JAXBContext context = JAXBContext
 					.newInstance(xmlMeta.getDtoClass());
@@ -111,9 +111,23 @@ public class XMLIO {
 					Boolean.TRUE);
 
 			marshaller.marshal(objectToWrite, file);
-		} catch (JAXBException | IOException | IllegalArgumentException
-				| NullPointerException e) {
+		} catch (JAXBException | IOException e) {
 			throw new XMLIOException(e.getMessage());
+		}
+	}
+
+	private static void prepareStorage(File file) throws XMLIOException, IOException {
+		if (file.exists()) {
+			return ;
+		}
+		
+		File parent = file.getParentFile(); 
+		if ( !parent.exists() && !parent.mkdirs() ) {
+			throw new XMLIOException( "Unable to create directories for: " + parent.getPath() );
+		}
+		
+		if ( !file.createNewFile() ) {
+			throw new XMLIOException( "Unable to create file: " + file.getName() );
 		}
 	}
 

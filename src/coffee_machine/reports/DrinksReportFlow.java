@@ -38,18 +38,13 @@ public class DrinksReportFlow implements Flow {
 	@Override
 	public Flow execute(CoffeeMachineState machine) {
 
-		try {
-			DrinksContainer orderedDrinks = calculateOrderedDrinks(
-					machine.getCurrentDrinks(), machine.getInitialDrinks());
-			OrderedDrinksContainerToDTO transformer = new OrderedDrinksContainerToDTO();
+		DrinksContainer orderedDrinks = calculateOrderedDrinks(
+				machine.getCurrentDrinks(), machine.getInitialDrinks());
+		OrderedDrinksContainerToDTO transformer = new OrderedDrinksContainerToDTO();
 
-			DrinksReportDTO drinksReport = transformer.transform(orderedDrinks);
-			save(drinksReport);
+		DrinksReportDTO drinksReport = transformer.transform(orderedDrinks);
+		save(drinksReport);
 
-		} catch (NullPointerException e) {
-			System.out.println("Error saving the report to a file!"
-					+ System.lineSeparator() + e.getMessage());
-		}
 		return new DrinkListFlow();
 	}
 
@@ -102,13 +97,13 @@ public class DrinksReportFlow implements Flow {
 					+ System.lineSeparator());
 			xml.write(xmlMeta, drinksReport);
 		} catch (XMLIOException e) {
-			System.out.println("Cannot write report to file!");
+			System.out.println( "Cannot write report to file: " + e.getMessage() );
 		}
 	}
 
 	private String generateReportName() {
 
-		DateFormat dateFormat = new SimpleDateFormat("HH;mm;ss - dd-MM-yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy[HH_mm_ss]");
 		Calendar cal = Calendar.getInstance();
 
 		String fileName = "reports/" + dateFormat.format(cal.getTime())
