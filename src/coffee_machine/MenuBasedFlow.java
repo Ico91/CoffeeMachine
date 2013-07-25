@@ -3,6 +3,7 @@ package coffee_machine;
 import java.util.List;
 
 import coffee_machine.menu.Executable;
+import coffee_machine.menu.MenuBuilder;
 import coffee_machine.menu.MenuController;
 import coffee_machine.menu.MenuModel;
 import coffee_machine.menu.ParamRequirements;
@@ -13,7 +14,7 @@ public abstract class MenuBasedFlow implements Flow {
 	private Flow next;
 	protected MenuModel menuModel;
 	protected MenuController menuController;
-
+	protected MenuBuilder menuBuilder;
 	public MenuBasedFlow() {
 	}
 
@@ -21,7 +22,11 @@ public abstract class MenuBasedFlow implements Flow {
 
 	@Override
 	public final Flow execute(CoffeeMachineState machine) {
+		menuBuilder = new MenuBuilder();
 		initMenu(machine);
+		menuModel = menuBuilder.build();
+		menuController = new MenuController(menuModel);
+		
 		menuController.start();
 		return next;
 	}

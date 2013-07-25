@@ -5,8 +5,6 @@ import java.util.List;
 import coffee_machine.MenuBasedFlow;
 import coffee_machine.administration.AdministrationFlow;
 import coffee_machine.menu.Executable;
-import coffee_machine.menu.MenuBuilder;
-import coffee_machine.menu.MenuController;
 import coffee_machine.menu.ParamRequirements;
 import coffee_machine.menu.ResultStatus;
 import coffee_machine.model.CoffeeMachineState;
@@ -57,7 +55,6 @@ public class DrinkListFlow extends MenuBasedFlow {
 
 	@Override
 	protected void initMenu(CoffeeMachineState cm) {
-		MenuBuilder menuBuilder = new MenuBuilder();
 		int index = 1;
 		for (Drink d : cm.getFiltratedDrinks()) {
 			menuBuilder.command(
@@ -71,7 +68,5 @@ public class DrinkListFlow extends MenuBasedFlow {
 		}
 		menuBuilder.hiddenCommand("secret",
 				navigationCommand(new AdministrationFlow()));
-		this.menuModel = menuBuilder.build();
-		this.menuController = new MenuController(this.menuModel);
 	}
 }

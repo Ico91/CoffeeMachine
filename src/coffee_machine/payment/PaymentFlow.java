@@ -5,8 +5,6 @@ import java.util.List;
 import coffee_machine.MenuBasedFlow;
 import coffee_machine.list_drinks.DrinkListFlow;
 import coffee_machine.menu.Executable;
-import coffee_machine.menu.MenuBuilder;
-import coffee_machine.menu.MenuController;
 import coffee_machine.menu.ParamRequirements;
 import coffee_machine.menu.ResultStatus;
 import coffee_machine.model.CoffeeMachineState;
@@ -73,7 +71,6 @@ public class PaymentFlow extends MenuBasedFlow {
 
 	@Override
 	protected void initMenu(CoffeeMachineState cm) {
-		MenuBuilder menuBuilder = new MenuBuilder();
 		printOrderInfo();
 		
 		menuBuilder
@@ -90,8 +87,5 @@ public class PaymentFlow extends MenuBasedFlow {
 								"Your order has been cancelled. "
 										+ String.valueOf(userCoins.sumOfCoins()
 												+ " stotinki has been returned to you.")));
-
-		menuModel = menuBuilder.build();
-		menuController = new MenuController(menuModel);
 	}
 }

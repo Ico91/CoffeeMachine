@@ -3,8 +3,6 @@ package coffee_machine.insufficient_amount;
 import coffee_machine.MenuBasedFlow;
 import coffee_machine.finalize_order.OrderFinalizeFlow;
 import coffee_machine.list_drinks.DrinkListFlow;
-import coffee_machine.menu.MenuBuilder;
-import coffee_machine.menu.MenuController;
 import coffee_machine.model.CoffeeMachineState;
 import coffee_machine.model.Drink;
 import coffee_machine.model.MoneyAmount;
@@ -66,7 +64,6 @@ public class InsufficientAmountFlow extends MenuBasedFlow {
 				.println("The machine does not have the neccessary coins to return your change."
 						+ "\n What would you like to do: ");
 		
-		MenuBuilder menuBuilder = new MenuBuilder();
 		menuBuilder
 			.command("1", "Make drink and return only available change",
 				navigationCommand(new OrderFinalizeFlow(drink, withdraw)))
@@ -74,8 +71,5 @@ public class InsufficientAmountFlow extends MenuBasedFlow {
 				navigationCommandWithOutput(new DrinkListFlow(),
 				"Your money have been returned to you: "
 				+ userCoins.sumOfCoins()));
-
-		menuModel = menuBuilder.build();
-		menuController = new MenuController(menuModel);
 	}
 }
