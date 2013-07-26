@@ -43,7 +43,6 @@ public class DTOToCoffeeMachineState {
 			CoffeeMachineState coffeeMachineState = new CoffeeMachineState(
 					moneyAmount, drinksContainer);
 
-			// TODO: Validations if needed
 			return coffeeMachineState;
 
 		} catch (DTOToMoneyAmountException e) {
